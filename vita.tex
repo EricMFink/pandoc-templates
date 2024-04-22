@@ -1,0 +1,166 @@
+%%% vita.tex
+%%% Pandoc template for conversion of .md file with YAML frontmatter 
+%%% Created by Eric M. Fink (https://github.com/LuckyJimJD)
+%%% Based on kjh-vita by Kieran Healy (http://kjhealy.github.com/kjh-vita)
+%%% 
+
+$if(fontsize)$
+\documentclass[$fontsize$,letterpaper,oneside]{article}
+$else$
+\documentclass[11pt,letterpaper,oneside]{article}
+$endif$
+
+\usepackage[english]{babel}  
+\usepackage[us, nodayofweek]{datetime}
+\newdateformat{mydate}{\THEDAY \ \monthname \ \THEYEAR}
+\usepackage{changepage}% http://ctan.org/pkg/changepage
+\usepackage{currfile}
+
+
+% ==================
+% = Colors & Fonts =
+% ==================
+
+\usepackage[dvipsnames,svgnames,x11names,hyperref]{xcolor}
+\definecolor{myblack}{HTML}{231F20} 
+\definecolor{mybrightred}{HTML}{EC1F27} 
+\definecolor{mydarkred}{HTML}{b03a2e} 
+\definecolor{mydarkblue}{HTML}{154360}
+\definecolor{mylightblue}{HTML}{3498DB} 
+
+\usepackage{fontspec}
+\setmainfont{Cormorant Garamond}[Mapping={tex-text},SmallCapsFont={Cormorant SC}]
+\setsansfont{Proza Libre}[Mapping=tex-text]
+\setmonofont{Cousine}[Mapping=tex-text,Scale=1.0]
+
+\newfontface\titlefont{Proza Libre Bold}[Colour=mydarkred]
+
+\usepackage{fontawesome}
+% \newfontfamily{\FA}{FontAwesome}
+
+% ===========
+% = Spacing =
+% ===========
+
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+
+\usepackage[defaultlines=4,all]{nowidow}
+
+\raggedbottom
+
+\usepackage[singlespacing]{setspace}
+
+\usepackage{parskip}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+
+\usepackage{enumitem}
+
+\setlist[itemize]{leftmargin=1.2em, labelsep=0.3em, itemsep=0em, topsep=0em, parsep=0em}
+
+\providecommand{\tightlist}{\setlength{\itemsep}{0em}\setlength{\parskip}{0.3em}\setlength{\itemindent}{0em}}
+
+\usepackage[hang,flushmargin]{footmisc} 
+
+
+% =======================
+% = Headers and Footers = 
+% =======================
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyfoot[C]{}
+\fancyfoot[R]{\tiny\texttt{Revised: \mydate\today}}
+\fancyfoot[L]{}
+\fancyhead{}
+\fancyhead[C]{}
+\fancyhead[R]{\small {$author$} | Page {\thepage}}
+\fancyhead[L]{}
+\renewcommand{\headrulewidth}{0pt}
+
+
+% ============
+% = Headings =
+% ============
+
+\usepackage[largestsep]{titlesec}  
+
+% \titlespacing*{\LEVEL}{LEFT}{BEFORE}{AFTER}
+\titlespacing*{\section}{0em}{2em}{0.5em}
+\titlespacing*{\subsection}{0em}{0.5em}{0.5em}
+\titlespacing*{\subsubsection}{0em}{1em}{0em}
+\titlespacing*{\paragraph}{0em}{0.5em}{0.5em}
+\titlespacing*{\subparagraph}{0em}{1.5em}{0.75em}
+
+\titleformat{\section}
+  {\Large\titlefont\raggedright}
+  {}{0em}
+  {}
+  [\titlerule]
+
+\titleformat{\subsection}
+  {\Large\rmfamily\bfseries\raggedright}
+  {}{0em}
+  {}
+
+\titleformat{\subsubsection}
+  {\large\rmfamily\bfseries\raggedright}
+  {}{0em}
+  {}
+
+\titleformat{\paragraph}
+  {\large\itshape\raggedright}
+  {}{0em}
+  {} 
+
+\titleformat{\subparagraph}
+  {\large\bfseries\raggedright}
+  {}{0em}
+  {} 
+
+\date{}
+
+
+% ==============
+% = Hyperlinks =
+% ==============
+
+\usepackage[colorlinks=true,linkcolor=mydarkred,citecolor=mydarkred,urlcolor=mydarkblue]{hyperref}
+
+
+% ==============================================================================
+% =============================== BEGIN DOCUMENT =============================== 
+% ==============================================================================
+
+\begin{document}\thispagestyle{empty}
+
+\begin{minipage}[t]{3.5in} 
+  \flushright 
+  \footnotesize {$affiliation$} \\
+  \footnotesize {$address1$} \\
+  \footnotesize {$address2$} 
+\end{minipage}
+\hfill     
+%\begin{minipage}[t]{0.0in}
+% dummy (needed here)
+%\end{minipage}
+\hfill
+\begin{minipage}[t]{2in}
+  \flushright 
+  \footnotesize {$phone$} \, \faPhone \\
+  {\footnotesize {\href{mailto:$email$}{$email$}} \, \faEnvelope} \\
+  {\footnotesize {\href{https://www.$web$}{$web$}} \, \faGlobe}
+\end{minipage}
+
+\vspace{3em}
+
+\noindent{\huge{$author$}}
+\reversemarginpar
+
+\vspace{1em}
+
+$body$
+	
+\end{document} 
+

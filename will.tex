@@ -1,0 +1,217 @@
+%%% will.tex
+%%% Pandoc template for Will
+%%% Created by Eric M. Fink (https://github.com/EricMFink/Pandoc/templates)
+%%%
+
+
+% ====================
+% = Layout & Spacing =
+% ====================
+
+\documentclass[12pt,letterpaper,twoside]{article}
+
+\usepackage[top=1in,bottom=1.5in,left=1.25in,right=1.25in,footskip=10mm]{geometry}
+
+\usepackage{setspace}
+\usepackage[none]{hyphenat}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{1em}
+\usepackage{indentfirst}
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\usepackage[normalem]{ulem}
+
+% ==========================
+% = Language & Date Format =
+% ==========================
+
+\usepackage[english]{babel}
+% \usepackage[us,nodayofweek]{datetime}
+\usepackage[nodayofweek]{datetime}
+\newdateformat{mydate}{\THEDAY -\shortmonthname -\THEYEAR}
+
+
+% ==================
+% = Colors & Fonts =
+% ==================
+
+\usepackage{xcolor}
+\definecolor{myblack}{HTML}{231F20} 
+\definecolor{mybrightred}{HTML}{EC1F27} 
+\definecolor{mydarkred}{HTML}{b03a2e} 
+\definecolor{mydarkblue}{HTML}{154360}
+\definecolor{mylightblue}{HTML}{3498DB} 
+
+\usepackage{fontspec}
+
+\setmainfont{Cormorant Garamond}[Mapping={tex-text},SmallCapsFont={Cormorant SC}]
+
+\setsansfont{Proza Libre}[Mapping=tex-text]
+
+\setmonofont{Cousine}[Mapping=tex-text,Scale=0.8]
+
+% =======================
+% = Headers and Footers =
+% =======================
+
+\usepackage{xspace}
+\newcommand{\Thepage}{\thepage\xspace}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+
+\fancyfoot[C]{}
+\fancyfoot[R]{~ \\ \rule{20mm}{1pt} \\ Testator ~~}
+\fancyfoot[L]{Page \Thepage of my Last Will and Testament}
+
+\fancyhead[C]{}
+\fancyhead[L]{}
+\fancyhead[R]{}
+
+\fancypagestyle{plain}{%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyhf{}%
+  \fancyfoot[C]{}%
+  \fancyfoot[R]{~ \\ \rule{20mm}{1pt} \\ Testator ~~}%
+  \fancyfoot[L]{Page \Thepage of my Last Will and Testament}%
+}
+
+
+% ============
+% = Headings =
+% ============
+
+\usepackage[compact]{titlesec}
+% \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
+
+\titlespacing*{\section}{0em}{1.5em}{0.1em}
+\titlespacing*{\subsection}{0em}{0em}{.5em}
+\titlespacing*{\subsubsection}{0em}{0em}{0em}
+\titlespacing*{\paragraph}{0em}{0em}{0em}
+\titlespacing*{\subparagraph}{0em}{0em}{0em}
+
+$if(secnumdepth)$
+\setcounter{secnumdepth}{$secnumdepth$}
+$else$
+\setcounter{secnumdepth}{0}
+$endif$
+
+% \titleformat{hcommand}[hshape]
+%   {hformat}
+%   {hlabel}
+%   {hsep}
+%   {hbefore-code}[hafter-code]
+
+\titleformat{\section}[hang]
+  {\parskip=0pt\normalsize\rmfamily\bfseries\filcenter}
+  {\thesection}
+  {}
+  {\MakeUppercase}
+\titleformat{\subsection}[hang]
+  {\parskip=0pt\scshape\normalsize\rmfamily\bfseries\filcenter}
+  {\thesubsection}
+  {}
+  {}
+\titleformat{\subsubsection}[hang]
+  {\normalsize\rmfamily\bfseries\filcenter}
+  {\thesubsubsection}
+  {}
+  {}
+\titleformat{\paragraph}[hang]
+  {\normalsize\rmfamily\itshape\filcenter}
+  {\theparagraph}
+  {}
+  {}
+\titleformat{\subparagraph}[hang]
+  {\normalsize\rmfamily\filcenter}
+  {\thesubparagraph}
+  {}
+  {}
+
+
+% =========
+% = Lists =
+% =========
+
+\usepackage{enumitem}
+\setlistdepth{6}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0em}\setlength{\parskip}{1em}}
+
+\setlist[enumerate]{itemindent=2em,topsep=0pt}
+
+
+% ==============
+% = Hyperlinks =
+% ==============
+
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,allcolors=black,}
+\urlstyle{same}
+
+% ==============================================================================
+% =============================== BEGIN DOCUMENT ===============================
+% ==============================================================================
+
+\begin{document}
+%\thispagestyle{plain}
+\singlespacing
+
+
+
+\begin{flushleft}
+\rmfamily{\MakeUppercase{State of {$state$}}} \\
+\vspace{5mm}
+\MakeUppercase\rmfamily{\MakeUppercase{County of {$county$}}} \\
+\vspace{5mm}
+\end{flushleft}
+
+\begin{center}
+\rmfamily\bfseries{\MakeUppercase{Will Of}} \\
+\rmfamily\bfseries{\MakeUppercase{$author$}}
+\end{center}
+
+
+
+$body$
+
+\vspace{15mm} 
+
+\noindent\hfill \uline{\hspace{80mm}} \vspace{1mm} \\
+\noindent\hspace*{100mm}\MakeUppercase{$author$}
+
+\newpage
+
+We, \uline{\hspace{40mm}} and \uline{\hspace{40mm}}, the witnesses, sign our names to this instrument being first duly sworn, and do hereby declare to the undersigned authority that the testator signs and executes this instrument as his last will in our presence and that he signs it willingly (or willingly directs another to sign for him), and that each of us, at the request of the testator, and in the presence and hearing of the testator, and in the presence and hearing of each other, hereby signs this last will as witness to the testator's signing, and to the best of our knowledge the testator is eighteen years of age or older, of sound mind, and under no constraint or undue influence. 
+
+
+
+\uline{\hspace{80mm}} \vspace{1mm} \\
+\hspace*{2em}Witness
+
+\vspace{10mm} 
+
+\uline{\hspace{80 mm}} \vspace{1mm} \\
+\hspace*{2em}Witness
+
+\vspace{20mm} 
+
+\noindent{STATE OF NORTH CAROLINA }
+
+\noindent{COUNTY OF \uline{\hspace{40mm}} }
+
+Subscribed, sworn to and acknowledged before me by \MakeUppercase{$author$}, the testator, and subscribed and sworn to before me by \uline{\hspace{40mm}} and \uline{\hspace{40mm}}, witnesses, this \uline{\hspace{10mm}}, day of \uline{\hspace{40mm}}, 2023.
+
+\noindent{(SEAL)}
+
+\vspace{15mm} 
+
+\noindent\hfill\uline{\hspace{80mm}} \vspace{1mm} \\
+\noindent\hspace*{110mm}, Notary Public
+
+\noindent\hspace*{70mm}My Commission Expires:
+
+\end{document}

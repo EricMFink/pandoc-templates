@@ -1,0 +1,638 @@
+%%% casebook.tex
+%%% Pandoc template for law school casebook
+%%% Created by Eric M. Fink (https://github.com/EricMFink/Pandoc/templates)
+%%%
+
+
+
+\documentclass[letterpaper,twoside,openright]{tufte-book}
+
+% ============
+% = Packages =
+% ============
+
+
+\usepackage{lipsum}
+\usepackage{semantic}
+\usepackage{pdflscape}
+\usepackage{ifxetex}
+\usepackage{needspace}
+\usepackage[]{titlesec}
+\usepackage[]{ccicons}
+\usepackage[none]{hyphenat}
+\usepackage{etoolbox}
+\usepackage{relsize}
+\usepackage{fourier}
+\usepackage{fontawesome}
+\usepackage{calc} 
+
+% ===================================
+% = Use md inside latex environment =
+% ===================================
+
+
+\let\Begin\begin
+\let\End\end
+\let\Marginnote\marginnote
+\let\Footnote\footnote
+\let\lipsumj\lipsum
+
+
+% ====================
+% = Layout & Spacing =
+% ====================
+%\usepackage{setspace}
+\usepackage{ragged2e}
+
+% \RaggedRight
+\raggedbottom
+
+\usepackage{parskip}
+
+%\setlength{\parskip}{1\baselineskip}
+\setlength{\parindent}{0em}
+\setlength{\RaggedRightParindent}{0em}
+\setlength{\JustifyingParindent}{0em}
+
+\usepackage[defaultlines=3,all]{nowidow}
+
+
+% ==========
+% = Colors =
+% ==========
+
+\usepackage{xcolor}
+
+\definecolor{myblack}{HTML}{231F20}
+\definecolor{mybrightred}{HTML}{EC1F27}
+\definecolor{mydarkred}{HTML}{8C2E24}
+\definecolor{mydarkblue}{HTML}{154360}
+\definecolor{mylightblue}{HTML}{3498DB}
+\definecolor{paleblue}{HTML}{e1f0fa}
+\definecolor{palepink}{HTML}{fef5f9}
+\definecolor{lightgrey}{HTML}{e9e9e9}
+\definecolor{mydarkgreen}{HTML}{006403}
+
+% =========
+% = Fonts =
+% =========
+
+\usepackage{crimson}
+\usepackage[defaultsans,scale=0.95]{lato}
+\usepackage{inconsolata}
+
+
+\usepackage{fontspec}
+
+\fontspec{inconsolata}
+
+%\setmainfont{Crimson}[Mapping={tex-text},Scale = 1.0]
+%\setsansfont{Lato}[Mapping=tex-text]
+\setmonofont[Scale=0.90]{Inconsolata}
+
+%\DeclareRobustCommand{\ltseries}{\fontseries{l}\selectfont}
+
+%\newfontface\marginfont{Alegreya Sans}
+
+
+\setsidenotefont{\rmfamily\scriptsize}
+\setcaptionfont{\sffamily\scriptsize}
+\setmarginnotefont{\sffamily\fontseries{l}\scriptsize}
+
+
+% =========
+% = Tufte =
+% =========
+
+\usepackage{amsmath,amssymb}
+\usepackage{cleveref}
+
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+
+\usepackage{bookmark}{\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mydarkblue,
+  citecolor=mydarkblue,
+  urlcolor=mydarkgreen,
+  pdftitle={$title$},
+  pdfauthor={$author$},
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{texttt}
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\newenvironment{widetwocolumn}
+{
+    \begin{fullwidth}
+    \begin{multicols}{2}
+}
+{
+    \end{multicols}
+    \end{fullwidth}
+}
+
+\newenvironment{tufte-landscape}
+{
+    \begin{landscape}
+    \advance\vsize6cm
+    \csname @colroom\endcsname=\vsize
+    \textheight=\vsize
+    \csname @colht\endcsname=\vsize
+}
+{
+    \end{landscape}
+}
+
+% https://tex.stackexchange.com/questions/307745/xelatex-latin-modern-mathbb-and-mathcal
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+\let\mathbb\relax % remove the definition by unicode-math
+\DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
+
+\mathlig{<N>}{\mathbb{N}}
+
+% These are broken by default for an unknown reason. We fix them with matlig:
+\mathlig{-}{\minus} % Normally renders as whitespace due to missing character.
+\mathlig{|}{\mid} % Normally renders as "j"
+
+
+% https://tex.stackexchange.com/questions/37561/getting-started-with-minion-pro-xelatex-and-mathspec
+\ifxetex
+  \newcommand{\ttls}[2][5]{%
+    \begingroup\addfontfeatures{LetterSpace=#1}#2\endgroup
+  }
+  \renewcommand{\allcapsspacing}[1]{\ttls[15]{#1}}
+  \renewcommand{\smallcapsspacing}[1]{\ttls[10]{#1}}
+  \renewcommand{\allcaps}[1]{\ttls[15]{\MakeTextUppercase{#1}}}
+  \renewcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
+  \renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
+\fi
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+% =========
+% = Lists =
+% =========
+
+\usepackage{enumitem}
+\setlistdepth{20}
+%\renewlist{itemize}{itemize}{10}
+%\renewlist{enumerate}{enumerate}{10}
+
+
+
+%\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0em}\setlength{\parskip}{.2em}}
+
+\setlist{nosep}
+%\setlist[enumerate]{labelindent=0pt,labelwidth=1.5em,leftmargin=!}
+\setlist[enumerate]{wide=0pt,labelwidth=1.3333em,labelsep=0.3333em,leftmargin=\dimexpr\labelwidth + \labelsep\relax }
+%\setlist[enumerate]{itemindent=2em}
+% \setlist[enumerate]{itemindent=0em}
+% \setlist[itemize]{itemindent=2em}
+% \setlist[itemize,1]{itemindent=0em}
+
+\setlist[itemize,1]{label=\textbullet}
+\setlist[itemize,2]{label=\guilsinglright}
+\setlist[itemize,3]{label=\textperiodcentered}
+\setlist[itemize,4]{label=\textendash}
+\setlist[itemize,5]{label=\diamond}
+\setlist[itemize,6]{label=\textopenbullet}
+
+
+% ====================
+% = New Environments =
+% ====================
+
+\newenvironment{preface}
+    {{\noindent\rmfamily\itshape\Huge\color{mydarkred}{Preface}}
+    }
+    {\vspace{1\baselineskip}
+    }
+
+
+% Explanatory Notes
+\newenvironment{comment}
+    {\sffamily 
+    }
+    {
+    \vspace{.5em}\vspace{1em}
+    }
+
+
+% ============
+% = Headings =
+% ============
+
+% \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
+\titlespacing*{\part}{0em}{0em}{0em}
+\titlespacing*{\chapter}{0em}{0em}{0em}
+\titlespacing*{\section}{0em}{4\baselineskip}{1\baselineskip}
+\titlespacing*{\subsection}{0em}{2\baselineskip}{1\baselineskip}
+\titlespacing*{\subsubsection}{0em}{2\baselineskip}{.25\baselineskip}
+\titlespacing*{\paragraph}{0em}{1\baselineskip}{1\baselineskip}
+\titlespacing*{\subparagraph}{0em}{1\baselineskip}{.5\baselineskip}
+
+$if(secnum)$
+\setcounter{secnumdepth}{$secnum$}
+$else$
+\setcounter{secnumdepth}{2}
+$endif$
+
+\renewcommand\thechapter{\arabic{chapter}}
+\renewcommand\thesection{\arabic{section}}
+
+
+\titleformat{\part}
+  [display]
+  {\begin{fullwidth}\vspace*{\fill}\sffamily\huge\bfseries\color{mydarkred}}
+  {{\partname} \thepart}
+  {0em}
+  {\vspace{1em}\Huge}
+  [\vspace*{\fill}\end{fullwidth}]
+
+\titleformat{\chapter}
+  [display]
+  {\begin{fullwidth}\vspace*{\fill}\raggedright\sffamily\Huge\color{mydarkred}}
+  {Chapter \thechapter}
+  {0em}
+  {\vspace{1em}\sffamily\Huge}
+  [\vspace*{\fill}\end{fullwidth}\clearpage]
+
+\titleformat{\section}%
+  [block]
+  {\newpage\begin{fullwidth}\raggedright\sffamily\Huge\color{mydarkred}}
+  {\thesection ~~}
+  {0em}
+  {}
+  [\end{fullwidth}]
+
+
+\titleformat{\subsection}
+  [block]
+  {\needspace{2\baselineskip}\begin{fullwidth}\raggedright\sffamily\huge\color{mydarkred}}
+  {\thesubsection ~~}
+  {0em}
+  {}
+  [\end{fullwidth}]
+
+
+% Title of Statute, Rule, Case, Reading, etc. 
+\titleclass{\subsubsection}{straight}
+\titleformat{\subsubsection}
+  [block]
+  {\raggedright\rmfamily\bfseries\LARGE}
+  {\thesubsection ~~}
+  {0em}
+  {}
+  [\vspace{-1em}\textcolor{mydarkred}{\rule{\textwidth}{2pt}}]
+
+% Judge name for Case; Subtitle for Statute, Rule, etc.; Author/Source for other readings 
+\titleclass{\paragraph}{straight}
+\titleformat{\paragraph}
+  [block]
+  {\raggedright\rmfamily\bfseries\large}
+  {\theparagraph}
+  {0em}
+  {}
+  []
+
+\titleclass{\subparagraph}{straight}
+\titleformat{\subparagraph}
+  [block]
+  {\raggedright\rmfamily\large}
+  {\thesubparagraph}
+  {0em}
+  {}
+  []
+
+
+% ==========
+% = Tables =
+% ==========
+
+% table with pandoc
+$if(tables)$
+\usepackage{longtable,booktabs,array}
+$if(multirow)$
+\usepackage{multirow}
+$endif$
+%\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+%\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+$endif$
+
+% ==========
+% = Quotes =
+% ==========
+
+
+%\AtBeginEnvironment{quote}{\vspace{-1\baselineskip}}% Stuff before {quote}
+%\AtEndEnvironment{quote}{\vspace{-1\baselineskip}}% Stuff after {quote}
+
+
+
+% ============
+% = Epigraph =
+% ============
+
+\usepackage{epigraph}
+% \setlength\epigraphwidth{.5\textwidth}
+\setlength\epigraphrule{0pt}
+\renewcommand{\epigraphsize}{\footnotesize}
+
+% Full Page Epigraph in Frontmatter
+
+\newcommand{\openepigraph}[3]{ % This block sets up a command for printing an epigraph with 2 arguments - the quote and the author
+{\noindent\rmfamily\normalsize
+{\itshape{#1}}
+\begin{flushright}\noindent\aldine ~{#2}, {\itshape{#3}} \end{flushright}}
+}
+
+
+% ==============
+% = Separators =
+% ==============
+
+\newcommand*{\halfsep}{\noindent\hfil\textcolor{mydarkred}{\rule{0.5\textwidth}{.5pt}}\hfil}
+
+\newcommand*{\fullsep}{\newline\noindent\textcolor{mydarkred}{\rule{\textwidth}{2pt}}}
+
+% ============
+% = Graphics =
+% ============
+
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+% =========
+% = Title =
+% =========
+
+\usepackage{etoolbox}
+
+\makeatletter
+\newcommand{\plainsubtitle}{}%     plain-text-only subtitle
+\newcommand{\subtitle}[1]{%
+  \gdef\@subtitle{#1}%
+  \renewcommand{\plainsubtitle}{#1}% use provided plain-text title
+  \ifthenelse{\isundefined{\hypersetup}}%
+    {}% hyperref is not loaded; do nothing
+    {\hypersetup{pdftitle={\plaintitle: \plainsubtitle{}}}}% set the PDF metadata title
+}
+\renewcommand{\maketitlepage}[0]{%
+  \cleardoublepage%
+  {%
+  \sffamily%
+  \raggedright%
+  \begin{fullwidth}%
+  \fontsize{18}{20}\selectfont\par\noindent\textcolor{mydarkred}{\allcaps{\thanklessauthor}}%
+  \vspace{11.5pc}%
+  \fontsize{36}{40}\selectfont\par\noindent\textcolor{mydarkred}{\allcaps{\thanklesstitle}}\par%
+  \vspace{5pc}%
+  \fontsize{20}{24}\selectfont\par\noindent\textcolor{mydarkred}{\allcaps{\plainsubtitle}}%
+  \vfill%
+  $if(affiliation)$
+  \fontsize{14}{16}\selectfont\par\noindent\textcolor{mydarkred}{\allcaps{\thanklesspublisher}}%
+  $endif$
+  \fontsize{14}{16}\selectfont\par\noindent\textcolor{mydarkred}{\allcaps{$date$}}%
+  \end{fullwidth}%
+  }
+  \thispagestyle{empty}%
+  \clearpage%
+}
+\makeatother
+
+\title{$title$}
+$if(subtitle)$
+\subtitle{$subtitle$}
+$endif$
+\author{$author$}
+$if(affiliation)$
+\publisher{$affiliation$}
+$endif$
+\date{$date$}
+
+
+% =====================
+% = Table of Contents =
+% =====================
+
+\usepackage{titletoc,tocloft}
+
+\renewcommand\cfttoctitlefont{\Huge\sffamily\textcolor{mydarkred}}
+\renewcommand\cftpartfont{\rmfamily\Huge\bfseries}
+\renewcommand\cftchapfont{\rmfamily\huge\bfseries}
+\renewcommand\cftsecfont{\rmfamily\LARGE}
+\renewcommand\cftsubsecfont{\rmfamily\Large}
+
+\renewcommand\cftpartpagefont{\rmfamily\Huge}
+\renewcommand\cftchappagefont{\rmfamily\huge}
+\renewcommand\cftsecpagefont{\rmfamily\LARGE}
+\renewcommand\cftsubsecpagefont{\Large}
+
+\renewcommand\cftpartafterpnum{\vskip0mm}
+\renewcommand\cftchapafterpnum{\vskip0mm}
+\renewcommand\cftsecafterpnum{\vskip0mm}
+\renewcommand\cftsubsecafterpnum{\vskip0mm}
+
+\setlength{\cftchapindent}{2em}
+\setlength{\cftsecindent}{4em}
+\setlength{\cftsubsecindent}{6em}
+\setlength{\cftsubsubsecindent}{7em}
+
+\titlecontents{part}% <section-type>
+  [0em]% <left>
+  {}% <above-code>
+  {\vskip2mm\Huge\partname~ \thecontentslabel\quad}% <numbered-entry-format>
+  {\vskip2mm\Huge\partname~}% <numberless-entry-format>
+  {\Huge\hfill\contentspage}% <filler-page-format>
+  []% <below-code>
+
+\titlecontents{chapter}% <section-type>
+  [2em]% <left>
+  {}% <above-code>
+  {\vskip1mm\LARGE\chaptername\ \thecontentslabel\quad}% <numbered-entry-format>
+  {\vskip1mm\LARGE}% <numberless-entry-format>
+  {\LARGE\hfill\contentspage}% <filler-page-format>
+  []% <below-code>
+
+\titlecontents{section}% <section-type>
+  [4em]% <left>
+  {}% <above-code>
+  {\vskip0mm\LARGE \thecontentslabel\quad}% <numbered-entry-format>
+  {\vskip0mm\LARGE}% <numberless-entry-format>
+  {\LARGE\hfill\contentspage}% <filler-page-format>
+  []% <below-code> 
+  
+\titlecontents{subsection}% <section-type>
+  [6em]% <left>
+  {}% <above-code>
+  {\vskip0mm\Large \thecontentslabel\quad}% <numbered-entry-format>
+  {\vskip0mm\Large}% <numberless-entry-format>
+  {\Large\hfill\contentspage}% <filler-page-format>
+  []% <below-code> 
+
+
+% ===================
+% = Pandoc citeproc =
+% ===================
+
+% Pandoc citation processing
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+% for Pandoc 2.8 to 2.10.1
+%\newenvironment{cslreferences}%
+%  {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
+%  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
+%  {\par}
+% For Pandoc 2.11+
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+
+
+
+
+% =============================================================================
+% ============================== BEGIN DOCUMENT ===============================
+% =============================================================================
+
+
+\begin{document}
+
+% \relsize{1}
+
+\frontmatter
+\maketitle
+
+\clearpage
+
+\pagestyle{empty}
+\begingroup
+\parindent 0pt
+\vspace*{\fill}
+
+
+
+
+$if(cc0)$
+
+{\ccZero} 
+
+\begin{small}
+\raggedright{This work is published under a Creative Commons CC0 1.0 Universal (CC0 1.0) Public Domain Dedication.} \\
+\url{https://creativecommons.org/publicdomain/zero/1.0/}
+\end{small}
+$else$
+
+\href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{\ccbyncsa} 
+
+\begin{small}
+\raggedright{This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.} \\
+\url{https://creativecommons.org/licenses/by-nc-sa/4.0/}
+\end{small}
+$endif$
+
+\vspace{1em}
+
+\begin{small}
+Eric M. Fink\\
+Associate Professor of Law \\
+Elon University School of Law \\
+Greensboro, North Carolina 27408 \\
+\url{https://www.emfink.net/ElonLaw/}
+
+
+\vspace{1em}
+
+
+Source code \\
+\url{https://github.com/EricMFink/$repo$}
+
+\itshape{$if(version)$$version$, $endif$$published$}
+
+\end{small}
+
+\endgroup
+\clearpage
+
+\setcounter{tocdepth}{3}
+\tableofcontents
+\cleardoublepage
+
+%----------------------------------------------------------------------------------------
+%	EPIGRAPH
+%----------------------------------------------------------------------------------------
+$if(epigraph)$
+\topskip0pt
+\vspace*{\fill}
+\openepigraph{$epigraph$}{$epigraph-author$}{$epigraph-source$}
+\vspace*{\fill}
+$endif$
+
+\needspace{5\baselineskip}
+
+\mainmatter
+
+$body$
+
+\clearpage
+\end{document}

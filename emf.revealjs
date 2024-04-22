@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+
+<title>$pagetitle$</title>
+
+<meta name="author" content="$author$">
+
+$if(description)$<meta name="description" content="$description$" />$endif$
+
+<link rel="stylesheet" href="dist/reset.css">
+<link rel="stylesheet" href="dist/reveal.css">
+$if(theme)$ 
+<link rel="stylesheet" href="dist/theme/$theme$.css" id="theme">
+$else$
+<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+$endif$
+<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+<link rel="stylesheet" href="https://use.typekit.net/viv2jun.css">
+<link href="https://fonts.googleapis.com/css2?family=Proza+Libre:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;700&display=swap" rel="stylesheet">
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+	if( window.location.search.match( /print-pdf/gi ) ) {
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = 'css/print/pdf.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+  }
+</script>
+</head>
+
+<body>
+<div class="reveal">
+<div class="slides">
+	$if(title)$
+	<section id="$idprefix$title-slide"$for(title-slide-attributes/pairs)$ $it.key$="$it.value$"$endfor$ data-state="no-title-header">					
+	<div class="title">
+	<h1 class="title">$title$</h1>
+	$if(subtitle)$
+	<h2 class="title">$subtitle$</h2>
+	$endif$
+	$for(author)$
+	<h3 class="title">$author$</h3>
+	$endfor$
+	$if(course)$
+	<h4 class="title">$course$</h4>
+	$endif$
+	$if(affiliation)$
+	<h4 class="title">$affiliation$</h4>
+	$endif$
+	$if(date)$
+	<h5 class="title">$date$</h5>
+	$endif$
+	</div>
+	</section>
+	$endif$
+	$if(toc)$
+	<section id="$idprefix$TOC">
+	$table-of-contents$
+	</section>
+	$endif$
+
+	$body$
+</div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="dist/reveal-scroll.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/menu/menu.js"></script>
+<script src="plugin/zoom/zoom.js"></script>
+
+
+<script>
+// More info about initialization & config:
+// - https://revealjs.com/initialization/
+// - https://revealjs.com/config/
+Reveal.initialize({
+hash: true,
+width: 1280,
+height: 720,
+controls: true,
+controlsLayout: 'bottom-right',
+plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMenu, RevealZoom ],
+menu: {
+  side: 'left',
+  width: 'normal',
+  titleSelector: 'h1, h2, h3, h4, h5, h6'
+}
+
+});
+
+
+</script>
+
+</body>
+</html>

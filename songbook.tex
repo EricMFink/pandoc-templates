@@ -1,0 +1,231 @@
+%%% Template for Songbook
+%%% Created by Eric M. Fink (https://github.com/LuckyJimJD)
+%%% 
+
+
+\documentclass[letterpaper,twoside,11pt]{memoir}
+
+\usepackage[osf]{mathpazo}
+\usepackage[mathcal,mathbf]{euler}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx,sidecap,tikz}
+\usepackage{siunitx} % automatic number formatting, decimal point alignment
+
+\usepackage{multicol}
+
+\raggedbottom
+\openright
+
+
+% ==================
+% = Colors & Fonts =
+% ==================
+
+\usepackage{xcolor}
+\definecolor{myblack}{HTML}{231F20} 
+\definecolor{mybrightred}{HTML}{EC1F27} 
+\definecolor{mydarkred}{HTML}{b03a2e} 
+\definecolor{mydarkblue}{HTML}{154360}
+\definecolor{mylightblue}{HTML}{3498DB} 
+
+\usepackage{fontspec}
+\setmainfont{Alegreya}[Mapping={tex-text},SmallCapsFont={Alegreya SC},Numbers={OldStyle},Ligatures={Common},Colour=myblack]
+\setsansfont{Alegreya Sans}[Mapping=tex-text,Colour=myblack]
+\setmonofont{Inconsolata}[Mapping=tex-text,Scale=1.0]
+
+\newfontface\titlefont{Alegreya SC}[Colour=mybrightred]
+\newfontface\subtitlefont{Alegreya Italic}[Colour=myblack]
+
+
+
+
+% ===========
+% = Spacing =
+% ===========
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.6em plus 0.1em minus 0.1em}
+
+% Extra line spacing (leading)
+\setSingleSpace{1.1}
+\SingleSpacing
+
+% Adjust spacing and font for block quote
+\renewenvironment{quote}{%
+   \list{}{%
+     \leftmargin=1em   % this is the adjusting screw
+     \rightmargin=0in
+     \topsep=0em
+     \itshape
+   }
+   \item\relax
+}
+{\endlist}
+
+% Adjust spacing for lists
+\usepackage{enumitem}
+\setlist[itemize]{label={},leftmargin=1em,rightmargin=1in,partopsep=0.1em,itemsep=0.2em,topsep=0em}
+\setlist[enumerate]{label={},nosep}
+
+
+% =======================
+% = Stock and Typeblock =
+% =======================
+
+\usepackage[footnotesep=1.5\baselineskip]{geometry}
+\setstocksize{8.5in}{5.5in}
+\settrimmedsize{\stockheight}{\stockwidth}{*}
+\settrims{0pt}{0pt}
+
+\settypeblocksize{*}{4.5in}{1.6}
+\setlrmargins{0.4in}{*}{2} % {inside margin}{outside margin} {ratio}
+\setulmargins{0.6in}{*}{2} % {top margin}{bottom margin} {ratio}
+
+\setheadfoot{\baselineskip}{0.2in} % headheight and footskip
+\setheaderspaces{0.2in}{*}{0.2} % headdrop, headsep, and ratio
+
+\checkandfixthelayout[lines]
+
+
+% =======================
+% = Headers and Footers = 
+% =======================
+
+\nouppercaseheads
+\makepagestyle{stylish}
+\copypagestyle{stylish}{headings}
+\makerunningwidth{stylish}{4.5in}
+\makeheadposition{stylish}{flushleft}{flushright}{}{}
+\pagestyle{stylish}
+\makeevenhead{stylish}{\thepage}{}{\textsc{$title$}}
+\makeoddhead{stylish}{\textsc\leftmark}{}{\thepage}
+
+
+% ============
+% = Headings =
+% ============
+
+\setsecnumdepth{none}
+\maxsecnumdepth{none}
+
+\makechapterstyle{color}{
+\def\chapterheadstart{\vspace{2\onelineskip}}
+\renewcommand*\chaptitlefont{\titlefont\Huge}
+}
+
+\setsecheadstyle{\titlefont\Large}
+\setbeforesecskip{2em plus 0.2em minus 0.1em}
+\setaftersecskip{0.2em}
+\setsubsecheadstyle{\rmfamily\normalsize\bfseries}
+\setbeforesubsecskip{1.5em plus 0.2em minus 0.1em}
+\setaftersubsecskip{1em plus 0.2em minus 0.1em}
+\setsubparaindent{\parindent}
+\setsubparaheadstyle{\rmfamily\normalsize\itshape}
+\setbeforesubparaskip{1.5em plus 0.2em minus 0.1em}
+\setaftersubparaskip{0.1em plus 0.1em minus 0.1em}
+
+
+% =====================
+% = Table of contents =
+% =====================
+
+\renewcommand*{\contentsname}{{Contents}}
+\settocdepth{section}
+\setlength{\cftbeforechapterskip}{2.0em plus 1em minus 0.1em}
+\setlength{\cftbeforesectionskip}{0.2em plus 0.2em minus 0.1em}
+\renewcommand{\cftchapterfont}{\titlefont\Large} 
+\renewcommand{\cftsectionfont}{\normalsize} 
+
+% ==============
+% = Footnotes =
+% ==============
+
+\renewcommand{\footnotesep}{0.7\baselineskip}
+\footmarkstyle{\hspace{\parindent}#1.\,}    % indent the footmark 
+\setlength{\footmarkwidth} {0em}
+\setlength{\footmarksep}   {0em}
+\setlength{\footparindent} {\parindent}
+
+
+% ==========
+% = Images =
+% ==========
+
+\usepackage[export]{adjustbox} % loads also graphicx
+\let\oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[2][]{%
+  \oldincludegraphics[#1,max width=4in]{#2}}
+  
+\usepackage[labelformat=empty]{caption}
+
+
+% ==============================================================================
+% =============================== BEGIN DOCUMENT =============================== 
+% ==============================================================================
+
+\begin{document}
+
+% =========
+% = Cover =
+% =========
+
+% \cleartorecto
+% \thispagestyle{empty}
+% \mbox{}\vspace{2in}
+% \noindent
+% \begin{flushleft}
+% {\Huge\scshape{$title$}}\\[2\baselineskip]
+% {\LARGE\scshape{$subtitle$}}\\[2\baselineskip]
+% \vspace{6\baselineskip}
+% {\Large{$author$}}
+% \end{flushleft}
+
+% Blank page after cover
+% \clearpage
+% \thispagestyle{empty}
+% \null
+% \clearpage
+
+% ============
+% = Colophon =
+% ============
+
+\frontmatter
+
+% Blank page to set colophon on verso
+\cleartorecto
+\thispagestyle{empty}
+\null
+
+\clearpage
+\thispagestyle{empty}
+\noindent
+\begin{flushleft}
+\vspace*{\fill}
+{\footnotesize{}$colophon$}
+\end{flushleft}
+
+
+% =====================
+% = Table of Contents =
+% =====================
+
+\clearpage
+\thispagestyle{empty}
+\tableofcontents*
+
+
+% ===============
+% = Main Matter =
+% ===============
+
+\cleartorecto\mainmatter
+
+\chapterstyle{color}
+
+$body$
+
+\cleartorecto
+
+\end{document}

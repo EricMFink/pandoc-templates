@@ -1,0 +1,460 @@
+%%% pamphlet.tex
+%%% Pandoc template using LaTeX article class
+%%% For creating PDF from .md file with YAML frontmatter 
+%%% Created by Eric M. Fink (https://github.com/LuckyJimJD/pandoc-templates)
+%%% 
+
+
+% ===============
+% = Page Layout =
+% ===============
+
+
+$if(fontsize)$
+\documentclass[letterpaper,$fontsize$,twoside]{article}
+$else$
+\documentclass[letterpaper,11pt,twoside]{article}
+$endif$
+
+
+$if(geometry)$
+\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+$else$
+\usepackage[top=1in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+$endif$
+
+\usepackage{multicol}
+
+\raggedbottom
+
+\usepackage{needspace}
+
+\usepackage[defaultlines=4,all]{nowidow}
+
+% ============
+% = Language =
+% ============
+
+\usepackage[english]{babel}  
+
+
+% ==================
+% = Colors & Fonts =
+% ==================
+
+\usepackage{xcolor}
+\definecolor{myblack}{HTML}{231F20} 
+\definecolor{mybrightred}{HTML}{EC1F27} 
+\definecolor{mydarkred}{HTML}{b03a2e} 
+\definecolor{mydarkblue}{HTML}{154360}
+\definecolor{mylightblue}{HTML}{3498DB} 
+
+\usepackage{fontspec}
+$if(mainfont)$
+\setmainfont{$mainfont$}[Mapping={tex-text},SmallCapsFont={$scfont$},Colour=myblack]
+$else$
+\setmainfont{Cormorant Garamond}[Mapping={tex-text},SmallCapsFont={Cormorant SC},Colour=myblack]
+$endif$
+
+$if(sansfont)$
+\setsansfont{$sansfont$}[Mapping=tex-text,Colour=myblack]
+$else$
+\setsansfont{Proza Libre}[Mapping=tex-text,Colour=myblack]
+$endif$
+
+$if(monofont)$
+\setmonofont{$monofont$}[Mapping=tex-text,Scale=1.0,Colour=myblack]
+$else$
+\setmonofont{Cousine}[Mapping=tex-text,Scale=1.0,Colour=myblack]
+$endif$
+
+$if(titlefont)$
+$if(plain)$
+\newfontface\titlefont{$titlefont$}[Colour=myblack]
+$else$
+\newfontface\titlefont{$titlefont$}[Colour=mydarkred]
+$endif$
+$else$
+$if(plain)$
+\newfontface\titlefont{$titlefont$}[Colour=myblack]
+$else$
+\newfontface\titlefont{Proza Libre Bold}[Colour=mydarkred]
+$endif$
+$endif$
+
+\usepackage{textcomp}
+\usepackage{fontawesome}
+\newfontfamily{\FA}{[FontAwesome.otf]}
+
+
+% ===========
+% = Spacing =
+% ===========
+
+\usepackage{setspace}
+
+\usepackage{ragged2e}
+\usepackage[none]{hyphenat}
+
+
+$if(parindent)$
+\setlength{\parindent}{$parindent$}
+$else$
+\setlength{\parindent}{0em}
+$endif$
+
+$if(parskip)$
+\setlength{\parskip}{$parskip$}
+$else$
+\setlength{\parskip}{1em}
+$endif$
+
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+
+\usepackage[hang,flushmargin]{footmisc} 
+
+% =======================
+% = Headers and Footers = 
+% =======================
+
+%custom date format
+\usepackage[us, nodayofweek]{datetime}
+\newdateformat{mydate}{\THEDAY \ \monthname \ \THEYEAR}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+
+$if(nohead)$
+\fancyfoot[C]{\textsc{\thepage}}
+\fancyfoot[R]{\tiny\texttt{$path$ Revised: \today}}
+\fancyfoot[L]{}
+\renewcommand{\headrulewidth}{0em}
+\fancyhead{}
+
+$else$ 
+$if(nofoot)$
+\fancyfoot{}
+$else$
+\fancyfoot[C]{}
+\fancyfoot[R]{\tiny\texttt{$path$ Revised: \today}}
+\fancyfoot[L]{}
+$endif$
+
+
+\fancyhead[LE]{\textsc{\thepage}}
+\fancyhead[LO]{\textsc{$author$}}
+\fancyhead[RE]{\textsc{$date$}}
+\fancyhead[RO]{\textsc{\thepage}}
+
+$if(subtitle)$
+\fancyhead[CE]{\textsc{$title$}}
+\fancyhead[CO]{\textsc{$subtitle$}}
+$else$
+\fancyhead[C]{\textsc{$title$}}
+$endif$
+
+$endif$
+
+
+
+% ============
+% = Headings =
+% ============
+
+\usepackage[compact]{titlesec}  
+% \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
+
+$if(largehead)$
+\titlespacing*{\section}{0em}{3em}{.5em}
+\titlespacing*{\subsection}{0em}{2em}{0.5em}
+\titlespacing*{\subsubsection}{0em}{1.5em}{0.5em}
+\titlespacing*{\paragraph}{0em}{1em}{0em}
+\titlespacing*{\subparagraph}{0em}{0.5em}{0em}
+$else$
+\titlespacing*{\section}{0em}{2em}{0.5em}
+\titlespacing*{\subsection}{0em}{1.5em}{0.5em}
+\titlespacing*{\subsubsection}{0em}{1.5em}{0.5em}
+\titlespacing*{\paragraph}{0em}{1em}{0em}
+\titlespacing*{\subparagraph}{0em}{0.5em}{0em}
+$endif$ 
+
+$if(secnumdepth)$
+\setcounter{secnumdepth}{$secnumdepth$}
+$else$
+\setcounter{secnumdepth}{0}
+$endif$
+
+
+$if(colorhead)$
+\titleformat{\section}[hang]
+  {\LARGE\titlefont}
+  {\thesection}
+  {1em}
+  {}
+\titleformat{\subsection}[hang]
+  {\Large\bfseries\sffamily}
+  {\thesubsection}
+  {1em}
+  {}
+\titleformat{\subsubsection}[hang]
+  {\large\bfseries\sffamily}
+  {\thesubsubsection}
+  {1em}
+  {}
+\titleformat{\paragraph}[hang]
+  {\normalsize\bfseries\sffamily}
+  {\theparagraph}
+  {1em}
+  {}
+\titleformat{\subparagraph}[hang]
+  {\footnotesize\itshape\sffamily}
+  {\thesubparagraph}
+  {1em}
+  {}
+
+$else$
+$if(largehead)$
+\titleformat{\section}[hang]
+  {\LARGE\bfseries\sffamily}
+  {\thesection}
+  {1em}
+  {}
+\titleformat{\subsection}[hang]
+  {\Large\bfseries\sffamily}
+  {\thesubsection}
+  {1em}
+  {}
+\titleformat{\subsubsection}[hang]
+  {\large\bfseries\sffamily}
+  {\thesubsubsection}
+  {1em}
+  {}
+\titleformat{\paragraph}[hang]
+  {\normalsize\bfseries\sffamily}
+  {\theparagraph}
+  {1em}
+  {}
+\titleformat{\subparagraph}[hang]
+  {\footnotesize\itshape\sffamily}
+  {\thesubparagraph}
+  {1em}
+  {}
+
+$else$
+\titleformat{\section}[hang]
+  {\Large\bfseries\sffamily}
+  {\thesection}
+  {1em}
+  {}
+\titleformat{\subsection}[hang]
+  {\large\bfseries\sffamily}
+  {\thesubsection}
+  {1em}
+  {}
+\titleformat{\subsubsection}[hang]
+  {\normalsize\bfseries\sffamily}
+  {\thesubsubsection}
+  {1em}
+  {}
+\titleformat{\paragraph}[hang]
+  {\small\bfseries\sffamily}
+  {\theparagraph}
+  {1em}
+  {}
+\titleformat{\subparagraph}[hang]
+  {\footnotesize\itshape\sffamily}
+  {\thesubparagraph}
+  {1em}
+  {}
+$endif$
+$endif$
+
+
+% =========
+% = Lists =
+% =========
+
+\usepackage{enumitem}
+$if(listdepth)$
+\setlistdepth{$listdepth$}
+$else$
+\setlistdepth{6}
+$endif$
+
+\setlist[itemize,1]{label=\textbullet}
+\setlist[itemize,2]{label=\textopenbullet}
+\setlist[itemize,3]{label=\textperiodcentered}
+\setlist[itemize,4]{label=\textendash}
+\setlist[itemize,5]{label=\diamond}
+\setlist[itemize,6]{label=\textopenbullet}
+
+%\setlist{nosep}
+
+$if(flushlist)$
+\setlist[itemize]{labelindent=1.25em,leftmargin=2.5em,labelsep=*,topsep=.2em,itemsep=.2em,partopsep=0em,parsep=0em,align=left}
+\setlist[enumerate]{wide,labelindent=0pt,labelwidth=!,labelsep=1em,topsep=.2em,itemsep=.2em,partopsep=0.2em,parsep=0.2em,align=left}
+$else$
+\setlist[itemize]{leftmargin=*,topsep=.2em,itemsep=.2em,partopsep=0em,parsep=0em,align=left}
+\setlist[enumerate]{leftmargin=*,itemindent=*,topsep=.2em,itemsep=.2em,partopsep=0.2em,parsep=0.2em,align=left}
+\setlist[1]{labelindent=1em} % Only the level 1
+$endif$
+
+% \providecommand{\tightlist}{%
+% \setlength{\itemsep}{0em}\setlength{\parskip}{0em}\setlength{\itemindent}{0em}}
+\def\tightlist{}
+
+
+% ==========
+% = Quotes =
+% ==========
+
+\usepackage{csquotes}
+$if(quoteflushlist)$
+\AtBeginEnvironment{quote}{\small\setlist{wide}}
+$else$
+\AtBeginEnvironment{quote}{\small\itshape} 
+$endif$
+
+$if(quoteindent)$
+\renewenvironment{quote}{%
+   \list{}{%
+     \$quoteindent$   % this is the adjusting screw
+     \rightmargin\leftmargin\parsep 0.5em }
+   \item\relax
+}
+{\endlist}
+
+$else$
+\renewenvironment{quote}{%
+   \list{}{%
+     \leftmargin2em   % this is the adjusting screw
+     \rightmargin\leftmargin\parsep 0.5em }
+   \item\relax
+}
+{\endlist}
+$endif$
+
+
+
+% ================
+% = Title Layout =
+% ================
+
+
+\usepackage{titling}
+\setlength{\droptitle}{-2.5cm}
+
+
+% ==============
+% = Blank Page =
+% ==============
+
+\usepackage{afterpage}
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-2}%
+    \newpage}
+
+
+% ==========
+% = Tables =
+% ==========
+
+\usepackage{longtable}
+\usepackage{booktabs}
+
+$if(norule)$
+\setlength\heavyrulewidth{$norule$}
+\setlength\lightrulewidth{$norule$}
+$endif$
+
+% ============
+% = Graphics =
+% ============
+
+\usepackage{caption}
+\captionsetup[figure]{labelformat=empty}
+
+$if(graphics)$
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+$endif$
+
+
+% ==============
+% = Hyperlinks =
+% ==============
+
+\usepackage[unicode=true]{hyperref}
+$if(colorlinks)$
+\hypersetup{colorlinks=true, linkcolor=mylightblue, citecolor=mylightblue, urlcolor=mylightblue,}
+$else$
+\hypersetup{colorlinks=false}
+$endif$
+
+% =============================================================================
+% ============================== BEGIN DOCUMENT =============================== 
+% =============================================================================
+
+\begin{document}\thispagestyle{empty}
+
+
+$if(customtitle)$
+
+\begin{figure}[h!]
+  \includegraphics[width=\linewidth]{KnowYourRights.jpg}
+  \caption{}
+  \label{}
+\end{figure}
+
+\newpage 
+
+$else$
+$if(largetitle)$
+\begin{flushleft}
+\titlefont\huge{$title$} $if(subtitle)$:\\ {$subtitle$}$endif$\\
+\vspace{.6cm}
+$if(author)$\rmfamily\normalsize{$author$}\\$endif$  
+$if(position)${\vspace{.2cm}$position$}\\$endif$ 
+$if(affiliation)${$affiliation$}\\$endif$ 
+$if(address)$\vspace{.2cm}{$address$}\\$endif$ 
+$if(phone)$\vspace{.2cm}{$phone$}\\$endif$ 
+$if(email)$\vspace{.2cm}{$email$}\\$endif$  
+\vspace{.2cm}
+{$date$} 
+\end{flushleft}
+
+
+$endif$
+
+
+\RaggedRight
+
+$if(spacing)$
+\$spacing$
+$else$
+\singlespacing
+$endif$
+
+\needspace{2\baselineskip}
+
+$if(columns)$
+\setlength{\columnsep}{3em}
+\begin{multicols}{$columns$}
+$body$
+\end{multicols}
+$else$
+$body$
+$endif$
+
+\end{document}

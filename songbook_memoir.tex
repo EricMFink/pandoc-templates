@@ -1,0 +1,368 @@
+%%% booklet.tex
+%%% Booklet template for Pandoc using LaTeX memoir class
+%%% For creating PDF from .md file with YAML frontmatter 
+%%% Created by Eric M. Fink (https://github.com/LuckyJimJD/pandoc-templates)
+%%% 
+
+\documentclass[$papertype$,twoside,showtrims,final,$fontsize$]{memoir}
+
+\usepackage[osf]{mathpazo}
+\usepackage[mathcal,mathbf]{euler}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{colorlinks=false,pdfpagelayout=TwoPageRight}
+\usepackage{graphicx,sidecap,tikz}
+% \usepackage{siunitx} % automatic number formatting, decimal point alignment
+
+\usepackage{graphicx}
+
+
+\usepackage{multicol}
+\setlength{\columnsep}{$columnsep$}
+
+
+\openright
+
+
+
+% =======================
+% = Stock and Typeblock =
+% =======================
+
+\setstocksize{$stockheight$}{$stockwidth$}
+% \trimFrame
+\settrimmedsize{$trimheight$}{$trimwidth$}{*}
+\settrims{$trimtop$}{$trimoutside$}
+
+\settypeblocksize{$typeblockheight$}{$typeblockwidth$}{$typeblockratio$} % {height}{width}{ratio}
+\setlrmargins{$insidemargin$}{$outsidemargin$}{$insideoutsideratio$} % {inside margin}{outside margin}{ratio}
+\setulmargins{$topmargin$}{$bottommargin$}{$topbottomratio$} % {top margin}{bottom margin}{ratio}
+
+
+\setheadfoot{$headheight$}{1.5\onelineskip} % headheight and footskip
+\setheaderspaces{$headdrop$}{$headsep$}{$headratio$} % headdrop, headsep, and ratio
+
+\raggedbottom
+
+\checkandfixthelayout[lines]
+
+
+% ===========
+% = Spacing =
+% ===========
+
+$if(RaggedRightParindent)$
+\usepackage{ragged2e}
+\setlength{\RaggedRightParindent}{0em}
+\RaggedRight
+\usepackage[none]{hyphenat}
+$endif$
+
+\usepackage{parskip}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+
+\SingleSpacing
+
+% Adjust spacing and font for block quote
+\renewenvironment{quote}{%
+   \list{}{%
+     \leftmargin=1em   % this is the adjusting screw
+     \rightmargin=1em
+     \topsep=0em
+     \itshape
+   }
+   \item\relax
+}
+{\endlist}
+
+
+% =========
+% = Lists =
+% =========
+
+\usepackage{fontawesome}
+\newfontfamily{\FA}{[FontAwesome.otf]}
+\usepackage{enumitem}
+\setlistdepth{$listdepth$}
+\renewlist{itemize}{itemize}{$listdepth$}
+
+% initially, use dots for all levels
+\setlist[itemize]{label=\tiny\faCircle}
+
+% customize levels
+\setlist[itemize,1]{label=\tiny\faCircle}
+\setlist[itemize,2]{label=\tiny\faCircleO}
+\setlist[itemize,3]{label=\tiny\faChevronRight}
+\setlist[itemize,4]{label=\tiny\faCaretRight} 
+\setlist[itemize,5]{label=\tiny\faAngleRight} 
+\setlist[itemize,6]{label=\tiny\faAngleDoubleRight} 
+
+\setlist[itemize]{label={},leftmargin={$listmargin$},rightmargin={$listmargin$}}
+\setlist[enumerate]{label={},nosep}
+
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{$itemsep$}\setlength{\parskip}{$itemskip$}\setlength{\itemindent}{$itemindent$}}
+
+
+% ==================
+% = Colors & Fonts =
+% ==================
+
+\usepackage{xcolor}
+\definecolor{myblack}{HTML}{231F20} 
+\definecolor{mybrightred}{HTML}{EC1F27} 
+\definecolor{mydarkred}{HTML}{b03a2e} 
+\definecolor{mydarkblue}{HTML}{154360}
+\definecolor{mylightblue}{HTML}{3498DB} 
+
+\usepackage{fontspec}
+\setmainfont{Alegreya}[Mapping={tex-text},SmallCapsFont={Alegreya SC}]
+\setsansfont{Alegreya Sans}[Mapping=tex-text]
+\setmonofont{Inconsolata}[Mapping=tex-text,Scale=1.0]
+
+\newfontface\titlefont{Alegreya SC}[Colour=mybrightred]
+\newfontface\subtitlefont{Alegreya Italic}[Colour=myblack]
+
+
+% =======================
+% = Headers and Footers = 
+% =======================
+
+\nouppercaseheads
+\makepagestyle{stylish}
+\copypagestyle{stylish}{headings}
+\makerunningwidth{stylish}{$typeblockwidth$}
+\makeheadposition{stylish}{flushleft}{flushright}{}{}
+\pagestyle{stylish}
+
+\makeevenhead{stylish}{\thepage}{}{\textsc{$title$}}
+\makeoddhead{stylish}{\textsc\leftmark}{}{\thepage}
+
+\copypagestyle{chapter}{plain}
+\makeoddfoot{chapter}{}{}{}
+
+% ============
+% = Headings =
+% ============
+
+\setsecnumdepth{$secnumdepth$}
+\maxsecnumdepth{$secnumdepth$}
+
+% H1
+\newfontface\chapterfont{$chapterfont$}[Colour=$chaptercolor$] 
+% H2
+\newfontface\sectionfont{$sectionfont$}[Colour=$sectioncolor$] 
+% H3
+\newfontface\subsectionfont{$subsectionfont$}[Colour=$subsectioncolor$] 
+% H4
+\newfontface\subsubsectionfont{$subsubsectionfont$}[Colour=$subsubsectioncolor$]
+% H5
+\newfontface\parafont{$parafont$}[Colour=$paracolor$] 
+% H6
+\newfontface\subparafont{$subparafont$}[Colour=$subparacolor$] 
+
+\makechapterstyle{color}{
+\def\chapterheadstart{\vspace{$afterchapskip$}}
+\renewcommand*{\chaptitlefont}{\chapterfont\$chaptersize$}
+  \renewcommand*{\chapnamefont}{\chaptitlefont}
+}
+
+\setsecheadstyle{\$sectionsize$\sectionfont}
+\setbeforesecskip{$beforesecskip$}
+\setaftersecskip{$aftersecskip$}
+
+\setsubsecheadstyle{\$subsectionsize$\subsectionfont}
+\setbeforesubsecskip{$beforesubsecskip$}
+\setaftersubsecskip{$aftersubsecskip$}
+
+\setsubsubsecheadstyle{\$subsubsectionsize$\subsubsectionfont}
+\setbeforesubsubsecskip{$beforesubsubsecskip$}
+\setaftersubsubsecskip{$aftersubsubsecskip$}
+
+\setparaheadstyle{\$parasize$\parafont}
+\setbeforeparaskip{$beforeparaskip$}
+\setafterparaskip{$afterparaskip$}
+
+\setsubparaheadstyle{\$subparasize$\subparafont}
+\setbeforesubparaskip{$beforesubparaskip$}
+\setaftersubparaskip{$aftersubparaskip$}
+
+
+% ==========
+% = Images =
+% ==========
+
+\usepackage[export]{adjustbox} % loads also graphicx
+\let\oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[2][]{%
+  \oldincludegraphics[#1,max width=4in]{#2}}
+  
+\usepackage[labelformat=empty]{caption}
+
+
+% =====================
+% = Table of contents =
+% =====================
+
+\renewcommand*{\contentsname}{{Contents}}
+\settocdepth{section}
+\setlength{\cftbeforechapterskip}{2.0em plus 1em minus 0.1em}
+\setlength{\cftbeforesectionskip}{0.2em plus 0.2em minus 0.1em}
+\renewcommand{\cftchapterfont}{\chapterfont\Large} 
+\renewcommand{\cftsectionfont}{\normalsize} 
+
+% ==============
+% = Footnotes =
+% ==============
+
+
+\usepackage{perpage}
+\MakePerPage{footnote}
+
+\renewcommand{\footnotesep}{1\baselineskip}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\footmarkstyle{\hspace{\parindent}#1 }    % indent the footmark 
+\setlength{\footmarkwidth} {0em}
+\setlength{\footmarksep}   {0em}
+\setlength{\footparindent} {\parindent}
+
+
+
+
+
+% ==============================================================================
+% =============================== BEGIN DOCUMENT =============================== 
+% ==============================================================================
+
+\begin{document}
+
+% ================
+% = Front Matter =
+% ================
+
+\frontmatter
+
+% =============
+% = TitlePage =
+% =============
+
+% \cleartorecto
+\thispagestyle{empty}
+\mbox{}\vspace{0.5in}
+\noindent
+
+\begin{center}\begin{DoubleSpace}
+{\fontsize{$titlesize$}{$titleskip$}\titlefont{$title$}}\\[1\baselineskip]
+$if(subtitle)$ {\$subtitlesize$\subtitlefont{$subtitle$}}\\[2\baselineskip]$endif$
+\end{DoubleSpace}
+
+$if(author)$ 
+\vspace{6\baselineskip}
+{\LARGE{$author$}}
+$endif$
+
+$if(titleimage)$ 
+\vfill
+\centerline{\includegraphics[width=0.3\textwidth]{../Images/$titleimage$}}
+$endif$
+
+\end{center}
+
+\clearpage
+
+% Blank page after titlepage
+% \clearpage
+% \thispagestyle{empty}
+% \null
+
+
+% ============
+% = Colophon =
+% ============
+
+% Blank page to set on verso
+% \clearpage
+% \thispagestyle{empty}
+% \null
+% \cleartoverso
+
+\thispagestyle{empty}
+\noindent
+\begin{flushleft}
+\vspace*{\fill}
+
+$if(copyright)$ 
+
+\bigskip
+
+{\small{$copyright$}}
+$endif$
+
+$if(acknowledgments)$
+
+\bigskip
+
+{\small{$acknowledgments$}}
+
+$endif$
+
+\bigskip
+
+$if(production)$
+
+{\small{$production$}}
+
+
+$endif$
+\end{flushleft}
+
+\clearpage
+\null
+\thispagestyle{empty}
+
+
+% =====================
+% = Table of Contents =
+% =====================
+
+$if(toc)$
+\clearpage
+\thispagestyle{empty}
+\tableofcontents*
+\clearpage
+$endif$
+
+% ===============
+% = Main Matter =
+% ===============
+
+\cleartorecto
+\mainmatter
+
+% Set line spacing (leading)
+\setSingleSpace{$setspace$}
+\SingleSpacing
+
+\chapterstyle{color}
+
+% \thispagestyle{empty}
+
+% \vspace*{1.5in}
+
+$body$
+
+
+
+% ================
+% = Back Matter =
+% ================
+
+$if(backmatter)$
+\cleartorecto
+\backmatter
+$endif$
+
+
+\end{document}

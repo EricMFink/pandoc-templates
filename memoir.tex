@@ -1,0 +1,319 @@
+%%% memoir.tex
+%%% Default Pandoc template using LaTeX memoir class
+%%% For creating PDF from .md file with YAML frontmatter 
+%%% Created by Eric M. Fink (https://github.com/LuckyJimJD/pandoc-templates)
+%%% Based on xelatex.template by Kieran J. Healy https://github.com/kjhealy/pandoc-templates
+%%% 
+
+% ===============
+% = Page Layout =
+% ===============
+
+$if(fontsize)$
+$if(sides)$
+\documentclass[letterpaper,$fontsize$,$sides$]{memoir}
+$else$
+\documentclass[letterpaper,$fontsize$,twoside]{memoir}
+$endif$
+$else$
+\documentclass[letterpaper,11pt,twoside]{memoir}
+$endif$
+
+$if(lr)$
+\setlrmarginsandblock{$lr$}{*}{1} % {inside margin}{outside margin}{ratio}
+$else$
+\setlrmarginsandblock{1.25in}{1.25in}{*} % {inside margin}{outside margin}{ratio}
+$endif$
+
+$if(top)$
+\setulmargins{$top$}{$bottom$}{*} % {top margin}{bottom margin}{ratio}
+$else$
+\setulmargins{1in}{1in}{*} % {top margin}{bottom margin}{ratio}
+$endif$
+
+$if(headheight)$
+\setheadfoot{$headheight$}{$footskip$} % headheight and footskip
+$else$
+\setheadfoot{0.2in}{2\onelineskip} % headheight and footskip
+
+$if(headdrop)$
+\setheaderspaces{$headdrop$}{*}{$ratio$} % headdrop, headsep, and ratio
+$else$
+\setheaderspaces{*}{*}{0.5} % headdrop, headsep, and ratio
+$endif$
+
+\checkandfixthelayout[lines]
+
+\openright
+
+$if(colmnsep)$
+\usepackage{multicol}
+\setlength{\columnsep}{$columnsep$}
+$endif$
+
+
+% ============
+% = Language =
+% ============
+
+\usepackage[english]{babel}  
+
+
+% ==================
+% = Colors & Fonts =
+% ==================
+
+\usepackage{xcolor}
+\definecolor{myblack}{HTML}{231F20} 
+\definecolor{mybrightred}{HTML}{EC1F27} 
+\definecolor{mydarkred}{HTML}{b03a2e} 
+\definecolor{mydarkblue}{HTML}{154360}
+\definecolor{mylightblue}{HTML}{3498DB} 
+
+\usepackage{fontspec}
+$if(mainfont)$
+\setmainfont{$mainfont$}[Mapping={tex-text},SmallCapsFont={$scfont$}]
+$else$
+\setmainfont{Cormorant Garamond}[Mapping={tex-text},SmallCapsFont={Cormorant SC}]
+$endif$
+
+$if(sansfont)$
+\setsansfont{$sansfont$}[Mapping=tex-text]
+$else$
+\setsansfont{Proza Libre}[Mapping=tex-text]
+$endif$
+
+$if(monofont)$
+\setmonofont{$monofont$}[Mapping=tex-text,Scale=1.0]
+$else$
+\setmonofont{Cousine}[Mapping=tex-text,Scale=1.0]
+$endif$
+
+$if(titlefont)$
+\newfontface\titlefont{$titlefont$}[Colour=$titlecolor$]
+$else$
+\newfontface\titlefont{Proza Libre Bold}[Colour=mydarkred]
+$endif$
+
+\usepackage{textcomp}
+\usepackage{fontawesome}
+\newfontfamily{\FA}{[FontAwesome.otf]}
+
+
+% ===========
+% = Spacing =
+% ===========
+
+\usepackage{parskip}
+
+$if(parindent)
+\setlength{\parindent}{$parindent$}
+$else$
+\setlength{\parindent}{0}
+$endif$
+
+$if(parskip)
+\setlength{\parskip}{$parskip$}
+$else$
+\setlength{\parskip}{1em}
+$endif$
+
+$if(linespacing)$
+\SingleSpacing
+$else$
+\SingleSpacing
+$endif$
+
+% =========
+% = Lists =
+% =========
+
+\usepackage{enumitem}
+$if(listdepth)$
+\setlistdepth{$listdepth$}
+$else$
+\setlistdepth{6}
+$endif$
+
+\setlist[itemize,1]{label=\textbullet}
+\setlist[itemize,2]{label=\textopenbullet}
+\setlist[itemize,3]{label=\textbullet}
+\setlist[itemize,4]{label=\textopenbullet}
+\setlist[itemize,5]{label=\textbullet}
+\setlist[itemize,6]{label=\textopenbullet}
+
+
+$if(itemsep)$
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{$itemsep$}\setlength{\parskip}{$itemskip$}\setlength{\itemindent}{$itemindent$}}
+$else$
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{0em}\setlength{\parskip}{0em}\setlength{\itemindent}{0em}}
+$endif$
+
+
+% =======================
+% = Headers and Footers = 
+% =======================
+
+% custom date format
+\usepackage[us, nodayofweek]{datetime}
+\newdateformat{mydate}{\THEDAY \ \monthname \ \THEYEAR}
+
+\nouppercaseheads
+\makepagestyle{stylish}
+\copypagestyle{stylish}{headings}
+\makerunningwidth{stylish}{$typeblockwidth$}
+\makeheadposition{stylish}{flushleft}{flushright}{}{}
+\pagestyle{stylish}
+
+$if(nohead)$
+\makeevenhead{stylish}{}{}{}
+\makeoddhead{stylish}{}{}{}
+\makeevenfoot{stylish}{}{}{}
+\makeoddfoot{stylish}{}{}{}
+$else$
+\makeevenhead{stylish}{\thepage}{$title$}{$author$}
+$if(subtitle)$
+\makeoddhead{stylish}{$date$}{$subtitle$}{\thepage}
+$else$
+\makeoddhead{stylish}{$date$}{$title$}{\thepage}
+$endif$
+$if(path)$
+\makeevenfoot{stylish}{$path$}{}{Revised: \today}
+\makeoddfoot{stylish}{$path$}{}{Revised: \today}
+$else$
+\makeevenfoot{stylish}{}{}{Revised: \today}
+\makeoddfoot{stylish}{}{}{Revised: \today}
+$endif$
+$endif$
+
+
+% =====================
+% = Section Numbering =
+% =====================
+
+$if(classnotes)$
+\setcounter{secnumdepth}{3}
+$else$
+\setcounter{secnumdepth}{$if(secnumdepth)$$secnumdepth$$else$0$endif$}
+$endif$
+
+
+% ==========
+% = Quotes =
+% ==========
+
+\usepackage{csquotes}
+
+\AtBeginEnvironment{quote}
+  {\itshape\small\list{}{\rightmargin=-1em \leftmargin=-1em}\item\relax}{\endlist}
+
+
+
+% ============
+% = Graphics =
+% ============
+
+$if(graphics)$
+\usepackage{graphicx}
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth]{#1}}
+$endif$
+
+
+
+% ================
+% = Title Format =
+% ================
+
+$if(title)$
+\title{\bigskip \bigskip $title$}
+$endif$ 
+
+%\author{$for(author)$$author$$sep$\\$endfor$}
+
+\author{$for(author)$\Large $author.name$\vspace{0.05in} \newline\normalsize\emph{$author.affiliation$} \newline\footnotesize \url{$author.email$}\vspace*{0.2in}\newline \footnotesize \url{$author.phone$}\vspace*{0.2in}\newline \footnotesize{Office Hours: }\href{https://$author.appointments$}{\texttt{$author.appointments$}}\vspace*{0.2in}\newline \newline \footnotesize \url{$author.email$}\vspace*{0.2in}\newline  $sep$ \and $endfor$}
+
+%\author{$for(author)$$author.name$ ($author.affiliation$)$sep$ \and $endfor$}
+
+\date{}
+
+
+% ===============
+% = Color Links =
+% ===============
+
+$if(title)$
+\usepackage[hidelinks]{hyperref}
+
+$else$
+\hypersetup{colorlinks=false,pdfpagelayout=TwoPageRight}
+
+$endif$ 
+
+
+% ==================
+% = Begin Document =
+% ==================
+
+\begin{document}  
+\setkeys{Gin}{width=1\textwidth} 
+\chapterstyle{article-4} 
+
+$if(title)$
+\maketitle
+$endif$
+
+
+
+% ================
+% = Front Matter =
+% ================
+
+% = Table of Contents =
+
+$if(toc)$
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{$toc-depth$}
+\tableofcontents
+}
+$endif$
+
+% = Abstract =
+
+$if(abstract)$
+
+\begin{abstract}
+
+\noindent $abstract$
+
+\end{abstract}
+
+$endif$
+
+
+% ===============
+% = Main Matter =
+% ===============
+
+$body$
+
+
+% ===============
+% = Back Matter =
+% ===============
+
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}

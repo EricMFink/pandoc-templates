@@ -1,0 +1,327 @@
+%%% article.tex
+%%% Academic article template for pandoc with options for legal-style (1, 1.1, 1.1.1, etc.) or law review style (I. A. 1. a. i.) section headings
+%%% Use with article.yaml for variables
+%%% Created by Eric M. Fink (https://github.com/LuckyJimJD/pandoc-templates)
+%%% 
+
+% ====================
+% = Layout & Spacing =
+% ====================
+
+$if(draft)$
+\documentclass[10pt,letterpaper,oneside]{article}
+\usepackage[hmarginratio=1:1,top=1.1in,bottom=1in,left=1.5in,right=1.5in]{geometry}
+% = Left-align & no hyphenation = 
+\usepackage{ragged2e}
+\setlength{\RaggedRightParindent}{2em}
+\usepackage[ragged, bottom]{footmisc}
+\usepackage[none]{hyphenat}
+
+$else$
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage[hmarginratio=1:1,top=1.75in,bottom=1in,left=1.9in,right=1.9in]{geometry}
+\usepackage[bottom]{footmisc}
+$endif$
+
+\usepackage{setspace}
+
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+% ==========================
+% = Language & Date Format =
+% ==========================
+
+\usepackage[english]{babel}  
+% \usepackage[us,nodayofweek]{datetime}
+\usepackage[nodayofweek]{datetime}
+\newdateformat{mydate}{\THEDAY -\shortmonthname -\THEYEAR}
+
+
+% ==================
+% = Colors & Fonts =
+% ==================
+
+\usepackage{xcolor}
+\definecolor{myblack}{HTML}{231F20} 
+\definecolor{mybrightred}{HTML}{EC1F27} 
+\definecolor{mydarkred}{HTML}{b03a2e} 
+\definecolor{mydarkblue}{HTML}{154360}
+\definecolor{mylightblue}{HTML}{3498DB} 
+
+\usepackage{fontspec}
+$if(draft)$
+\setmainfont{Cousine}[Mapping=tex-text]
+\setsansfont{Cousine}[Mapping=tex-text]
+\setmonofont{Cousine}[Mapping=tex-text,Scale=1.0]
+$else$
+
+$if(mainfont)$
+\setmainfont{$mainfont$}[Mapping={tex-text},SmallCapsFont={$scfont$}]
+$else$
+\setmainfont{Minion Pro}[Mapping={tex-text},SmallCapsFont={Minion RegularSC}]
+$endif$
+
+$if(sansfont)$
+\setsansfont{$sansfont$}[Mapping=tex-text]
+$else$
+\setsansfont{Lato}[Mapping=tex-text]
+$endif$
+
+$if(monofont)$
+\setmonofont{$monofont$}[Mapping=tex-text,Scale=1.0]
+$else$
+\setmonofont{Cousine}[Mapping=tex-text,Scale=1.0]
+$endif$
+
+$if(titlefont)$
+\newfontface\titlefont{$titlefont$}
+$else$
+\newfontface\titlefont{Minion RegularSC}
+$endif$
+
+$endif$
+
+
+% =======================
+% = Headers and Footers = 
+% =======================
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+$if(draft)$
+
+\fancyfoot{}
+\fancyfoot[C]{}
+\fancyfoot[R]{\tiny\texttt{Revised: {\mydate\today}}}
+\fancyfoot[L]{\tiny\texttt{$path$}}
+\fancyhead{}
+\fancyhead[C]{\small\textsc{$header$}}
+\fancyhead[R]{\small{\thepage}}
+\fancyhead[L]{\small{Draft]}}
+
+
+$else$
+
+\fancyfoot{}
+\fancyfoot[C]{}
+\fancyfoot[R]{\tiny\texttt{Revised: {\mydate\today}}}
+\fancyfoot[L]{\tiny\texttt{$path$}}
+\fancyhead{}
+\fancyhead[C]{\small\textsc{$header$}}
+\fancyhead[RO]{\small{\thepage}}
+\fancyhead[RE]{\small{[Draft}}
+\fancyhead[LO]{\small{\mydate\today]}}
+\fancyhead[LE]{\small{\thepage}}
+
+$endif$
+
+
+% =====================
+% = Section Numbering =
+% =====================
+
+\usepackage{enumitem}
+\setlistdepth{5}
+\setcounter{secnumdepth}{5}
+
+% ============
+% = Headings =
+% ============
+
+
+\usepackage[]{titlesec}  
+% \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
+\titlespacing*{\section}{0em}{2em}{0.5em}
+\titlespacing*{\subsection}{0em}{1.5em}{0.5em}
+\titlespacing*{\subsubsection}{0em}{1.5em}{0.5em}
+\titlespacing*{\paragraph}{0em}{1em}{0pt}
+\titlespacing*{\subparagraph}{0em}{0.5em}{0em}
+
+
+$if(lawreview)$
+\makeatletter
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\Alph{subsection}}
+\renewcommand{\thesubsubsection}{\arabic{subsubsection}}
+\renewcommand{\theparagraph}{\alph{paragraph}}
+\renewcommand{\thesubparagraph}{\roman{subparagraph}}
+
+\titleformat{\section}[block]
+{\normalfont\normalsize\scshape\center}
+{\thesection.}
+{1em}
+{}
+\titleformat{\subsection}[block]
+{\normalfont\itshape\center}
+{\thesubsection.}
+{1em}
+{}
+\titleformat{\subsubsection}
+{\normalfont}
+{\thesubsubsection.}
+{1em}
+{}
+\titleformat{\paragraph}
+{\normalfont}
+{\theparagraph.}
+{1em}
+{}
+\titleformat{\subparagraph}
+{\normalfont\small}
+{\thesubparagraph.}
+{1em}
+{}
+
+$else$
+\titleformat{\section}[block]
+  {\large\bfseries}
+  {\thesection}
+  {1em}
+  {}
+\titleformat{\subsection}[block]
+  {\normalsize\bfseries}
+  {\thesubsection}
+  {1em}
+  {}
+\titleformat{\subsubsection}[block]
+  {\normalsize\itshape}
+  {\thesubsubsection}
+  {1em}
+  {}
+\titleformat{\paragraph}[block]
+  {\normalsize\itshape}
+  {\thesubparagraph}
+  {1em}
+  {}
+\titleformat{\subparagraph}[block]
+  {\normalsize\itshape}
+  {\theparagraph}
+  {1em}
+  {}
+$endif$
+
+% ================
+% = Title Layout =
+% ================
+
+\usepackage{titling}
+
+$if(draft)$
+% = Uncomment next line to reduce spacing of Title from top of page =
+% \setlength{\droptitle}{-1cm}
+\title{$for(title)$\Large\textbf{$title$}$if(subtitle)$:\\ \textbf{$subtitle$} $endif$ $endfor$}
+% = Uncomment next line to adjust spacing between Title and Author = 
+% \vspace{0.5em}
+\author{$for(author)$\normalsize{$author.name$}\\ \footnotesize{$author.affiliation$}\\ \footnotesize{$author.address$}$endfor$}
+\date{\footnotesize{Draft: \mydate\today}}
+
+$else$
+\setlength{\droptitle}{-3cm}
+\title{\Large\textbf{{$title$}$if(subtitle)$:\\ $subtitle$}$endif$}
+\author{$for(author)$\normalsize{$author.name$}\thanks{$author.position$, $author.affiliation$, $author.address$. $author.email$. $author.thanks$} $sep$ \and $endfor$}
+\date{}
+$endif$
+
+% ============
+% = Epigraph =
+% ============
+
+\usepackage{epigraph}
+% \setlength\epigraphwidth{.5\textwidth}
+\setlength\epigraphrule{0pt}
+\renewcommand{\epigraphsize}{\footnotesize}
+
+
+% ============
+% = Graphics =
+% ============
+
+\usepackage{caption}
+\captionsetup[figure]{labelformat=empty}
+
+$if(graphics)$
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+$endif$
+
+% =============
+% = Citations =
+% =============
+
+\usepackage[
+    backend=biber,
+    style=verbose-inote,
+    sortlocale=auto,
+    natbib=true,
+    url=false, 
+    doi=false,
+    eprint=false
+]{biblatex}
+\addbibresource{biblatex-examples.bib}
+
+% ==============
+% = Hyperlinks =
+% ==============
+
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,allcolors=black,}
+\urlstyle{same}
+
+
+% ==============================================================================
+% =============================== BEGIN DOCUMENT =============================== 
+% ==============================================================================
+
+\begin{document}
+
+
+% =========================
+% = Insert Title & Author =
+% =========================
+
+\maketitle
+% \vspace{-0.5in}
+
+
+% ==============================
+% = Insert Abstract & Epigraph =
+% ==============================
+
+
+$if(abstract)$
+\begin{abstract}
+\noindent{$abstract$}
+\end{abstract}
+$endif$
+
+$if(epigraph)$
+\epigraph{{$for(epigraph)$\itshape{$epigraph.text$}$endfor$}}%
+{$for(epigraph)${$epigraph.by$}\\ {$epigraph.source$}$endfor$}
+$endif$
+
+% =================================
+% = Set Line Spacing for Main Body=
+% =================================
+
+
+$if(draft)$
+\doublespacing
+\RaggedRight
+$else$
+\singlespacing
+$endif$
+
+
+$body$
+
+\end{document}
