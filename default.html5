@@ -13,6 +13,9 @@ $endif$
 $if(keywords)$
   <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
 $endif$
+$if(tags)$
+  <meta name="keywords" content="$for(keywords)$$tags$$sep$, $endfor$" />
+$endif$
 $if(description-meta)$
   <meta name="description" content="$description-meta$" />
 $endif$
@@ -39,13 +42,21 @@ $include-before$
 $endfor$
 $if(title)$
 <header id="title-block-header">
+$for(title)$
 <h1 class="title">$title$</h1>
+$endfor$
 $if(subtitle)$
 <p class="subtitle">$subtitle$</p>
 $endif$
 $for(author)$
 <p class="author">$author$</p>
 $endfor$
+$if(affiliation)$
+<p class="affiliation">$affiliation$</p>
+$endif$
+$if(tags)$
+<p class="tags">$tags$</p>
+$endif$
 $if(date)$
 <p class="date">$date$</p>
 $endif$

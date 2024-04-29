@@ -43,18 +43,28 @@ $if(title)$
 $if(subtitle)$
 <p class="subtitle">$subtitle$</p>
 $endif$
+$endif$
+
 $for(author)$
 <p class="authors">$author$</p>
 $endfor$
+
 $if(affiliation)$
 <p class="affiliation">$affiliation$</p>
 $endif$
+
 $if(source)$
 <p class="source">$source$</p>
 $endif$
+
+$if(tags)$
+<p class="source">$tags$</p>
+$endif$
+
 $if(date)$
 <p class="date">$date$</p>
 $endif$
+
 </header>
 $endif$
 $if(toc)$
