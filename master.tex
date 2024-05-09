@@ -4,7 +4,244 @@
 %%%
 
 
-$if(casebook)$
+$if(legal-code)$
+
+% START OF LEGAL CODE TEMPLATE
+
+\documentclass[11pt,letterpaper,twoside,]{article}
+
+% ============
+% = Packages =
+% ============
+
+\usepackage{multicol}
+%\usepackage{lipsum}
+%\usepackage{semantic}
+%\usepackage{pdflscape}
+%\usepackage{ifxetex}
+\usepackage{needspace}
+\usepackage[]{titlesec}
+%\usepackage[]{ccicons}
+\usepackage{etoolbox}
+%\usepackage{relsize}
+%\usepackage{fourier}
+%\usepackage{fontawesome}
+%\usepackage{calc} 
+%\usepackage{wrapfig}
+
+% ====================
+% = Layout & Spacing =
+% ====================
+
+\usepackage[top=1in,bottom=2in,left=2in,right=1in,]{geometry}
+
+\usepackage{setspace}
+\usepackage{ragged2e}
+\usepackage[]{hyphenat}
+%\usepackage[none]{hyphenat}
+\raggedbottom
+%\RaggedRight
+
+\usepackage{parskip}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+%\setlength{\parskip}{1\baselineskip}
+\setlength{\RaggedRightParindent}{0em}
+\setlength{\JustifyingParindent}{0em}
+
+\usepackage[defaultlines=3,all]{nowidow}
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+% ===================================
+% = Use md inside latex environment =
+% ===================================
+
+\let\Begin\begin
+\let\End\end
+
+
+% ==================
+% = Colors & Fonts =
+% ==================
+
+\usepackage[table]{xcolor}
+\definecolor{myblack}{HTML}{231F20}
+\definecolor{mybrightred}{HTML}{EC1F27}
+\definecolor{mydarkred}{HTML}{8C2E24}
+\definecolor{mydarkblue}{HTML}{154360}
+\definecolor{mylightblue}{HTML}{3498DB}
+\definecolor{lightgrey}{HTML}{DCDCDC}
+\definecolor{mydarkgreen}{HTML}{009f06}
+
+% \usepackage{crimson}
+% \usepackage[defaultsans,scale=0.95]{lato}
+% \usepackage{inconsolata}
+
+\usepackage{fontspec}
+\setmainfont{Portada Text}[Mapping={tex-text}]
+%\setmainfont{Cormorant Garamond}[Mapping={tex-text},SmallCapsFont={Cormorant SC}]
+%\setmainfont{Crimson}[Mapping={tex-text},Scale = 1.0]
+\setsansfont{Adelle Sans}[Mapping=tex-text]
+%\setsansfont{Proza Libre}[Mapping=tex-text]
+%\setsansfont{Lato}[Mapping=tex-text]
+\setmonofont[Scale=0.90]{LFT Etica Mono}
+%\setmonofont{Cousine}[Mapping=tex-text,Scale=0.8]
+
+\newfontface\titlefont{Adelle Sans Bold}[Colour=mydarkred]
+
+% =======================
+% = Headers and Footers =
+% =======================
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\fancyfoot[C]{}
+\fancyfoot[R]{}
+\fancyfoot[L]{}
+
+\fancyhead[C]{\small{$title$}}
+\fancyhead[LE]{\small{\thepage}}
+\fancyhead[LO]{\small{}}
+\fancyhead[RE]{\small{}}
+\fancyhead[RO]{\small{\thepage}}
+
+% =========
+% = Lists =
+% =========
+
+\usepackage{enumitem}
+\setlistdepth{6}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0em}\setlength{\parskip}{.2em}}
+
+%\setlist[enumerate]{itemindent=2em}
+%\setlist[enumerate,1]{itemindent=.5em}
+%\setlist[enumerate]{labelindent=0pt,labelwidth=1.5em,leftmargin=!}
+%\setlist[enumerate]{wide=0pt,labelwidth=1.3333em,labelsep=0.3333em,leftmargin=\dimexpr\labelwidth + \labelsep\relax }
+% \setlist[enumerate]{itemindent=2em}
+% \setlist[enumerate]{itemindent=0em}
+% \setlist[itemize]{itemindent=2em}
+% \setlist[itemize,1]{itemindent=0em}
+
+
+% ====================
+% = New Environments =
+% ====================
+
+\newenvironment{preface}
+    {{\noindent\rmfamily\itshape\Huge\color{mydarkred}{Preface}}
+    }
+    {\vspace{1\baselineskip}
+    }
+
+% Explanatory Notes
+\newenvironment{comment}
+    {\sffamily\small 
+    }
+    {
+    \vspace{.5em}\vspace{1em}
+    }
+
+% ============
+% = Headings =
+% ============
+
+% \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
+\titlespacing*{\section}{0em}{0em}{1em}
+\titlespacing*{\subsection}{0em}{2em}{1em}
+\titlespacing*{\subsubsection}{0em}{2em}{1em}
+\titlespacing*{\paragraph}{0em}{2em}{1em}
+\titlespacing*{\subparagraph}{0em}{2em}{1em}
+
+$if(secnum)$
+\setcounter{secnumdepth}{$secnum$}
+$else$
+\setcounter{secnumdepth}{0}
+$endif$
+
+% Restatement Chapter
+\titleformat{\section}%
+  [block]
+  {\newpage\rmfamily\Large}
+  {\thesection ~~}
+  {0em}
+  {}
+  []
+
+% Restatement Topic
+\titleformat{\subsection}
+  [block]
+  {\needspace{2\baselineskip}\raggedright\rmfamily\large}
+  {\thesubsection ~~}
+  {0em}
+  {}
+  []
+
+% Restatement Section
+\titleclass{\subsubsection}{straight}
+\titleformat{\subsubsection}
+  [block]
+  {\raggedright\rmfamily\bfseries\normalsize}
+  {\thesubsection ~~}
+  {0em}
+  {}
+  []
+
+% Restatement Comments & Illustrations
+\titleclass{\paragraph}{straight}
+\titleformat{\paragraph}
+  [block]
+  {\raggedright\rmfamily\itshape\small}
+  {\theparagraph}
+  {0em}
+  {}
+  []
+
+% Restatement Subsubsection
+\titleclass{\subparagraph}{straight}
+\titleformat{\subparagraph}
+  [block]
+  {\raggedright\sffamily\itshape\small}
+  {\thesubparagraph}
+  {0em}
+  {}
+  []
+
+% =====================
+% = Table of Contents =
+% =====================
+
+
+% =============================================================================
+% ============================== BEGIN DOCUMENT ===============================
+% =============================================================================
+
+%\setlength{\columnsep}{2em}
+
+\begin{document}
+\thispagestyle{empty}
+\singlespacing
+
+\vspace*{\fill}
+\rmfamily{\Large{$title$}}
+
+$if(subtitle)$
+\rmfamily{\Large{$subtitle$}} 
+$endif$
+
+\rmfamily{\large{$publisher$}}
+\vspace*{\fill}
+
+$body$
+
+\end{document}
+
+% END OF LEGAL CODE TEMPLATE
+
+$elseif(casebook)$
 
 % START OF CASEBOOK TEMPLATE
 
