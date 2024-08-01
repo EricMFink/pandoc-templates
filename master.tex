@@ -521,7 +521,7 @@ $endif$
 \titleclass{\subsubsection}{straight}
 \titleformat{\subsubsection}
   [block]
-  {\raggedright\rmfamily\bfseries\LARGE\color{mydarkred}}
+  {\raggedright\rmfamily\LARGE\color{mydarkred}}
   {\thesubsection ~~}
   {0em}
   {}
@@ -2471,8 +2471,10 @@ $endif$
 $if(date)$
 \rmfamily\footnotesize{$date$} \\
 $endif$
+$if(title)$
 \vspace{5mm}
 \titlefont\LARGE{$title$} \\
+$endif$
 $if(subtitle)$
 \vspace{.5cm}
 \titlefont\Large{$subtitle$} 
