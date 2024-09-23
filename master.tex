@@ -1514,7 +1514,6 @@ $else$
 $endif$
 \raggedbottom
 
-
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 
 \usepackage{multicol}
@@ -1562,13 +1561,9 @@ $else$
 \setmonofont{Cousine}[Mapping=tex-text,Scale=0.8]
 $endif$
 
-
-
-
 % =======================
 % = Headers and Footers =
 % =======================
-
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -1591,7 +1586,6 @@ $else$
 \fancyhead[RE]{\small{}}
 \fancyhead[RO]{\small{\thepage}}
 $endif$
-
 
 % ============
 % = Headings =
@@ -1644,7 +1638,6 @@ $endif$
   {1em}
   {}
 
-
 % =========
 % = Lists =
 % =========
@@ -1670,8 +1663,6 @@ $endif$
 
 %\setlist[enumerate]{itemindent=2em}
 %\setlist[enumerate,1]{itemindent=.5em}
-
-
 
 % ==========
 % = Quotes =
@@ -1751,7 +1742,6 @@ $endif$
   \endgroup
 }
 
-
 % ==============
 % = Blank Page =
 % ==============
@@ -1783,7 +1773,6 @@ $endif$
 % = Graphics =
 % ============
 
-
 \usepackage[justification=centering,font={scriptsize},skip=1em]{caption}
 % Sizes: scriptsize, footnotesize, small, normalsize, large, Large
 \captionsetup[figure]{labelformat=empty,width=.8\linewidth}
@@ -1802,7 +1791,6 @@ $endif$
 \renewcommand{\includegraphics}[2][]{%
   \oldincludegraphics[#1,max width=.75\linewidth]{#2}}
 
-
 % =============
 % = Footnotes =
 % =============
@@ -1810,7 +1798,6 @@ $endif$
 \usepackage[hang,flushmargin]{footmisc}
 
 % $if(notesymbols)$\renewcommand{\thefootnote}{\fnsymbol{footnote}}$endif$
-
 
 % ===================
 % = Pandoc citeproc =
@@ -1850,7 +1837,6 @@ $if(csl-refs)$
 
 $endif$
 
-
 % ==============
 % = Hyperlinks =
 % ==============
@@ -1875,7 +1861,6 @@ $endif$
 % ==============================================================================
 
 \begin{document}
-
 
 \singlespacing
 
@@ -1909,8 +1894,6 @@ $if(subtitle)$
 $endif$
 \end{flushleft}
 $endif$
-
-
 
 $if(columns)$
 \setlength{\columnsep}{5em}
