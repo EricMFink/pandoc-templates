@@ -89,7 +89,7 @@ $for(author)$
   <h3 class="title">$author$</h3>
 $endfor$
 $if(affiliation)$
-  <h4 class="title">$affiliation$</h4>
+  <h3 class="title">$affiliation$</h3>
 $endif$
 $if(date)$
   <h5 class="date">$date$</h5>
