@@ -389,7 +389,7 @@ $endif$
   {}
 % H5
 \titleformat{\subparagraph}[block]
-  {\normalsize\itshape\rmfamily}
+  {\footnotesize\itshape\rmfamily}
   {}
   {0em}
   {}
@@ -579,7 +579,8 @@ $if(ta2)$
 {$ta2$} \\
 \texttt{\href{mailto:{$ta2-email$}}{$ta2-email$}} \\
 $elseif(ta)$
-{Teaching Assistant:} {$ta$} \\
+{\itshape{Teaching Assistant:}} \\
+{$ta$} \\
 \texttt{\href{mailto:{$ta-email$}}{$ta-email$}} \\
 $endif$
 \end{footnotesize}
