@@ -572,7 +572,13 @@ $endif$
 {$phone$}  \\
 {Office Hours: }$if(officehours)${$officehours$}$else$\href{https://calendly.com/emfink}{\texttt{calendly.com/emfink}}$endif$
 
-$if(ta)$
+$if(ta2)$
+{\itshape{Teaching Assistants:}} \\
+{$ta$} \\
+\texttt{\href{mailto:{$ta-email$}}{$ta-email$}} \\
+{$ta2$} \\
+\texttt{\href{mailto:{$ta2-email$}}{$ta2-email$}} \\
+$elseif(ta)$
 {Teaching Assistant:} {$ta$} \\
 \texttt{\href{mailto:{$ta-email$}}{$ta-email$}} \\
 $endif$
