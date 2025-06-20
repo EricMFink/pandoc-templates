@@ -438,6 +438,7 @@ $endif$
 % table with pandoc
 $if(tables)$
 \usepackage{longtable,booktabs,array}
+%\setlength\heavyrulewidth{0pt}
 $if(multirow)$
 \usepackage{multirow}
 $endif$
@@ -451,6 +452,11 @@ $endif$
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
 $endif$
+
+\renewcommand{\arraystretch}{1.5}
+
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\footnotesize}
 
 % \setlength\LTleft{0pt}
 % \setlength\LTright{0pt}
@@ -562,6 +568,9 @@ $if(days)$
 $endif$
 $if(room)$
 {$room$} \\ 
+$endif$
+$if(repo)$
+\texttt{\href{https://emfink.net/$repo$}{emfink.net/$repo$}} \\ 
 $endif$
 \vspace{1em}
 
