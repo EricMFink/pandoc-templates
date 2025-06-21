@@ -249,7 +249,7 @@ $elseif(syllabus)$
 % = Layout & Spacing =
 % ====================
 
-\documentclass[12pt,letterpaper,twoside]{article}
+\documentclass[11pt,letterpaper,twoside]{article}
 \usepackage[hmarginratio=1:1,top=1in,bottom=.75in,left=1.5in,right=1.5in]{geometry}
 \usepackage{needspace}
 \usepackage[defaultlines=3,all]{nowidow}
@@ -456,7 +456,7 @@ $endif$
 \renewcommand{\arraystretch}{1.5}
 
 \usepackage{etoolbox}
-\AtBeginEnvironment{longtable}{\footnotesize}
+\AtBeginEnvironment{longtable}{\small}
 
 % \setlength\LTleft{0pt}
 % \setlength\LTright{0pt}
@@ -500,6 +500,8 @@ $endif$
 \usepackage[hang,flushmargin]{footmisc} 
 
 $if(notesymbols)$\renewcommand{\thefootnote}{\fnsymbol{footnote}}$endif$
+
+%\renewcommand{\footnotesize}{\fontsize{9pt}{11pt}\selectfont} %use to change size of footnotes
 
 % ===================
 % = Pandoc citeproc =
