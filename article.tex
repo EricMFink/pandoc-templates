@@ -1,7 +1,7 @@
 %%% article.tex
 %%% Academic article template for pandoc with options for legal-style (1, 1.1, 1.1.1, etc.) or law review style (I. A. 1. a. i.) section headings
 %%% Use with article.yaml for variables
-%%% Created by Eric M. Fink (https://github.com/LuckyJimJD/pandoc-templates)
+%%% Created by Eric M. Fink (https://github.com/EricMFink/Pandoc/templates)
 %%% 
 
 % ====================
@@ -9,7 +9,7 @@
 % ====================
 
 $if(draft)$
-\documentclass[10pt,letterpaper,oneside]{article}
+\documentclass[11pt,letterpaper,oneside]{article}
 \usepackage[hmarginratio=1:1,top=1.1in,bottom=1in,left=1.5in,right=1.5in]{geometry}
 % = Left-align & no hyphenation = 
 \usepackage{ragged2e}
@@ -19,7 +19,7 @@ $if(draft)$
 
 $else$
 \documentclass[12pt,letterpaper,twoside]{article}
-\usepackage[hmarginratio=1:1,top=1.75in,bottom=1in,left=1.9in,right=1.9in]{geometry}
+\usepackage[hmarginratio=1:1,top=1.5in,bottom=1.25in,left=1.9in,right=1.9in]{geometry}
 \usepackage[bottom]{footmisc}
 $endif$
 
@@ -34,9 +34,8 @@ $endif$
 % ==========================
 
 \usepackage[english]{babel}  
-% \usepackage[us,nodayofweek]{datetime}
-\usepackage[nodayofweek]{datetime}
-\newdateformat{mydate}{\THEDAY -\shortmonthname -\THEYEAR}
+\usepackage{datetime}
+\newdateformat{mydate}{\THEDAY \monthname \THEYEAR}
 
 
 % ==================
@@ -51,38 +50,14 @@ $endif$
 \definecolor{mylightblue}{HTML}{3498DB} 
 
 \usepackage{fontspec}
-$if(draft)$
-\setmainfont{Cousine}[Mapping=tex-text]
-\setsansfont{Cousine}[Mapping=tex-text]
-\setmonofont{Cousine}[Mapping=tex-text,Scale=1.0]
-$else$
 
-$if(mainfont)$
-\setmainfont{$mainfont$}[Mapping={tex-text},SmallCapsFont={$scfont$}]
-$else$
-\setmainfont{Minion Pro}[Mapping={tex-text},SmallCapsFont={Minion RegularSC}]
-$endif$
+\usepackage{CrimsonPro}
+\usepackage[defaultsans,scale=0.90]{lato}
+\setmonofont[Scale=0.85]{LFT Etica Mono}
 
-$if(sansfont)$
-\setsansfont{$sansfont$}[Mapping=tex-text]
-$else$
-\setsansfont{Lato}[Mapping=tex-text]
-$endif$
-
-$if(monofont)$
-\setmonofont{$monofont$}[Mapping=tex-text,Scale=1.0]
-$else$
-\setmonofont{Cousine}[Mapping=tex-text,Scale=1.0]
-$endif$
-
-$if(titlefont)$
-\newfontface\titlefont{$titlefont$}
-$else$
-\newfontface\titlefont{Minion RegularSC}
-$endif$
-
-$endif$
-
+%\usepackage{inconsolata}
+%\fontspec{inconsolata}
+%\setmonofont[Scale=0.90]{Inconsolata}
 
 % =======================
 % = Headers and Footers = 
@@ -95,8 +70,8 @@ $if(draft)$
 
 \fancyfoot{}
 \fancyfoot[C]{}
-\fancyfoot[R]{\tiny\texttt{Revised: {\mydate\today}}}
-\fancyfoot[L]{\tiny\texttt{$path$}}
+\fancyfoot[R]{\scriptsize\texttt{Revised: {\mydate\today}}}
+\fancyfoot[L]{\scriptsize\texttt{$path$}}
 \fancyhead{}
 \fancyhead[C]{\small\textsc{$header$}}
 \fancyhead[R]{\small{\thepage}}
@@ -107,8 +82,8 @@ $else$
 
 \fancyfoot{}
 \fancyfoot[C]{}
-\fancyfoot[R]{\tiny\texttt{Revised: {\mydate\today}}}
-\fancyfoot[L]{\tiny\texttt{$path$}}
+\fancyfoot[R]{\scriptsize\texttt{Revised: {\mydate\today}}}
+\fancyfoot[L]{\scriptsize\texttt{$path$}}
 \fancyhead{}
 \fancyhead[C]{\small\textsc{$header$}}
 \fancyhead[RO]{\small{\thepage}}
@@ -125,7 +100,7 @@ $endif$
 
 \usepackage{enumitem}
 \setlistdepth{5}
-\setcounter{secnumdepth}{5}
+\setcounter{secnumdepth}{3}
 
 % ============
 % = Headings =
@@ -134,7 +109,7 @@ $endif$
 
 \usepackage[]{titlesec}  
 % \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
-\titlespacing*{\section}{0em}{2em}{0.5em}
+\titlespacing*{\section}{0em}{3em}{0.5em}
 \titlespacing*{\subsection}{0em}{1.5em}{0.5em}
 \titlespacing*{\subsubsection}{0em}{1.5em}{0.5em}
 \titlespacing*{\paragraph}{0em}{1em}{0pt}
@@ -176,28 +151,28 @@ $if(lawreview)$
 {}
 
 $else$
-\titleformat{\section}[block]
+\titleformat{\section}[hang]
   {\large\bfseries}
-  {\thesection}
+  {\thesection.}
   {1em}
   {}
-\titleformat{\subsection}[block]
-  {\normalsize\bfseries}
+\titleformat{\subsection}[hang]
+  {\large\itshape}
   {\thesubsection}
   {1em}
   {}
-\titleformat{\subsubsection}[block]
-  {\normalsize\itshape}
+\titleformat{\subsubsection}[hang]
+  {\normalsize}
   {\thesubsubsection}
   {1em}
   {}
-\titleformat{\paragraph}[block]
+\titleformat{\paragraph}[hang]
   {\normalsize\itshape}
   {\thesubparagraph}
   {1em}
   {}
-\titleformat{\subparagraph}[block]
-  {\normalsize\itshape}
+\titleformat{\subparagraph}[hang]
+  {\normalsize}
   {\theparagraph}
   {1em}
   {}
@@ -215,13 +190,13 @@ $if(draft)$
 \title{$for(title)$\Large\textbf{$title$}$if(subtitle)$:\\ \textbf{$subtitle$} $endif$ $endfor$}
 % = Uncomment next line to adjust spacing between Title and Author = 
 % \vspace{0.5em}
-\author{$for(author)$\normalsize{$author.name$}\\ \footnotesize{$author.affiliation$}\\ \footnotesize{$author.address$}$endfor$}
+\author{$for(author)$\normalsize{$author$}\\ \footnotesize{$affiliation$}\\ \footnotesize{$address$}$endfor$}
 \date{\footnotesize{Draft: \mydate\today}}
 
 $else$
-\setlength{\droptitle}{-3cm}
+% \setlength{\droptitle}{-3cm}
 \title{\Large\textbf{{$title$}$if(subtitle)$:\\ $subtitle$}$endif$}
-\author{$for(author)$\normalsize{$author.name$}\thanks{$author.position$, $author.affiliation$, $author.address$. $author.email$. $author.thanks$} $sep$ \and $endfor$}
+\author{$for(author)$\normalsize{$author$}\thanks{$position$, $affiliation$, $address$. $email$. $thanks$} $sep$ \and $endfor$}
 \date{}
 $endif$
 
@@ -233,6 +208,23 @@ $endif$
 % \setlength\epigraphwidth{.5\textwidth}
 \setlength\epigraphrule{0pt}
 \renewcommand{\epigraphsize}{\footnotesize}
+
+
+% ==========
+% = Quotes =
+% ==========
+
+\usepackage{csquotes}
+
+\AtBeginEnvironment{quote}{\small}
+
+\renewenvironment{quote}{%
+   \list{}{%
+     \leftmargin2em   % this is the adjusting screw
+     \rightmargin\leftmargin\parsep 0mm }
+   \item\relax
+}
+{\endlist}
 
 
 % ============
@@ -254,29 +246,65 @@ $if(graphics)$
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 $endif$
 
-% =============
-% = Citations =
-% =============
+% ===================
+% = Pandoc citeproc =
+% ===================
 
-\usepackage[
-    backend=biber,
-    style=verbose-inote,
-    sortlocale=auto,
-    natbib=true,
-    url=false, 
-    doi=false,
-    eprint=false
-]{biblatex}
-\addbibresource{biblatex-examples.bib}
+$if(csl-refs)$
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+\begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+% allow citations to break across lines
+\let\@cite@ofmt\@firstofone
+% avoid brackets around text for \cite:
+\def\@biblabel#1{}
+\def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+{\begin{list}{}{%
+	\setlength{\itemindent}{0pt}
+	\setlength{\leftmargin}{0pt}
+	\setlength{\parsep}{0pt}
+	% turn on hanging indent if param 1 is 1
+	\ifodd #1
+	\setlength{\leftmargin}{\cslhangindent}
+	\setlength{\itemindent}{-1\cslhangindent}
+	\fi
+	% set entry spacing
+	\setlength{\itemsep}{#2\baselineskip}}}
+{\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+$endif$
 
 % ==============
 % = Hyperlinks =
 % ==============
 
 \usepackage{hyperref}
-\hypersetup{colorlinks=true,allcolors=black,}
+\hypersetup{%
+  colorlinks=true,
+  allcolors=black,
+  breaklinks=true,
+  pdfusetitle=true,
+  pdftitle={{$title$}$if(subtitle)$: {$subtitle$}$endif$},
+  pdfauthor={$author$},
+  pdfkeywords={$keywords$},
+  pdfproducer={XeLateX with hyperref},
+  pdfcreator={XeLateX with hyperref}
+}
+\usepackage{url}
 \urlstyle{same}
-
 
 % ==============================================================================
 % =============================== BEGIN DOCUMENT =============================== 
@@ -300,6 +328,7 @@ $endif$
 
 $if(abstract)$
 \begin{abstract}
+\footnotesize
 \noindent{$abstract$}
 \end{abstract}
 $endif$
@@ -320,7 +349,6 @@ $if(draft)$
 $else$
 \singlespacing
 $endif$
-
 
 $body$
 
