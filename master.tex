@@ -48,28 +48,17 @@ $if(legal-code)$
 % ==================
 
 \usepackage[table]{xcolor}
-\definecolor{myblack}{HTML}{231F20}
-\definecolor{mybrightred}{HTML}{EC1F27}
-\definecolor{mydarkred}{HTML}{8C2E24}
-\definecolor{mydarkblue}{HTML}{154360}
-\definecolor{mylightblue}{HTML}{3498DB}
-\definecolor{lightgrey}{HTML}{DCDCDC}
-\definecolor{mydarkgreen}{HTML}{009f06}
-
-% \usepackage{crimson}
-% \usepackage[defaultsans,scale=0.95]{lato}
-% \usepackage{inconsolata}
+\definecolor{OffBlack}{HTML}{191919}
+\definecolor{OffWhite}{HTML}{fffff8}
+\definecolor{DullRed}{HTML}{8C2E24}
+\definecolor{TarHeelBlue}{HTML}{4b9cd3}
+\definecolor{HopkinsBlue}{HTML}{68ace5}
 
 \usepackage{fontspec}
-\setmainfont{Portada Text}[Mapping={tex-text}]
-%\setmainfont{Cormorant Garamond}[Mapping={tex-text},SmallCapsFont={Cormorant SC}]
-%\setmainfont{Crimson}[Mapping={tex-text},Scale = 1.0]
+\setmainfont{Athelas}[Mapping={tex-text}]
 \setsansfont{Adelle Sans}[Mapping=tex-text]
-%\setsansfont{Proza Libre}[Mapping=tex-text]
-%\setsansfont{Lato}[Mapping=tex-text]
 \setmonofont[Scale=0.90]{LFT Etica Mono}
-%\setmonofont{Cousine}[Mapping=tex-text,Scale=0.8]
-\newfontface\titlefont{Adelle Sans Bold}[Colour=mydarkred]
+\newfontface\titlefont{Adelle Sans Bold}[Colour=DullRed]
 
 % =======================
 % = Headers and Footers =
@@ -101,7 +90,7 @@ $if(legal-code)$
 % ====================
 
 \newenvironment{preface}
-    {{\noindent\rmfamily\itshape\Huge\color{mydarkred}{Preface}}
+    {{\noindent\rmfamily\itshape\Huge\color{DullRed}{Preface}}
     }
     {\vspace{1\baselineskip}
     }
@@ -247,23 +236,18 @@ $elseif(syllabus)$
 % ==================
 
 \usepackage[table]{xcolor}
-\definecolor{myblack}{HTML}{231F20} 
-\definecolor{mybrightred}{HTML}{EC1F27} 
-\definecolor{mydarkred}{HTML}{b03a2e} 
-\definecolor{mydarkblue}{HTML}{154360}
-\definecolor{mylightblue}{HTML}{3498DB} 
-\definecolor{mydarkgrey}{HTML}{566573} 
-\definecolor{mylightgrey}{HTML}{D5D8DC} 
+\definecolor{OffBlack}{HTML}{191919}
+\definecolor{OffWhite}{HTML}{fffff8}
+\definecolor{DullRed}{HTML}{8C2E24}
+\definecolor{TarHeelBlue}{HTML}{4b9cd3}
+\definecolor{HopkinsBlue}{HTML}{68ace5}
 
 \usepackage{fontspec}
-\setmainfont{Cormorant Garamond}[Mapping={tex-text},SmallCapsFont={Cormorant SC}]
-\setsansfont{Proza Libre}[Mapping=tex-text]
+\setmainfont{Athelas}[Mapping={tex-text}]
+\setsansfont{Adelle Sans}[Mapping=tex-text]
 \setmonofont{LFT Etica Mono}[Mapping=tex-text,Scale=0.8]
-%\setmonofont{Cousine}[Mapping=tex-text,Scale=0.8]
-\newfontface\titlefont{Proza Libre Bold}[Colour=mydarkred]
+\newfontface\titlefont{Adelle Sans Bold}[Colour=DullRed]
 \usepackage{textcomp}
-% \usepackage{fontawesome}
-% \newfontfamily{\FA}{[FontAwesome.otf]}
 \usepackage{amssymb}
 
 % =======================
@@ -445,46 +429,6 @@ $endif$
 $if(notesymbols)$\renewcommand{\thefootnote}{\fnsymbol{footnote}}$endif$
 %\renewcommand{\footnotesize}{\fontsize{9pt}{11pt}\selectfont} %use to change size of footnotes
 
-% ===================
-% = Pandoc citeproc =
-% ===================
-
-$if(csl-refs)$
-% definitions for citeproc citations
-\NewDocumentCommand\citeproctext{}{}
-\NewDocumentCommand\citeproc{mm}{%
-\begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
-\makeatletter
-% allow citations to break across lines
-\let\@cite@ofmt\@firstofone
-% avoid brackets around text for \cite:
-\def\@biblabel#1{}
-\def\@cite#1#2{{#1\if@tempswa , #2\fi}}
-\makeatother
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newlength{\csllabelwidth}
-\setlength{\csllabelwidth}{3em}
-\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
-{\begin{list}{}{%
-	\setlength{\itemindent}{0pt}
-	\setlength{\leftmargin}{0pt}
-	\setlength{\parsep}{0pt}
-	% turn on hanging indent if param 1 is 1
-	\ifodd #1
-	\setlength{\leftmargin}{\cslhangindent}
-	\setlength{\itemindent}{-1\cslhangindent}
-	\fi
-	% set entry spacing
-	\setlength{\itemsep}{#2\baselineskip}}}
-{\end{list}}
-\usepackage{calc}
-\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
-$endif$
-
 % ==============
 % = Hyperlinks =
 % ==============
@@ -497,7 +441,7 @@ $endif$
 % ==============================================================================
 
 % Sets default font color without overriding hyperlink colors
-\color{myblack}
+\color{OffBlack}
 
 \begin{document}\thispagestyle{empty}
 
@@ -567,17 +511,17 @@ $endif$
 % ==================
 
 \usepackage[dvipsnames,svgnames,x11names,hyperref]{xcolor}
-\definecolor{myblack}{HTML}{231F20} 
-\definecolor{mybrightred}{HTML}{EC1F27} 
-\definecolor{mydarkred}{HTML}{b03a2e} 
-\definecolor{mydarkblue}{HTML}{154360}
-\definecolor{mylightblue}{HTML}{3498DB} 
+\definecolor{OffBlack}{HTML}{191919}
+\definecolor{OffWhite}{HTML}{fffff8}
+\definecolor{DullRed}{HTML}{8C2E24}
+\definecolor{TarHeelBlue}{HTML}{4b9cd3}
+\definecolor{HopkinsBlue}{HTML}{68ace5}
 
 \usepackage{fontspec}
 \setmainfont{Cormorant Garamond}[Mapping={tex-text},SmallCapsFont={Cormorant SC}]
 \setsansfont{Proza Libre}[Mapping=tex-text]
-\setmonofont{Cousine}[Mapping=tex-text,Scale=1.0]
-\newfontface\titlefont{Proza Libre Bold}[Colour=mydarkred]
+\setmonofont{LFT Etica Mono}[Mapping=tex-text,Scale=1.0]
+\newfontface\titlefont{Proza Libre Bold}[Colour=DullRed]
 \usepackage{fontawesome}
 % \newfontfamily{\FA}{FontAwesome}
 
@@ -658,7 +602,7 @@ $endif$
 % = Hyperlinks =
 % ==============
 
-\usepackage[colorlinks=true,linkcolor=mydarkred,citecolor=mydarkred,urlcolor=mydarkblue]{hyperref}
+\usepackage[colorlinks=true,linkcolor=DullRed,citecolor=DullRed,urlcolor=mydarkblue]{hyperref}
 
 % ==============================================================================
 % =============================== BEGIN DOCUMENT =============================== 
@@ -753,22 +697,20 @@ $elseif(exam)$
 % ==================
 
 \usepackage[table]{xcolor}
-\definecolor{myblack}{HTML}{231F20}
-\definecolor{mybrightred}{HTML}{EC1F27}
-\definecolor{mydarkred}{HTML}{8C2E24}
-\definecolor{mydarkblue}{HTML}{154360}
-\definecolor{mylightblue}{HTML}{3498DB}
-\definecolor{lightgrey}{HTML}{DCDCDC}
-\definecolor{mydarkgreen}{HTML}{009f06}
+\definecolor{OffBlack}{HTML}{191919}
+\definecolor{OffWhite}{HTML}{fffff8}
+\definecolor{DullRed}{HTML}{8C2E24}
+\definecolor{TarHeelBlue}{HTML}{4b9cd3}
+\definecolor{HopkinsBlue}{HTML}{68ace5}
 
 \usepackage{fontspec}
 %\setmainfont{Crimson}[Mapping={tex-text},Scale = 1.0]
-\setmainfont{Portada Text}[Mapping={tex-text}]
+\setmainfont{Cormorant Garamond}[Mapping={tex-text}]
 % \setsansfont{Adelle Sans}[Mapping=tex-text]
-\setsansfont{Lato}[Mapping=tex-text]
+\setsansfont{Proza Libre}[Mapping=tex-text]
 \setmonofont[Scale=1.0]{LFT Etica Mono}
 %\setmonofont{Cousine}[Mapping=tex-text,Scale=0.8]
-\newfontface\titlefont{Lato Bold}[Colour=mydarkred]
+\newfontface\titlefont{Proza Libre Bold}[Colour=DullRed]
 
 % =======================
 % = Headers and Footers =
@@ -848,7 +790,6 @@ $endif$
   {1em}
   {}
 
-
 % =========
 % = Lists =
 % =========
@@ -909,7 +850,7 @@ $endif$
 % ==============
 
 \newcommand{\halfsep}{%
-    \textcolor{mydarkred}{\noindent\hfil\rule{.5\textwidth}{.5pt}\hfil} 
+    \textcolor{DullRed}{\noindent\hfil\rule{.5\textwidth}{.5pt}\hfil} 
 }
 
 \newcommand*{\fullsep}{%
@@ -917,7 +858,7 @@ $endif$
   \begingroup
     \centering
     \raisebox{.2\baselineskip}{%
-      \textcolor{mydarkred}{\rule{\linewidth}{2pt}}%
+      \textcolor{DullRed}{\rule{\linewidth}{2pt}}%
     }%
     \par
   \endgroup
@@ -961,7 +902,7 @@ $endif$
   colorlinks=true,
   linkcolor=mydarkblue,
   citecolor=mydarkgreen,
-  urlcolor=mydarkred,
+  urlcolor=DullRed,
   pdftitle={$title$},
   pdfauthor={$author$},
   pdfcreator={LaTeX via pandoc}}
@@ -1036,18 +977,17 @@ $endif$
 % ==================
 
 \usepackage{xcolor}
-\definecolor{myblack}{HTML}{231F20} 
-\definecolor{mybrightred}{HTML}{EC1F27} 
-\definecolor{mydarkred}{HTML}{b03a2e} 
-\definecolor{mydarkblue}{HTML}{154360}
-\definecolor{mylightblue}{HTML}{3498DB} 
+\definecolor{OffBlack}{HTML}{191919}
+\definecolor{OffWhite}{HTML}{fffff8}
+\definecolor{DullRed}{HTML}{8C2E24}
+\definecolor{TarHeelBlue}{HTML}{4b9cd3}
+\definecolor{HopkinsBlue}{HTML}{68ace5}
 
 \usepackage{fontspec}
-$if(draft)$
-\setmainfont{LFT Etica Mono}
-$else$
-\usepackage{CrimsonPro}
-\usepackage[defaultsans,scale=0.90]{lato}
+\usepackage{Athelas}
+%\usepackage{CrimsonPro}
+\setsansfont{Adelle Sans}[Mapping=tex-text]
+%\usepackage[defaultsans,scale=0.90]{lato}
 \setmonofont[Scale=0.85]{LFT Etica Mono}
 $endif$
 
@@ -1284,18 +1224,6 @@ $endif$
 \maketitle
 % \vspace{-0.5in}
 
-% ================
-% = Draft Style
-% ================
-
-$if(draft)$
-\doublespacing
-\RaggedRight
-
-$body$
-
-$else$
-
 % =================
 % = Publish Style
 % =================
@@ -1384,32 +1312,17 @@ $endif$
 % ==================
 
 \usepackage[table]{xcolor}
-\definecolor{myblack}{HTML}{231F20}
-\definecolor{mybrightred}{HTML}{EC1F27}
-\definecolor{mydarkred}{HTML}{8C2E24}
-\definecolor{mydarkblue}{HTML}{154360}
-\definecolor{mylightblue}{HTML}{3498DB}
-\definecolor{lightgrey}{HTML}{DCDCDC}
-\definecolor{mydarkgreen}{HTML}{009f06}
+\definecolor{OffBlack}{HTML}{191919}
+\definecolor{OffWhite}{HTML}{fffff8}
+\definecolor{DullRed}{HTML}{8C2E24}
+\definecolor{TarHeelBlue}{HTML}{4b9cd3}
+\definecolor{HopkinsBlue}{HTML}{68ace5}
 
 \usepackage{fontspec}
-$if(main-font)$
-\setmainfont{$main-font$}[Mapping={tex-text}]
-$else$
-\setmainfont{Cormorant Garamond}[Mapping={tex-text},SmallCapsFont={Cormorant SC}]
-$endif$
-$if(sans-font)$
-\setsansfont{$sans-font$}[Mapping=tex-text]
-\newfontface\titlefont{$sans-font$ Bold}[Colour=mydarkred]
-$else$
-\setsansfont{Proza Libre}[Mapping=tex-text]
-\newfontface\titlefont{Proza Libre Bold}[Colour=mydarkred]
-$endif$
-$if(mono-font)$
-\setmonofont{$mono-font$}[Mapping=tex-text,Scale=0.8]
-$else$
-\setmonofont{Cousine}[Mapping=tex-text,Scale=0.8]
-$endif$
+\setmainfont{Athelas}[Mapping={tex-text},SmallCapsFont={Cormorant SC}]
+\setsansfont{Adelle Sans}[Mapping=tex-text]
+\newfontface\titlefont{Adelle Sans Bold}[Colour=DullRed]
+\setmonofont{LFT Etica Mono}[Mapping=tex-text,Scale=0.8]
 
 % =======================
 % = Headers and Footers =
@@ -1539,7 +1452,7 @@ $endif$
 % ==============
 
 \newcommand{\halfsep}{%
-    \textcolor{mydarkred}{\noindent\hfil\rule{.5\textwidth}{.5pt}\hfil} 
+    \textcolor{DullRed}{\noindent\hfil\rule{.5\textwidth}{.5pt}\hfil} 
 }
 
 \newcommand*{\fullsep}{%
@@ -1547,7 +1460,7 @@ $endif$
   \begingroup
     \centering
     \raisebox{.2\baselineskip}{%
-      \textcolor{mydarkred}{\rule{\linewidth}{2pt}}%
+      \textcolor{DullRed}{\rule{\linewidth}{2pt}}%
     }%
     \par
   \endgroup
@@ -1655,9 +1568,9 @@ $endif$
 \usepackage{hyperref}
 \hypersetup{%
   colorlinks=true,
-  linkcolor=mydarkblue,
-  citecolor=mydarkgreen,
-  urlcolor=mydarkred,
+  linkcolor=HopkinsBlue,
+  citecolor=HopkinsBlue,
+  urlcolor=DullRed,
   pdftitle={{$title$}$if(subtitle)$: {$subtitle$}$endif$},
   pdfauthor={$author-name$},
   pdfkeywords={$keywords$}

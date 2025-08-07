@@ -6,7 +6,6 @@
 % = Packages =
 % ============
 
-
 \usepackage{lipsum}
 \usepackage{semantic}
 \usepackage{pdflscape}
@@ -26,13 +25,11 @@
 % = Use md inside latex environment =
 % ===================================
 
-
 \let\Begin\begin
 \let\End\end
 \let\Marginnote\marginnote
 \let\Footnote\footnote
 \let\lipsumj\lipsum
-
 
 % ====================
 % = Layout & Spacing =
@@ -52,22 +49,17 @@
 
 \usepackage[defaultlines=3,all]{nowidow}
 
-
 % ==========
 % = Colors =
 % ==========
 
 \usepackage{xcolor}
 
-\definecolor{myblack}{HTML}{231F20}
-\definecolor{mybrightred}{HTML}{EC1F27}
-\definecolor{mydarkred}{HTML}{8C2E24}
-\definecolor{mydarkblue}{HTML}{154360}
-\definecolor{mylightblue}{HTML}{3498DB}
-\definecolor{paleblue}{HTML}{e1f0fa}
-\definecolor{palepink}{HTML}{fef5f9}
-\definecolor{lightgrey}{HTML}{e9e9e9}
-\definecolor{mydarkgreen}{HTML}{006403}
+\definecolor{OffBlack}{HTML}{191919}
+\definecolor{OffWhite}{HTML}{fffff8}
+\definecolor{DullRed}{HTML}{8C2E24}
+\definecolor{TarHeelBlue}{HTML}{4b9cd3}
+\definecolor{HopkinsBlue}{HTML}{68ace5}
 
 % =========
 % = Fonts =
@@ -81,7 +73,7 @@
 
 % \fontspec{inconsolata}
 
-\setmainfont{Portada Text}[Mapping={tex-text}]
+\setmainfont{Athelas}[Mapping={tex-text}]
 
 \setsansfont{Adelle Sans}[Mapping=tex-text]
 %\setmainfont{Crimson}[Mapping={tex-text},Scale = 1.0]
@@ -115,7 +107,6 @@
   \usepackage[]{microtype}
   \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-
 
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 
@@ -198,25 +189,6 @@
 \setlist[itemize,5]{label=\diamond}
 \setlist[itemize,6]{label=\textopenbullet}
 
-
-% ====================
-% = New Environments =
-% ====================
-
-\newenvironment{preface}
-    {{\noindent\rmfamily\itshape\Huge\color{mydarkred}{Preface}}
-    }
-    {\vspace{1\baselineskip}
-    }
-
-% Explanatory Notes
-\newenvironment{comment}
-    {\sffamily 
-    }
-    {
-    \vspace{.5em}\vspace{1em}
-    }
-
 % ============
 % = Headings =
 % ============
@@ -238,7 +210,7 @@ $endif$
 
 \titleformat{\section}%
   [block]
-  {\newpage\begin{fullwidth}\raggedright\sffamily\Huge\color{mydarkred}}
+  {\newpage\begin{fullwidth}\raggedright\sffamily\Huge\color{DullRed}}
   {\thesection ~~}
   {0em}
   {}
@@ -246,21 +218,20 @@ $endif$
 
 \titleformat{\subsection}
   [block]
-  {\needspace{2\baselineskip}\raggedright\sffamily\huge\color{mydarkred}}
+  {\needspace{2\baselineskip}\raggedright\sffamily\huge\color{DullRed}}
   {\thesubsection ~~}
   {0em}
   {}
   []
 
-
 \titleclass{\subsubsection}{straight}
 \titleformat{\subsubsection}
   [block]
-  {\raggedright\rmfamily\LARGE\color{mydarkred}}
+  {\raggedright\rmfamily\LARGE\color{DullRed}}
   {\thesubsubsection ~~}
   {0em}
   {}
-  [\vspace{-1em}\textcolor{mydarkred}{\rule{\textwidth}{2pt}}]
+  [\vspace{-1em}\textcolor{DullRed}{\rule{\textwidth}{2pt}}]
 
 % Title & Cite for Statute, Rule, Case, Reading, etc. 
 \titleclass{\paragraph}{straight}
@@ -311,8 +282,6 @@ $endif$
 %\AtBeginEnvironment{quote}{\vspace{-1\baselineskip}}% Stuff before {quote}
 %\AtEndEnvironment{quote}{\vspace{-1\baselineskip}}% Stuff after {quote}
 
-
-
 % ============
 % = Epigraph =
 % ============
@@ -330,14 +299,13 @@ $endif$
 \begin{flushright}\noindent\aldine ~{#2}, {\itshape{#3}} \end{flushright}}
 }
 
-
 % ==============
 % = Separators =
 % ==============
 
-\newcommand*{\halfsep}{\noindent\hfil\textcolor{mydarkred}{\rule{0.5\textwidth}{.5pt}}\hfil}
+\newcommand*{\halfsep}{\noindent\hfil\textcolor{DullRed}{\rule{0.5\textwidth}{.5pt}}\hfil}
 
-\newcommand*{\fullsep}{\newline\noindent\textcolor{mydarkred}{\rule{\textwidth}{2pt}}}
+\newcommand*{\fullsep}{\newline\noindent\textcolor{DullRed}{\rule{\textwidth}{2pt}}}
 
 % ============
 % = Graphics =
@@ -378,16 +346,16 @@ $endif$
   \sffamily%
   \raggedright%
   \begin{fullwidth}%
-  \fontsize{18}{20}\selectfont\par\noindent\textcolor{mydarkred}{\allcaps{\thanklessauthor}}%
+  \fontsize{18}{20}\selectfont\par\noindent\textcolor{DullRed}{\allcaps{\thanklessauthor}}%
   \vspace{11.5pc}%
-  \fontsize{36}{40}\selectfont\par\noindent\textcolor{mydarkred}{\allcaps{\thanklesstitle}}\par%
+  \fontsize{36}{40}\selectfont\par\noindent\textcolor{DullRed}{\allcaps{\thanklesstitle}}\par%
   \vspace{5pc}%
-  \fontsize{20}{24}\selectfont\par\noindent\textcolor{mydarkred}{\allcaps{\plainsubtitle}}%
+  \fontsize{20}{24}\selectfont\par\noindent\textcolor{DullRed}{\allcaps{\plainsubtitle}}%
   \vfill%
   $if(affiliation)$
-  \fontsize{14}{16}\selectfont\par\noindent\textcolor{mydarkred}{\allcaps{\thanklesspublisher}}%
+  \fontsize{14}{16}\selectfont\par\noindent\textcolor{DullRed}{\allcaps{\thanklesspublisher}}%
   $endif$
-  \fontsize{14}{16}\selectfont\par\noindent\textcolor{mydarkred}{\allcaps{$date$}}%
+  \fontsize{14}{16}\selectfont\par\noindent\textcolor{DullRed}{\allcaps{$date$}}%
   \end{fullwidth}%
   }
   \thispagestyle{empty}%
@@ -405,14 +373,13 @@ $if(affiliation)$
 $endif$
 \date{$date$}
 
-
 % =====================
 % = Table of Contents =
 % =====================
 
 \usepackage{titletoc,tocloft}
 
-\renewcommand\cfttoctitlefont{\Huge\sffamily\textcolor{mydarkred}}
+\renewcommand\cfttoctitlefont{\Huge\sffamily\textcolor{DullRed}}
 \renewcommand\cftsecfont{\rmfamily\LARGE}
 \renewcommand\cftsubsecfont{\rmfamily\Large}
 \renewcommand\cftsubsubsecfont{\rmfamily\large}
@@ -428,7 +395,6 @@ $endif$
 \setlength{\cftsecindent}{0em}
 \setlength{\cftsubsecindent}{2em}
 \setlength{\cftsubsubsecindent}{4em}
-
 
 % For Chapters
 \titlecontents{section}% <section-type>
@@ -462,7 +428,6 @@ $endif$
   {\vskip0mm\normalsize}% <numberless-entry-format>
   {\normalsize\hfill\contentspage}% <filler-page-format>
   []% <below-code> 
-
 
 % ===================
 % = Pandoc citeproc =
@@ -502,12 +467,9 @@ $if(csl-refs)$
 
 $endif$
 
-
-
 % =============================================================================
 % ============================== BEGIN DOCUMENT ===============================
 % =============================================================================
-
 
 \begin{document}
 
