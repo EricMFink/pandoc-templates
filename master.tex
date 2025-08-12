@@ -7,7 +7,7 @@ $if(legal-code)$
 
 % START OF LEGAL CODE TEMPLATE
 
-\documentclass[11pt,letterpaper,twoside,]{article}
+\documentclass[10pt,letterpaper,twoside,]{article}
 
 % ============
 % = Packages =
@@ -201,13 +201,19 @@ $body$
 
 $elseif(syllabus)$
 
+%%% syllabus.tex
+%%% Pandoc template using LaTeX article class
+%%% For creating PDF from .md file with YAML frontmatter 
+%%% Created by Eric M. Fink (https://github.com/LuckyJimJD/pandoc-templates)
+%%% 
+
 % START OF SYLLABUS TEMPLATE
 
 % ====================
 % = Layout & Spacing =
 % ====================
 
-\documentclass[11pt,letterpaper,twoside]{article}
+\documentclass[12pt,letterpaper,twoside]{article}
 \usepackage[hmarginratio=1:1,top=1in,bottom=.75in,left=1.5in,right=1.5in]{geometry}
 \usepackage{needspace}
 \usepackage[defaultlines=3,all]{nowidow}
@@ -245,8 +251,8 @@ $elseif(syllabus)$
 \usepackage{fontspec}
 \setmainfont{Athelas}[Mapping={tex-text}]
 \setsansfont{Adelle Sans}[Mapping=tex-text]
-\setmonofont{LFT Etica Mono}[Mapping=tex-text,Scale=0.8]
-\newfontface\titlefont{Adelle Sans Bold}[Colour=DullRed]
+\setmonofont{LFT Etica Mono}[Mapping=tex-text,Scale=0.9]
+\newfontface\titlefont{Adelle Sans}[Colour=DullRed]
 \usepackage{textcomp}
 \usepackage{amssymb}
 
@@ -288,20 +294,15 @@ $elseif(syllabus)$
 % = Headings =
 % ============
 
-\usepackage[compact]{titlesec}  
+\usepackage[compact]{titlesec}
 % \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
 \titlespacing*{\section}{0em}{3em}{0.5em}
-\titlespacing*{\subsection}{0em}{2em}{1em}
+\titlespacing*{\subsection}{0em}{2em}{.5em}
 \titlespacing*{\subsubsection}{0em}{1em}{0.5em}
 \titlespacing*{\paragraph}{0em}{1em}{.2em}
 \titlespacing*{\subparagraph}{0em}{.5em}{.5em}
 
-
-$if(secnumdepth)$
-\setcounter{secnumdepth}{$secnumdepth$}
-$else$
 \setcounter{secnumdepth}{0}
-$endif$
 
 % H1
 \titleformat{\section}[hang]
@@ -335,10 +336,6 @@ $endif$
   {0em}
   {}
 
-% Remove section references from subsections
-\renewcommand{\thesection}{}
-\renewcommand{\thesubsection}{\arabic{subsection}}
-
 % ==========
 % = Quotes =
 % ==========
@@ -354,25 +351,6 @@ $endif$
    \item\relax
 }
 {\endlist}
-
-% ============
-% = Graphics =
-% ============
-
-\usepackage{caption}
-\captionsetup[figure]{labelformat=empty}
-
-$if(graphics)$
-\usepackage{graphicx,grffile}
-\makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-$endif$
 
 % ==========
 % = Tables =
@@ -400,27 +378,6 @@ $endif$
 \usepackage{etoolbox}
 \AtBeginEnvironment{longtable}{\small}
 
-% ============
-% = Graphics =
-% ============
-
-\usepackage[justification=centering,font={scriptsize},skip=1em]{caption}
-% Sizes: scriptsize, footnotesize, small, normalsize, large, Large
-\captionsetup[figure]{labelformat=empty,width=.8\linewidth}
-\usepackage{float}
-\let\origfigure\figure
-\let\endorigfigure\endfigure
-\renewenvironment{figure}[1][2] {
-    \expandafter\origfigure\expandafter[H]
-} {
-    \endorigfigure
-}
-
-\usepackage[export]{adjustbox}% http://ctan.org/pkg/adjustbox
-\let\oldincludegraphics\includegraphics
-\renewcommand{\includegraphics}[2][]{%
-  \oldincludegraphics[#1,max width=.75\linewidth]{#2}}
-
 % =============
 % = Footnotes = 
 % =============
@@ -434,16 +391,16 @@ $if(notesymbols)$\renewcommand{\thefootnote}{\fnsymbol{footnote}}$endif$
 % ==============
 
 \usepackage[unicode=true]{hyperref}
-\hypersetup{colorlinks=true,allcolors=mydarkblue}
+\hypersetup{colorlinks=true,allcolors=TarHeelBlue}
 
 % ==============================================================================
 % =============================== BEGIN DOCUMENT =============================== 
 % ==============================================================================
 
+\begin{document}\thispagestyle{empty}
+
 % Sets default font color without overriding hyperlink colors
 \color{OffBlack}
-
-\begin{document}\thispagestyle{empty}
 
 % \maketitle
 
@@ -489,6 +446,7 @@ $body$
 \end{document}
 
 % END OF SYLLABUS TEMPLATE
+
 
 $elseif(vita)$
 
@@ -989,7 +947,6 @@ $endif$
 \setsansfont{Adelle Sans}[Mapping=tex-text]
 %\usepackage[defaultsans,scale=0.90]{lato}
 \setmonofont[Scale=0.85]{LFT Etica Mono}
-$endif$
 
 % =======================
 % = Headers and Footers = 
@@ -1095,20 +1052,10 @@ $endif$
 % ================
 
 \usepackage{titling}
-$if(draft)$
-% = Uncomment next line to reduce spacing of Title from top of page =
-% \setlength{\droptitle}{-1cm}
-\title{$for(title)$\Large\textbf{$title$}$if(subtitle)$:\\ \textbf{$subtitle$} $endif$ $endfor$}
-% = Uncomment next line to adjust spacing between Title and Author = 
-% \vspace{0.5em}
-\author{$for(author)$\normalsize{$author$}\\ \footnotesize{$affiliation$}\\ \footnotesize{$address$}$endfor$}
-\date{\footnotesize{Draft: \mydate\today}}
-$else$
 % \setlength{\droptitle}{-3cm}
 \title{\Large\textbf{{$title$}$if(subtitle)$:\\ $subtitle$}$endif$}
 \author{$for(author)$\normalsize{$author$}\thanks{$position$, $affiliation$, $address$. $email$. $thanks$} $sep$ \and $endfor$}
 \date{}
-$endif$
 
 % ============
 % = Epigraph =
@@ -1243,8 +1190,6 @@ $endif$
 \singlespacing
 
 $body$
-
-$endif$
 
 \end{document}
 

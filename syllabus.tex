@@ -4,72 +4,53 @@
 %%% Created by Eric M. Fink (https://github.com/LuckyJimJD/pandoc-templates)
 %%% 
 
+% START OF SYLLABUS TEMPLATE
 
 % ====================
 % = Layout & Spacing =
 % ====================
 
 \documentclass[12pt,letterpaper,twoside]{article}
-
 \usepackage[hmarginratio=1:1,top=1in,bottom=.75in,left=1.5in,right=1.5in]{geometry}
-\usepackage[defaultlines=1,all]{nowidow}
+\usepackage{needspace}
+\usepackage[defaultlines=3,all]{nowidow}
 \raggedbottom
-
 \usepackage[singlespacing]{setspace}
-
 \usepackage{ragged2e}
 \setlength{\RaggedRightParindent}{0em}
 \RaggedRight
-
 \usepackage[none]{hyphenat}
-
 \usepackage{parskip}
 \setlength{\parindent}{0em}
 \setlength{\parskip}{0.6em plus 0.2em minus 0.1em}
-
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
-
-
-
-\usepackage{needspace}
 
 % ==========================
 % = Language & Date Format =
 % ==========================
 
 \usepackage[english]{babel}  
-\usepackage[us, nodayofweek]{datetime}
-\newdateformat{mydate}{\THEDAY \ \monthname \ \THEYEAR}
+\usepackage{datetime}
+\newdateformat{mydate}{\THEDAY-\monthname-\THEYEAR}
 \usepackage{currfile}
-
 
 % ==================
 % = Colors & Fonts =
 % ==================
 
 \usepackage[table]{xcolor}
-\definecolor{myblack}{HTML}{231F20} 
-\definecolor{mybrightred}{HTML}{EC1F27} 
-\definecolor{mydarkred}{HTML}{b03a2e} 
-\definecolor{mydarkblue}{HTML}{154360}
-\definecolor{mylightblue}{HTML}{3498DB} 
-\definecolor{mydarkgrey}{HTML}{566573} 
-\definecolor{mylightgrey}{HTML}{D5D8DC} 
-
-
+\definecolor{OffBlack}{HTML}{191919}
+\definecolor{OffWhite}{HTML}{fffff8}
+\definecolor{DullRed}{HTML}{8C2E24}
+\definecolor{TarHeelBlue}{HTML}{4b9cd3}
+\definecolor{HopkinsBlue}{HTML}{68ace5}
 
 \usepackage{fontspec}
-
-\setmainfont{Cormorant Garamond}[Mapping={tex-text},SmallCapsFont={Cormorant SC}]
-\setsansfont{Proza Libre}[Mapping=tex-text]
-\setmonofont{Cousine}[Mapping=tex-text,Scale=0.8]
-\newfontface\titlefont{Proza Libre Bold}[Colour=mydarkred]
-
+\setmainfont{Athelas}[Mapping={tex-text}]
+\setsansfont{Adelle Sans}[Mapping=tex-text]
+\setmonofont{LFT Etica Mono}[Mapping=tex-text,Scale=0.9]
+\newfontface\titlefont{Adelle Sans}[Colour=DullRed]
 \usepackage{textcomp}
-% \usepackage{fontawesome}
-% \newfontfamily{\FA}{[FontAwesome.otf]}
-
-
 \usepackage{amssymb}
 
 % =======================
@@ -89,7 +70,6 @@
 \fancyhead[RE]{\textsc{Prof. Fink}}
 \fancyhead[RO]{\textsc{\thepage}}
 
-
 % =========
 % = Lists =
 % =========
@@ -103,70 +83,55 @@
 \setlist[itemize,4]{label=\textendash}
 \setlist[itemize,5]{label=\diamond}
 \setlist[itemize,6]{label=\textopenbullet}
-
 \setlist[itemize]{leftmargin={1.5em}}
-
 \providecommand{\tightlist}{%
 \setlength{\itemsep}{0em}\setlength{\parskip}{0em}\setlength{\itemindent}{0em}}
-
 
 % ============
 % = Headings =
 % ============
 
-\usepackage[compact]{titlesec}  
+\usepackage[compact]{titlesec}
 % \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
-\titlespacing*{\section}{0em}{2em}{1em}
-\titlespacing*{\subsection}{0em}{1em}{0.5em}
-\titlespacing*{\subsubsection}{0em}{1em}{.2em}
-\titlespacing*{\paragraph}{0em}{.5em}{.5em}
-\titlespacing*{\subparagraph}{.5em}{.5em}{0em}
+\titlespacing*{\section}{0em}{3em}{0.5em}
+\titlespacing*{\subsection}{0em}{2em}{.5em}
+\titlespacing*{\subsubsection}{0em}{1em}{0.5em}
+\titlespacing*{\paragraph}{0em}{1em}{.2em}
+\titlespacing*{\subparagraph}{0em}{.5em}{.5em}
 
-
-$if(secnumdepth)$
-\setcounter{secnumdepth}{$secnumdepth$}
-$else$
 \setcounter{secnumdepth}{0}
-$endif$
-
 
 % H1
 \titleformat{\section}[hang]
+  {\Huge\titlefont}
+  {}
+  {0pt}
+  {}
+
+% H2
+\titleformat{\subsection}[hang]
   {\Large\titlefont}
   {}
   {0pt}
   {}
-% H2
-\titleformat{\subsection}[hang]
-  {\large\bfseries\rmfamily}
+% H3
+\titleformat{\subsubsection}[hang]
+  {\Large\itshape\rmfamily}
   {\thesubsection}
   {1em}
   {}
-% H3
-\titleformat{\subsubsection}[hang]
-  {\large\titlefont}
+% H4
+\titleformat{\paragraph}[hang]
+  {\normalsize\bfseries\rmfamily}
   {\thesubsubsection}
   {1em}
   {}
-% H4
-\titleformat{\paragraph}[block]
-  {\normalsize\itshape\rmfamily}
-  {}
-  {0em}
-  {}
-
 % H5
 \titleformat{\subparagraph}[block]
-  {\normalsize\rmfamily}
+  {\footnotesize\itshape\rmfamily}
   {}
   {0em}
   {}
-
-
-% Remove section references from subsections
-\renewcommand{\thesection}{}
-\renewcommand{\thesubsection}{\arabic{subsection}}
-
 
 % ==========
 % = Quotes =
@@ -174,7 +139,7 @@ $endif$
 
 \usepackage{csquotes}
 
-\AtBeginEnvironment{quote}{\scriptsize\itshape} 
+\AtBeginEnvironment{quote}{\small\itshape} 
 
 \renewenvironment{quote}{%
    \list{}{%
@@ -184,29 +149,6 @@ $endif$
 }
 {\endlist}
 
-
-
-% ============
-% = Graphics =
-% ============
-
-\usepackage{caption}
-\captionsetup[figure]{labelformat=empty}
-
-$if(graphics)$
-\usepackage{graphicx,grffile}
-\makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-$endif$
-
-
-
 % ==========
 % = Tables =
 % ==========
@@ -214,6 +156,7 @@ $endif$
 % table with pandoc
 $if(tables)$
 \usepackage{longtable,booktabs,array}
+%\setlength\heavyrulewidth{0pt}
 $if(multirow)$
 \usepackage{multirow}
 $endif$
@@ -228,113 +171,37 @@ $endif$
 \makesavenoteenv{longtable}
 $endif$
 
-% \setlength\LTleft{0pt}
-% \setlength\LTright{0pt}
-
-
-
-% ============
-% = Graphics =
-% ============
-
-\usepackage[justification=centering,font={scriptsize},skip=1em]{caption}
-% Sizes: scriptsize, footnotesize, small, normalsize, large, Large
-\captionsetup[figure]{labelformat=empty,width=.8\linewidth}
-
-\usepackage{float}
-\let\origfigure\figure
-\let\endorigfigure\endfigure
-\renewenvironment{figure}[1][2] {
-    \expandafter\origfigure\expandafter[H]
-} {
-    \endorigfigure
-}
-
-\usepackage[export]{adjustbox}% http://ctan.org/pkg/adjustbox
-\let\oldincludegraphics\includegraphics
-\renewcommand{\includegraphics}[2][]{%
-  \oldincludegraphics[#1,max width=.75\linewidth]{#2}}
-
-% \usepackage{graphicx,grffile}
-% \makeatletter
-% \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-% \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-% \makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-% \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-
+\renewcommand{\arraystretch}{1.5}
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\small}
 
 % =============
 % = Footnotes = 
 % =============
 
 \usepackage[hang,flushmargin]{footmisc} 
-
 $if(notesymbols)$\renewcommand{\thefootnote}{\fnsymbol{footnote}}$endif$
-
-
-
-% ===================
-% = Pandoc citeproc =
-% ===================
-
-$if(csl-refs)$
-% Pandoc citation processing
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newlength{\csllabelwidth}
-\setlength{\csllabelwidth}{3em}
-\newlength{\cslentryspacingunit} % times entry-spacing
-\setlength{\cslentryspacingunit}{\parskip}
-% for Pandoc 2.8 to 2.10.1
-%\newenvironment{cslreferences}%
-%  {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
-%  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
-%  {\par}
-% For Pandoc 2.11+
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
-  % turn on hanging indent if param 1 is 1
-  \ifodd #1
-  \let\oldpar\par
-  \def\par{\hangindent=\cslhangindent\oldpar}
-  \fi
-  % set entry spacing
-  \setlength{\parskip}{#2\cslentryspacingunit}
- }%
- {}
-\usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
-
-$endif$
+%\renewcommand{\footnotesize}{\fontsize{9pt}{11pt}\selectfont} %use to change size of footnotes
 
 % ==============
 % = Hyperlinks =
 % ==============
 
 \usepackage[unicode=true]{hyperref}
-
-\hypersetup{colorlinks=true,allcolors=mydarkblue}
+\hypersetup{colorlinks=true,allcolors=TarHeelBlue}
 
 % ==============================================================================
 % =============================== BEGIN DOCUMENT =============================== 
 % ==============================================================================
 
-% Sets default font color without overriding hyperlink colors
-\color{myblack}
-
 \begin{document}\thispagestyle{empty}
+
+% Sets default font color without overriding hyperlink colors
+\color{OffBlack}
 
 % \maketitle
 
-{\huge\bfseries\titlefont{$course$}} \\
-\vspace{1em}
+\section{$course$}
 
 \begin{footnotesize}
 {$affiliation$} \\
@@ -345,28 +212,35 @@ $endif$
 $if(room)$
 {$room$} \\ 
 $endif$
+$if(repo)$
+\texttt{\href{https://emfink.net/$repo$}{emfink.net/$repo$}} \\ 
+$endif$
 \vspace{1em}
 
 {$author$}  \\
-\texttt{\href{mailto:{$email$}}{$email$}}  \\
+\texttt{\href{mailto:{$email$}}{$email$}} \\
 {$phone$}  \\
-{Office Hours: }\href{https://calendly.com/emfink}{\texttt{calendly.com/emfink}} 
-\end{footnotesize}
+{Office Hours: }$if(officehours)${$officehours$}$else$\href{https://calendly.com/emfink}{\texttt{calendly.com/emfink}}$endif$
 
-$if(ta)$
-\vspace{1em}
-{\itshape{Teaching Assistant:}}  \\
-{$ta$}  \\
-\texttt{\href{mailto:{$ta-email$}}{$ta-email$}}  \\
+$if(ta2)$
+{\itshape{Teaching Assistants:}} \\
+{$ta$} \\
+\texttt{\href{mailto:{$ta-email$}}{$ta-email$}} \\
+{$ta2$} \\
+\texttt{\href{mailto:{$ta2-email$}}{$ta2-email$}} \\
+$elseif(ta)$
+{\itshape{Teaching Assistant:}} \\
+{$ta$} \\
+\texttt{\href{mailto:{$ta-email$}}{$ta-email$}} \\
 $endif$
-
+\end{footnotesize}
 \vspace{2em}
 
-\needspace{3\baselineskip}
-
-
-% \needspace{3em}% Controls page break before headings 
+\needspace{1\baselineskip}
 
 $body$
 
 \end{document}
+
+% END OF SYLLABUS TEMPLATE
+
