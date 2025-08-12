@@ -10,7 +10,7 @@
 % = Layout & Spacing =
 % ====================
 
-\documentclass[12pt,letterpaper,twoside]{article}
+\documentclass[11pt,letterpaper,twoside]{article}
 \usepackage[hmarginratio=1:1,top=1in,bottom=.75in,left=1.5in,right=1.5in]{geometry}
 \usepackage{needspace}
 \usepackage[defaultlines=3,all]{nowidow}
@@ -139,12 +139,12 @@
 
 \usepackage{csquotes}
 
-\AtBeginEnvironment{quote}{\small\itshape} 
+\AtBeginEnvironment{quote}{\footnotesize\itshape} 
 
 \renewenvironment{quote}{%
    \list{}{%
      \leftmargin2em   % this is the adjusting screw
-     \rightmargin\leftmargin\parsep 1em }
+     \rightmargin\leftmargin\parsep .1em }
    \item\relax
 }
 {\endlist}
