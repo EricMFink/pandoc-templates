@@ -24,14 +24,15 @@ $endif$
     }
     $styles.html()$
   </style>
-$if(theme)$
-  <link rel="stylesheet" href="$revealjs-url$/dist/theme/$theme$.css" id="theme">
-$else$
-  <link rel="stylesheet" href="$revealjs-url$/dist/theme/black.css" id="theme">
-$endif$
+
 $for(css)$
   <link rel="stylesheet" href="$css$"/>
 $endfor$
+$if(theme)$
+  <link rel="stylesheet" href="$revealjs-url$/dist/theme/$theme$.css" id="theme">
+$else$
+  <link rel="stylesheet" href="$revealjs-url$/dist/theme/emf-moon.css" id="theme">
+$endif$
 $if(math)$
   $math$
 $endif$
