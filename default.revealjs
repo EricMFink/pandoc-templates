@@ -16,37 +16,6 @@ $endif$
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-
-<!-- Favicon -->
-	<link rel="shortcut icon" href="https://www.emfink.net/assets/img/favicon.ico">
-
-<!-- Main CSS -->
-<!-- 	<link rel="stylesheet" type="text/css" href="https://www.emfink.net/assets/css/main.css"> -->
-  
-<!-- Custom Icons -->
-	
-	<link rel="stylesheet" type="text/css" href="https://www.emfink.net/assets/css/academicons.css">
-	<link rel="stylesheet" type="text/css" href="https://www.emfink.net/assets/css/academicons.min.css">
-	<link rel="stylesheet" type="text/css" href="https://www.emfink.net/assets/fontawesome/css/fontawesome.css">
-	<link rel="stylesheet" type="text/css" href="https://www.emfink.net/assets/fontawesome/css/all.min.css">
-	<link rel="stylesheet" type="text/css" href="https://www.emfink.net/assets/fontawesome/css/brands.css">  
-	<link rel="stylesheet" type="text/css" href="https://www.emfink.net/assets/fontawesome/css/solid.css">
-
-  <!-- Google Fonts -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&amp;display=swap" rel="stylesheet">
-
-  <!-- Portada, Adelle, LFT Etica Mono -->
-	<link rel="stylesheet" href="https://use.typekit.net/viv2jun.css">
-
-  <!-- jQuery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-  <!-- Amplitude JS -->
-	<script type="text/javascript" src="https://www.emfink.net/assets/js/amplitude.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://www.emfink.net/assets/css/amplitudejs.css">
-	
   <link rel="stylesheet" href="$revealjs-url$/dist/reset.css">
   <link rel="stylesheet" href="$revealjs-url$/dist/reveal.css">
   <style>
@@ -55,7 +24,6 @@ $endif$
     }
     $styles.html()$
   </style>
-
 $if(theme)$
   <link rel="stylesheet" href="$revealjs-url$/dist/theme/$theme$.css" id="theme">
 $else$
@@ -80,21 +48,19 @@ $endfor$
 
 $if(title)$
 <section id="$idprefix$title-slide"$for(title-slide-attributes/pairs)$ $it.key$="$it.value$"$endfor$>
-<div class="title">
   <h1 class="title">$title$</h1>
 $if(subtitle)$
-  <h2 class="title">$subtitle$</h2>
+  <p class="subtitle">$subtitle$</p>
 $endif$
 $for(author)$
-  <h3 class="title">$author$</h3>
+  <p class="author">$author$</p>
 $endfor$
-$if(affiliation)$
-  <h3 class="title">$affiliation$</h3>
-$endif$
+$for(institute)$
+  <p class="institute">$institute$</p>
+$endfor$
 $if(date)$
-  <h5 class="date">$date$</h5>
+  <p class="date">$date$</p>
 $endif$
-</div>
 </section>
 $endif$
 $if(toc)$
@@ -115,11 +81,9 @@ $body$
   <script src="$revealjs-url$/dist/reveal.js"></script>
 
   <!-- reveal.js plugins -->
-  <script src="$revealjs-url$/plugin/menu/menu.js"></script>
   <script src="$revealjs-url$/plugin/notes/notes.js"></script>
   <script src="$revealjs-url$/plugin/search/search.js"></script>
   <script src="$revealjs-url$/plugin/zoom/zoom.js"></script>
-  <script src="$revealjs-url$/plugin/pdfexport/pdfexport.js"></script>
 $if(mathjax)$
   <script src="$revealjs-url$/plugin/math/math.js"></script>
 $endif$
@@ -131,10 +95,7 @@ $endif$
       Reveal.initialize({
         // Display controls in the bottom right corner
         controls: $controls$,
-        
-	// Shortcut for toggling between screen and PDF mode
-	pdfExportShortcut: 'P',
-	
+
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
         controlsTutorial: $controlsTutorial$,
@@ -347,11 +308,9 @@ $endif$
 $if(mathjax)$
           RevealMath,
 $endif$
-          RevealMenu,
           RevealNotes,
           RevealSearch,
-          RevealZoom,
-          PdfExport,
+          RevealZoom
         ]
       });
     </script>

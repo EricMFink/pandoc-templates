@@ -1,9 +1,3 @@
-# Pandoc Templates 
-
-Forked by [Eric M. Fink](https://github.com/EricMFink/), with added custom templates. 
-
-***
-
 The [pandoc-templates] repository contains default templates for [pandoc].
 
 If you use custom templates, we recommend forking this
