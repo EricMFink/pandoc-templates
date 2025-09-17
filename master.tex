@@ -49,8 +49,7 @@ $if(legal-code)$
 
 \usepackage[table]{xcolor}
 \definecolor{OffBlack}{HTML}{191919}
-\definecolor{OffWhite}{HTML}{fffff8}
-\definecolor{DullRed}{HTML}{8C2E24}
+\definecolor{Maroon}{HTML}{800000}
 \definecolor{TarHeelBlue}{HTML}{4b9cd3}
 \definecolor{HopkinsBlue}{HTML}{002D72}
 \definecolor{RacingGreen}{HTML}{004225}
@@ -59,7 +58,7 @@ $if(legal-code)$
 \setmainfont{Athelas}[Mapping={tex-text}]
 \setsansfont{Adelle Sans}[Mapping=tex-text]
 \setmonofont[Scale=0.90]{LFT Etica Mono}
-\newfontface\titlefont{Adelle Sans Bold}[Colour=DullRed]
+\newfontface\titlefont{Adelle Sans Bold}[Colour=Maroon]
 
 % =======================
 % = Headers and Footers =
@@ -91,7 +90,7 @@ $if(legal-code)$
 % ====================
 
 \newenvironment{preface}
-    {{\noindent\rmfamily\itshape\Huge\color{DullRed}{Preface}}
+    {{\noindent\rmfamily\itshape\Huge\color{Maroon}{Preface}}
     }
     {\vspace{1\baselineskip}
     }
@@ -244,8 +243,7 @@ $elseif(syllabus)$
 
 \usepackage[table]{xcolor}
 \definecolor{OffBlack}{HTML}{191919}
-\definecolor{OffWhite}{HTML}{fffff8}
-\definecolor{DullRed}{HTML}{8C2E24}
+\definecolor{Maroon}{HTML}{800000}
 \definecolor{TarHeelBlue}{HTML}{4b9cd3}
 \definecolor{HopkinsBlue}{HTML}{002D72}
 \definecolor{RacingGreen}{HTML}{004225}
@@ -254,7 +252,7 @@ $elseif(syllabus)$
 \setmainfont{Athelas}[Mapping={tex-text}]
 \setsansfont{Adelle Sans}[Mapping=tex-text]
 \setmonofont{LFT Etica Mono}[Mapping=tex-text,Scale=0.9]
-\newfontface\titlefont{Adelle Sans}[Colour=DullRed]
+\newfontface\titlefont{Adelle Sans}[Colour=Maroon]
 \usepackage{textcomp}
 \usepackage{amssymb}
 
@@ -472,8 +470,7 @@ $endif$
 
 \usepackage[dvipsnames,svgnames,x11names,hyperref]{xcolor}
 \definecolor{OffBlack}{HTML}{191919}
-\definecolor{OffWhite}{HTML}{fffff8}
-\definecolor{DullRed}{HTML}{8C2E24}
+\definecolor{Maroon}{HTML}{800000}
 \definecolor{TarHeelBlue}{HTML}{4b9cd3}
 \definecolor{HopkinsBlue}{HTML}{002D72}
 \definecolor{RacingGreen}{HTML}{004225}
@@ -482,7 +479,7 @@ $endif$
 \setmainfont{Cormorant Garamond}[Mapping={tex-text},SmallCapsFont={Cormorant SC}]
 \setsansfont{Proza Libre}[Mapping=tex-text]
 \setmonofont{LFT Etica Mono}[Mapping=tex-text,Scale=1.0]
-\newfontface\titlefont{Proza Libre Bold}[Colour=DullRed]
+\newfontface\titlefont{Proza Libre Bold}[Colour=Maroon]
 \usepackage{fontawesome}
 % \newfontfamily{\FA}{FontAwesome}
 
@@ -525,11 +522,11 @@ $endif$
 \usepackage[]{titlesec}  
 
 % \titlespacing*{\LEVEL}{LEFT}{BEFORE}{AFTER}
-\titlespacing{\section}{0em}{2em}{1em}
-\titlespacing{\subsection}{0em}{1.5em}{0.5em}
-\titlespacing{\subsubsection}{0em}{0.5em}{0.5em}
-\titlespacing{\paragraph}{0em}{1.5em}{0.5em}
-\titlespacing{\subparagraph}{0em}{1.5em}{0.75em}
+\titlespacing*{\section}{0em}{2em}{1em}
+\titlespacing*{\subsection}{0em}{1.5em}{0.5em}
+\titlespacing*{\subsubsection}{0em}{0.5em}{0.5em}
+\titlespacing*{\paragraph}{0em}{1.5em}{0.5em}
+\titlespacing*{\subparagraph}{0em}{1.5em}{0.5em}
 
 \titleformat{\section}[hang]
   {\Large\titlefont\raggedright}
@@ -563,7 +560,7 @@ $endif$
 % = Hyperlinks =
 % ==============
 
-\usepackage[colorlinks=true,linkcolor=DullRed,citecolor=DullRed,urlcolor=mydarkblue]{hyperref}
+\usepackage[colorlinks=true,linkcolor=HopkinsBlue,citecolor=HopkinsBlue,urlcolor=HopkinsBlue]{hyperref}
 
 % ==============================================================================
 % =============================== BEGIN DOCUMENT =============================== 
@@ -659,8 +656,7 @@ $elseif(exam)$
 
 \usepackage[table]{xcolor}
 \definecolor{OffBlack}{HTML}{191919}
-\definecolor{OffWhite}{HTML}{fffff8}
-\definecolor{DullRed}{HTML}{8C2E24}
+\definecolor{Maroon}{HTML}{800000}
 \definecolor{TarHeelBlue}{HTML}{4b9cd3}
 \definecolor{HopkinsBlue}{HTML}{002D72}
 \definecolor{RacingGreen}{HTML}{004225}
@@ -672,7 +668,7 @@ $elseif(exam)$
 \setsansfont{Proza Libre}[Mapping=tex-text]
 \setmonofont[Scale=1.0]{LFT Etica Mono}
 %\setmonofont{Cousine}[Mapping=tex-text,Scale=0.8]
-\newfontface\titlefont{Proza Libre Bold}[Colour=DullRed]
+\newfontface\titlefont{Proza Libre Bold}[Colour=Maroon]
 
 % =======================
 % = Headers and Footers =
@@ -812,7 +808,7 @@ $endif$
 % ==============
 
 \newcommand{\halfsep}{%
-    \textcolor{DullRed}{\noindent\hfil\rule{.5\textwidth}{.5pt}\hfil} 
+    \textcolor{Maroon}{\noindent\hfil\rule{.5\textwidth}{.5pt}\hfil} 
 }
 
 \newcommand*{\fullsep}{%
@@ -820,7 +816,7 @@ $endif$
   \begingroup
     \centering
     \raisebox{.2\baselineskip}{%
-      \textcolor{DullRed}{\rule{\linewidth}{2pt}}%
+      \textcolor{Maroon}{\rule{\linewidth}{2pt}}%
     }%
     \par
   \endgroup
@@ -862,9 +858,9 @@ $endif$
 \usepackage{hyperref}
 \hypersetup{
   colorlinks=true,
-  linkcolor=mydarkblue,
+  linkcolor=HopkinsBlue,
   citecolor=mydarkgreen,
-  urlcolor=DullRed,
+  urlcolor=Maroon,
   pdftitle={$title$},
   pdfauthor={$author$},
   pdfcreator={LaTeX via pandoc}}
@@ -940,8 +936,7 @@ $endif$
 
 \usepackage{xcolor}
 \definecolor{OffBlack}{HTML}{191919}
-\definecolor{OffWhite}{HTML}{fffff8}
-\definecolor{DullRed}{HTML}{8C2E24}
+\definecolor{Maroon}{HTML}{800000}
 \definecolor{TarHeelBlue}{HTML}{4b9cd3}
 \definecolor{HopkinsBlue}{HTML}{002D72}
 \definecolor{RacingGreen}{HTML}{004225}
@@ -1263,8 +1258,7 @@ $endif$
 
 \usepackage[table]{xcolor}
 \definecolor{OffBlack}{HTML}{191919}
-\definecolor{OffWhite}{HTML}{fffff8}
-\definecolor{DullRed}{HTML}{8C2E24}
+\definecolor{Maroon}{HTML}{800000}
 \definecolor{TarHeelBlue}{HTML}{4b9cd3}
 \definecolor{HopkinsBlue}{HTML}{002D72}
 \definecolor{RacingGreen}{HTML}{004225}
@@ -1272,7 +1266,7 @@ $endif$
 \usepackage{fontspec}
 \setmainfont{Athelas}[Mapping={tex-text},SmallCapsFont={Cormorant SC}]
 \setsansfont{Adelle Sans}[Mapping=tex-text]
-\newfontface\titlefont{Adelle Sans Bold}[Colour=DullRed]
+\newfontface\titlefont{Adelle Sans Bold}[Colour=Maroon]
 \setmonofont{LFT Etica Mono}[Mapping=tex-text,Scale=0.8]
 
 % =======================
@@ -1403,7 +1397,7 @@ $endif$
 % ==============
 
 \newcommand{\halfsep}{%
-    \textcolor{DullRed}{\noindent\hfil\rule{.5\textwidth}{.5pt}\hfil} 
+    \textcolor{Maroon}{\noindent\hfil\rule{.5\textwidth}{.5pt}\hfil} 
 }
 
 \newcommand*{\fullsep}{%
@@ -1411,7 +1405,7 @@ $endif$
   \begingroup
     \centering
     \raisebox{.2\baselineskip}{%
-      \textcolor{DullRed}{\rule{\linewidth}{2pt}}%
+      \textcolor{Maroon}{\rule{\linewidth}{2pt}}%
     }%
     \par
   \endgroup
@@ -1521,7 +1515,7 @@ $endif$
   colorlinks=true,
   linkcolor=HopkinsBlue,
   citecolor=HopkinsBlue,
-  urlcolor=DullRed,
+  urlcolor=Maroon,
   pdftitle={{$title$}$if(subtitle)$: {$subtitle$}$endif$},
   pdfauthor={$author-name$},
   pdfkeywords={$keywords$}
