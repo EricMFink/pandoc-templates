@@ -51,16 +51,16 @@ $if(title)$
 <section id="$idprefix$title-slide"$for(title-slide-attributes/pairs)$ $it.key$="$it.value$"$endfor$>
   <h1 class="title">$title$</h1>
 $if(subtitle)$
-  <p class="subtitle">$subtitle$</p>
+  <h2 class="subtitle">$subtitle$</h2>
 $endif$
 $for(author)$
-  <p class="author">$author$</p>
+  <h3 class="author">$author$</h3>
 $endfor$
 $for(institute)$
-  <p class="institute">$institute$</p>
+  <h3 class="institute">$institute$</h3>
 $endfor$
 $if(date)$
-  <p class="date">$date$</p>
+  <h4 class="date">$date$</h4>
 $endif$
 </section>
 $endif$
