@@ -1225,7 +1225,7 @@ $endif$
 $if(geometry)$
   $geometry$,
 $else$
-  hmarginratio=1:1,top=1in,bottom=1in,left=1.25in,right=1.25in,
+  hmarginratio=1:1,top=1in,bottom=1in,left=1.5in,right=1.5in,
 $endif$
 ]{geometry}
 
@@ -1264,9 +1264,9 @@ $endif$
 \definecolor{RacingGreen}{HTML}{004225}
 
 \usepackage{fontspec}
-\setmainfont{Athelas}[Mapping={tex-text},SmallCapsFont={Cormorant SC}]
+\setmainfont{Athelas}[Mapping={tex-text}]
 \setsansfont{Adelle Sans}[Mapping=tex-text]
-\newfontface\titlefont{Adelle Sans Bold}[Colour=Maroon]
+\newfontface\titlefont{Adelle Sans}[Colour=Maroon]
 \setmonofont{LFT Etica Mono}[Mapping=tex-text,Scale=0.8]
 
 % =======================
@@ -1556,7 +1556,7 @@ $if(title)$
 $endif$
 $if(subtitle)$
 \vspace{.5cm}
-\titlefont\Large{$subtitle$} 
+\titlefont\large{$subtitle$} 
 $endif$
 \end{flushleft}
 $endif$
