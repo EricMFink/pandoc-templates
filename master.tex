@@ -1322,7 +1322,7 @@ $endif$
   {1em}
   {}
 \titleformat{\subsubsection}[hang]
-  {\normalsize\itshape\sffamily}
+  {\normalsize\bfseries\sffamily}
   {\thesubsubsection}
   {1em}
   {}
@@ -1351,14 +1351,12 @@ $endif$
 \setlist[itemize,5]{label=\diamond}
 \setlist[itemize,6]{label=\textopenbullet}
 
-$if(nolistsep)$
+\setlist[1]{labelindent=.5em}
+\setlist[itemize]{leftmargin=*}
+\setlist[enumerate]{labelsep=*, leftmargin=2em}
 \setlist{nosep}
 \providecommand{\tightlist}{%
-  \setlength{\itemsep}{0em}\setlength{\parskip}{0em}}
-$else$
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0em}\setlength{\parskip}{.5em}}
-$endif$
+  \setlength{\topsep}{0em}\setlength{\partopsep}{0em}\setlength{\itemsep}{0em}\setlength{\parskip}{0em}}
 
 % ==========
 % = Quotes =
@@ -1539,20 +1537,20 @@ $else$
 \thispagestyle{empty}
 \begin{flushleft}
 $if(subject)$
-\rmfamily\footnotesize{$subject$} \\
+\sffamily{$subject$} \\
 $endif$
 $if(author)$
-\rmfamily\footnotesize{$author$} \\
+\sffamily{$author$} \\
 $endif$
 $if(affiliation)$
-\rmfamily\footnotesize{$affiliation$}  \\
+\sffamily{$affiliation$}  \\
 $endif$
 $if(date)$
-\rmfamily\footnotesize{$date$} \\
+\sffamily`{$date$} \\
 $endif$
 $if(title)$
 \vspace{5mm}
-\titlefont\LARGE{$title$} \\
+\titlefont\Large{$title$} \\
 $endif$
 $if(subtitle)$
 \vspace{.5cm}
@@ -1562,7 +1560,7 @@ $endif$
 $endif$
 
 $if(columns)$
-\setlength{\columnsep}{5em}
+\setlength{\columnsep}{3em}
 \begin{multicols*}{2}
 $body$
 \end{multicols*}
