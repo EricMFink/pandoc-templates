@@ -1,10 +1,7 @@
-%%% syllabus.tex
+%%% syllabus_template.tex
 %%% Pandoc template using LaTeX article class
 %%% For creating PDF from .md file with YAML frontmatter 
-%%% Created by Eric M. Fink (https://github.com/LuckyJimJD/pandoc-templates)
-%%% 
-
-% START OF SYLLABUS TEMPLATE
+%%% Created by Eric M. Fink (https://github.com/EricMFink/pandoc-templates)
 
 % ====================
 % = Layout & Spacing =
@@ -12,13 +9,18 @@
 
 \documentclass[11pt,letterpaper,twoside]{article}
 \usepackage[hmarginratio=1:1,top=1in,bottom=.75in,left=1.5in,right=1.5in]{geometry}
+
+\usepackage{etoolbox}
+\usepackage{marginnote}
+\usepackage{sidenotes}
+
 \usepackage{needspace}
 \usepackage[defaultlines=3,all]{nowidow}
 \raggedbottom
-\usepackage[singlespacing]{setspace}
 \usepackage{ragged2e}
 \setlength{\RaggedRightParindent}{0em}
 \RaggedRight
+\usepackage[singlespacing]{setspace}
 \usepackage[none]{hyphenat}
 \usepackage{parskip}
 \setlength{\parindent}{0em}
@@ -40,18 +42,20 @@
 
 \usepackage[table]{xcolor}
 \definecolor{OffBlack}{HTML}{191919}
-\definecolor{OffWhite}{HTML}{fffff8}
-\definecolor{DullRed}{HTML}{8C2E24}
+\definecolor{Maroon}{HTML}{800000}
 \definecolor{TarHeelBlue}{HTML}{4b9cd3}
-\definecolor{HopkinsBlue}{HTML}{68ace5}
+\definecolor{HopkinsBlue}{HTML}{002D72}
+\definecolor{RacingGreen}{HTML}{004225}
 
 \usepackage{fontspec}
-\setmainfont{Athelas}[Mapping={tex-text}]
+\setmainfont{Athelas}[Mapping=tex-text]
 \setsansfont{Adelle Sans}[Mapping=tex-text]
-\setmonofont{LFT Etica Mono}[Mapping=tex-text,Scale=0.9]
-\newfontface\titlefont{Adelle Sans}[Colour=DullRed]
+\setmonofont[Scale=0.90]{LFT Etica Mono}
+
 \usepackage{textcomp}
-\usepackage{amssymb}
+\usepackage{amssymb}}
+\usepackage[]{ccicons}
+\usepackage{fontawesome5}
 
 % =======================
 % = Headers and Footers = 
@@ -63,8 +67,8 @@
 \fancyfoot[C]{}
 \fancyfoot[R]{\tiny\texttt{$path$ Revised: \mydate\today}}
 \fancyfoot[L]{}
-\fancyhead[CE]{\textsc{$course$}}
-\fancyhead[CO]{\textsc{$affiliation$}}
+\fancyhead[CE]{\textsc{$subject$}}
+\fancyhead[CO]{\textsc{$institution$}}
 \fancyhead[LE]{\textsc{\thepage}}
 \fancyhead[LO]{\textsc{$term$}}
 \fancyhead[RE]{\textsc{Prof. Fink}}
@@ -76,13 +80,6 @@
 
 \usepackage{enumitem}
 \setlistdepth{6}
-
-\setlist[itemize,1]{label=\textbullet}
-\setlist[itemize,2]{label=\textopenbullet}
-\setlist[itemize,3]{label=\textperiodcentered}
-\setlist[itemize,4]{label=\textendash}
-\setlist[itemize,5]{label=\diamond}
-\setlist[itemize,6]{label=\textopenbullet}
 \setlist[itemize]{leftmargin={1.5em}}
 \providecommand{\tightlist}{%
 \setlength{\itemsep}{0em}\setlength{\parskip}{0em}\setlength{\itemindent}{0em}}
@@ -93,42 +90,42 @@
 
 \usepackage[compact]{titlesec}
 % \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
-\titlespacing*{\section}{0em}{3em}{0.5em}
+\titlespacing*{\section}{0em}{0em}{.5em}
 \titlespacing*{\subsection}{0em}{2em}{.5em}
-\titlespacing*{\subsubsection}{0em}{1em}{0.5em}
-\titlespacing*{\paragraph}{0em}{1em}{.2em}
-\titlespacing*{\subparagraph}{0em}{.5em}{.5em}
+\titlespacing*{\subsubsection}{0em}{1.5em}{.5em}
+\titlespacing*{\paragraph}{0em}{1em}{0em}
+\titlespacing*{\subparagraph}{0em}{.2em}{0em}
 
 \setcounter{secnumdepth}{0}
 
 % H1
-\titleformat{\section}[hang]
-  {\Huge\titlefont}
+\titleformat{\section}[block]
+  {\huge\sffamily\color{Maroon}}
   {}
-  {0pt}
+  {0em}
   {}
 
 % H2
-\titleformat{\subsection}[hang]
-  {\Large\titlefont}
+\titleformat{\subsection}[block]
+  {\needspace{9\baselineskip}\LARGE\sffamily\color{Maroon}}
   {}
-  {0pt}
+  {0em}
   {}
 % H3
-\titleformat{\subsubsection}[hang]
-  {\Large\itshape\rmfamily}
+\titleformat{\subsubsection}[block]
+  {\needspace{6\baselineskip}\Large\rmfamily\bfseries}
   {\thesubsection}
-  {1em}
+  {0em}
   {}
 % H4
-\titleformat{\paragraph}[hang]
-  {\normalsize\bfseries\rmfamily}
+\titleformat{\paragraph}[block]
+  {\footnotesize\sffamily\large\rmfamily\bfseries}
   {\thesubsubsection}
-  {1em}
+  {0em}
   {}
 % H5
 \titleformat{\subparagraph}[block]
-  {\footnotesize\itshape\rmfamily}
+  {\footnotesize\rmfamily}
   {}
   {0em}
   {}
@@ -153,27 +150,17 @@
 % = Tables =
 % ==========
 
-% table with pandoc
-$if(tables)$
 \usepackage{longtable,booktabs,array}
 %\setlength\heavyrulewidth{0pt}
-$if(multirow)$
 \usepackage{multirow}
-$endif$
-\usepackage{calc} % for calculating minipage widths
-% Correct order of tables after \paragraph or \subparagraph
-%\usepackage{etoolbox}
+\usepackage{calc}
 \makeatletter
 \patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
 \makeatother
-% Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
-$endif$
-
 \renewcommand{\arraystretch}{1.5}
-\usepackage{etoolbox}
-\AtBeginEnvironment{longtable}{\small}
+\AtBeginEnvironment{longtable}{\footnotesize}
 
 % =============
 % = Footnotes = 
@@ -181,66 +168,73 @@ $endif$
 
 \usepackage[hang,flushmargin]{footmisc} 
 $if(notesymbols)$\renewcommand{\thefootnote}{\fnsymbol{footnote}}$endif$
-%\renewcommand{\footnotesize}{\fontsize{9pt}{11pt}\selectfont} %use to change size of footnotes
 
 % ==============
 % = Hyperlinks =
 % ==============
 
 \usepackage[unicode=true]{hyperref}
-\hypersetup{colorlinks=true,allcolors=TarHeelBlue}
+\hypersetup{%
+  colorlinks=true,
+  allcolors=HopkinsBlue,
+  breaklinks=true,
+  pdfusetitle=true,
+  pdfauthor={$author$},
+  pdftitle={$title$},
+  $if(subject)$
+  pdfsubject={$subject$},
+  $endif$
+  $if(keywords)$
+  pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},
+  $endif$
+  pdfproducer=LateX via pandoc,
+  pdfcreator=LateX via pandoc
+}
 
-% ==============================================================================
-% =============================== BEGIN DOCUMENT =============================== 
-% ==============================================================================
+% ===============================
+% ===== BEGIN DOCUMENT ==========
+% ===============================
 
 \begin{document}\thispagestyle{empty}
 
-% Sets default font color without overriding hyperlink colors
 \color{OffBlack}
 
-% \maketitle
-
-\section{$course$}
+\section{$subject$}
 
 \begin{footnotesize}
-{$affiliation$} \\
-{$term$} \\
-$if(days)$
-{$days$} \\
-$endif$
-$if(room)$
-{$room$} \\ 
-$endif$
-$if(repo)$
-\texttt{\href{https://emfink.net/$repo$}{emfink.net/$repo$}} \\ 
-$endif$
+\subparagraph{$institution$}
+\subparagraph{$term$}
+$if(room)$\subparagraph{$room$}$endif$
+$if(meets)$\subparagraph{$meets$}$endif$
+\subparagraph{\url{$repo-url$}}
 \vspace{1em}
 
-{$author$}  \\
-\texttt{\href{mailto:{$email$}}{$email$}} \\
-{$phone$}  \\
-{Office Hours: }$if(officehours)${$officehours$}$else$\href{https://calendly.com/emfink}{\texttt{calendly.com/emfink}}$endif$
+$if(ta)$\paragraph{Professor}$endif$
+\subparagraph{Eric M. Fink} 
+\subparagraph{efink@elon.edu}
+\subparagraph{336.279.9334} 
+\subparagraph{Office Hours: {\url{calendly.com/emfink/}}}
+
+\vspace{1em}
 
 $if(ta2)$
-{\itshape{Teaching Assistants:}} \\
-{$ta$} \\
-\texttt{\href{mailto:{$ta-email$}}{$ta-email$}} \\
-{$ta2$} \\
-\texttt{\href{mailto:{$ta2-email$}}{$ta2-email$}} \\
+\paragraph{Teaching Assistants:}
+\subparagraph{$ta$}
+\subparagraph{$ta-email$}
+\vspace{.5em}
+\subparagraph{$ta2$}
+\subparagraph{$ta2-email$}
 $elseif(ta)$
-{\itshape{Teaching Assistant:}} \\
-{$ta$} \\
-\texttt{\href{mailto:{$ta-email$}}{$ta-email$}} \\
+\subparagraph{Teaching Assistant:}
+\subparagraph{$ta$}
+\subparagraph{$ta-email$}
 $endif$
 \end{footnotesize}
-\vspace{2em}
+
+\vspace{1em}
 
 \needspace{1\baselineskip}
 
 $body$
 
 \end{document}
-
-% END OF SYLLABUS TEMPLATE
-
