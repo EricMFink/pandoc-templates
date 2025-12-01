@@ -3,11 +3,11 @@
 %%% Created by Eric M. Fink (https://github.com/EricMFink/Pandoc/templates)
 %%% Contents: 
 %%% 1. Article: line 12
-%%% 2. Syllabus: line 296
-%%% 3. Vita: line 536
+%%% 2. Syllabus: line 295
+%%% 3. Vita: line 535
 %%% 4. Legal Code: 683
 %%% 6. Rules Handout: 842
-%%% 7. Generic: 997
+%%% 7. Default: 999
 
 $if(article)$
 
@@ -344,7 +344,7 @@ $elseif(syllabus)$
 \setmonofont[Scale=0.90]{LFT Etica Mono}
 
 \usepackage{textcomp}
-\usepackage{amssymb}}
+\usepackage{amssymb}
 \usepackage[]{ccicons}
 \usepackage{fontawesome5}
 
@@ -1001,33 +1001,19 @@ $else$
 % ====================
 % = Layout & Spacing =
 % ====================
-
-\documentclass[
 $if(fontsize)$
-  $fontsize$,
+\documentclass[$fontsize$,letterpaper,twoside]{article}
 $else$
-  12pt,
+\documentclass[11pt,letterpaper,twoside]{article}
 $endif$
-$if(papersize)$
-  $papersize$paper,
-$else$
-  letterpaper,
-$endif$
-$if(oneside)$
-  oneside,
-$else$
-  twoside,
-$endif$
-]{article}
 
-\usepackage[
 $if(geometry)$
-  $geometry$,
+\usepackage[$geometry$]{geometry}
 $else$
-  hmarginratio=1:1,top=1in,bottom=1in,left=1.5in,right=1.5in,
+\usepackage[hmarginratio=1:1,top=1in,bottom=.75in,left=1.5in,right=1.5in]{geometry}
 $endif$
-]{geometry}
 
+\usepackage{multicol}
 \usepackage{setspace}
 \usepackage{ragged2e}
 \RaggedRight
@@ -1041,13 +1027,13 @@ $else$
 $endif$
 \raggedbottom
 \setlength{\emergencystretch}{3em}
-\usepackage{multicol}
+\usepackage{currfile}
 
 % ===================
 % = Language & Date =
 % ===================
 
-\usepackage[english]{babel}
+\usepackage[english]{babel}  
 \usepackage{datetime}
 \newdateformat{mydate}{\THEDAY-\monthname-\THEYEAR}
 
@@ -1063,12 +1049,12 @@ $endif$
 \definecolor{RacingGreen}{HTML}{004225}
 
 \usepackage{fontspec}
-\setmainfont{Athelas}[Mapping={tex-text}]
+\setmainfont{Athelas}[Mapping=tex-text]
 \setsansfont{Adelle Sans}[Mapping=tex-text]
-\setmonofont{LFT Etica Mono}[Mapping=tex-text,Scale=0.8]
+\setmonofont[Scale=0.90]{LFT Etica Mono}
 
 \usepackage{textcomp}
-\usepackage{amssymb}}
+\usepackage{amssymb}
 \usepackage[]{ccicons}
 \usepackage{fontawesome5}
 
@@ -1080,7 +1066,11 @@ $endif$
 \pagestyle{fancy}
 \fancyfoot[C]{}
 \fancyfoot[R]{\tiny\texttt{Revised: \mydate\today}}
+$if(path)$
+\fancyfoot[L]{\tiny\texttt{$path$}}
+$else$
 \fancyfoot[L]{}
+$endif$
 $if(subtitle)$
 \fancyhead[CE]{\small{$title$}}
 \fancyhead[CO]{\small{$subtitle$}}
@@ -1096,17 +1086,30 @@ $else$
 \fancyhead[RO]{\small{\thepage}}
 $endif$
 
+% =========
+% = Lists =
+% =========
+
+\usepackage{enumitem}
+\setlistdepth{6}
+\setlist[1]{labelindent=.5em}
+\setlist[itemize]{leftmargin=*}
+\setlist[enumerate]{labelsep=*, leftmargin=2em}
+\setlist{nosep}
+\providecommand{\tightlist}{%
+  \setlength{\topsep}{0em}\setlength{\partopsep}{0em}\setlength{\itemsep}{0em}\setlength{\parskip}{0em}}
+
 % ============
 % = Headings =
 % ============
 
 \usepackage[compact]{titlesec}
 % \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
-\titlespacing*{\section}{0em}{1.5em}{.5em}
-\titlespacing*{\subsection}{0em}{1em}{.2em}
-\titlespacing*{\subsubsection}{0em}{0em}{0em}
-\titlespacing*{\paragraph}{0em}{0em}{0em}
-\titlespacing*{\subparagraph}{0em}{0em}{0em}
+\titlespacing*{\section}{0em}{2em}{.5em}
+\titlespacing*{\subsection}{0em}{1.5em}{.5em}
+\titlespacing*{\subsubsection}{0em}{1em}{.5em}
+\titlespacing*{\paragraph}{0em}{.5em}{.2em}
+\titlespacing*{\subparagraph}{0em}{.5em}{.2em}
 
 $if(secnumdepth)$
 \setcounter{secnumdepth}{$secnumdepth$}
@@ -1115,17 +1118,17 @@ $else$
 $endif$
 
 \titleformat{\section}[hang]
-  {\Large\sffamily\color{Maroon}}
+  {\LARGE\sffamily\color{Maroon}}
   {\thesection}
   {1em}
   {}
 \titleformat{\subsection}[hang]
-  {\large\sffamily\color{Maroon}}
+  {\Large\sffamily\color{Maroon}}
   {\thesubsection}
   {1em}
   {}
 \titleformat{\subsubsection}[hang]
-  {\normalsize\bfseries\sffamily}
+  {\large\bfseries\rmfamily}
   {\thesubsubsection}
   {1em}
   {}
@@ -1139,22 +1142,6 @@ $endif$
   {\thesubparagraph}
   {1em}
   {}
-
-% =========
-% = Lists =
-% =========
-
-\usepackage{enumitem}
-\setlistdepth{6}
-
-\setlist[itemize]{label=\textbullet}
-
-\setlist[1]{labelindent=.5em}
-\setlist[itemize]{leftmargin=*}
-\setlist[enumerate]{labelsep=*, leftmargin=2em}
-\setlist{nosep}
-\providecommand{\tightlist}{%
-  \setlength{\topsep}{0em}\setlength{\partopsep}{0em}\setlength{\itemsep}{0em}\setlength{\parskip}{0em}}
 
 % ==========
 % = Quotes =
@@ -1185,8 +1172,17 @@ $endif$
 % = Tables =
 % ==========
 
-\usepackage{longtable}
-\usepackage{supertabular,booktabs}
+\usepackage{longtable,booktabs,array}
+%\setlength\heavyrulewidth{0pt}
+\usepackage{multirow}
+\usepackage{calc}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\renewcommand{\arraystretch}{1.5}
+\AtBeginEnvironment{longtable}{\footnotesize}
 
 % ==============
 % = Separators =
@@ -1255,12 +1251,11 @@ $endif$
   \oldincludegraphics[#1,max width=.75\linewidth]{#2}}
 
 % =============
-% = Footnotes =
+% = Footnotes = 
 % =============
 
-\usepackage[hang,flushmargin]{footmisc}
-
-% $if(notesymbols)$\renewcommand{\thefootnote}{\fnsymbol{footnote}}$endif$
+\usepackage[hang,flushmargin]{footmisc} 
+$if(notesymbols)$\renewcommand{\thefootnote}{\fnsymbol{footnote}}$endif$
 
 % ===================
 % = Pandoc citeproc =
@@ -1272,7 +1267,6 @@ $if(csl-refs)$
 \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
 \makeatletter
 \let\@cite@ofmt\@firstofone
-% avoid brackets around text for \cite:
 \def\@biblabel#1{}
 \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
 \makeatother
@@ -1302,55 +1296,74 @@ $endif$
 % = Hyperlinks =
 % ==============
 
-\usepackage{hyperref}
+\usepackage[unicode=true]{hyperref}
 \hypersetup{%
   colorlinks=true,
-  linkcolor=HopkinsBlue,
-  citecolor=HopkinsBlue,
-  urlcolor=Maroon,
-  pdftitle={{$title$}$if(subtitle)$: {$subtitle$}$endif$},
-  pdfauthor={$author-name$},
-  pdfkeywords={$keywords$}
-  pdfproducer={XeLateX with hyperref},
-  pdfcreator={Xelatex}]{hyperref}
+  allcolors=HopkinsBlue,
+  breaklinks=true,
+  pdfusetitle=true,
+  pdfauthor={$author$},
+  pdftitle={$title$},
+  $if(subject)$
+  pdfsubject={$subject$},
+  $endif$
+  $if(keywords)$
+  pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},
+  $endif$
+  pdfproducer=LateX via pandoc,
+  pdfcreator=LateX via pandoc
 }
-\urlstyle{sf}
 
 % ==============================================================================
 % =============================== BEGIN DOCUMENT ===============================
 % ==============================================================================
 
 \begin{document}
-
+\color{OffBlack}
 \singlespacing
 
 $if(full-title)$
 \maketitle
 
 $else$
+
 \thispagestyle{empty}
 \begin{flushleft}
+
 $if(subject)$
-\sffamily{$subject$} \\
+\small{$subject$} \\
 $endif$
+
 $if(author)$
-\sffamily{$author$} \\
+\small{$author$} \\
 $endif$
+
 $if(affiliation)$
-\sffamily{$affiliation$}  \\
+\small{$affiliation$}  \\
 $endif$
+
+$if(term)$
+\small{$term$} \\
+$endif$
+
 $if(date)$
-\sffamily`{$date$} \\
+\small{$date$} \\
 $endif$
+
 $if(title)$
 \vspace{5mm}
-\section{$title$} \\
+\sffamily\centering\LARGE\textbf{\color{Maroon}{$title$}}
 $endif$
+
 $if(subtitle)$
-\vspace{.5cm}
-\subsection{$subtitle$} 
+\vspace{2mm}
+\sffamily\centering\Large{\color{Maroon}{$subtitle$}}
 $endif$
+
+\vspace{5mm}
+
 \end{flushleft}
+
 $endif$
 
 $if(columns)$
@@ -1364,7 +1377,5 @@ $body$
 $endif$
 
 \end{document}
-
-% END OF DEFAULT TEMPLATE
 
 $endif$
