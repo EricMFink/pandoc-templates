@@ -269,6 +269,8 @@ $endif$
 
 \begin{document}
 
+\newcounter{none}
+
 \maketitle
 % \vspace{-0.5in}
 
@@ -488,6 +490,8 @@ $if(notesymbols)$\renewcommand{\thefootnote}{\fnsymbol{footnote}}$endif$
 
 \begin{document}\thispagestyle{empty}
 
+\newcounter{none}
+
 \color{OffBlack}
 
 \section{$subject$}
@@ -648,6 +652,8 @@ $endif$
 % ==============================================================================
 
 \begin{document}\thispagestyle{empty}
+
+\newcounter{none}
 
 \begin{minipage}[t]{3.5in} 
   \flushright 
@@ -823,6 +829,8 @@ $endif$
 \thispagestyle{empty}
 \singlespacing
 
+\newcounter{none}
+
 \vspace*{\fill}
 \rmfamily{\Large{$title$}}
 
@@ -972,6 +980,8 @@ $if(notesymbols)$\renewcommand{\thefootnote}{\fnsymbol{footnote}}$endif$
 
 \begin{document}
 \color{OffBlack}
+
+\newcounter{none}
 
 \singlespacing
 \thispagestyle{empty}
@@ -1321,6 +1331,7 @@ $endif$
 \begin{document}
 \color{OffBlack}
 \singlespacing
+\newcounter{none}
 
 $if(full-title)$
 \maketitle
