@@ -1104,6 +1104,7 @@ $endif$
 \setlistdepth{6}
 \setlist[1]{labelindent=.5em}
 \setlist[itemize]{leftmargin=*}
+\setlist[itemize]{label=\textbullet}
 \setlist[enumerate]{labelsep=*, leftmargin=2em}
 \setlist{nosep}
 \providecommand{\tightlist}{%
@@ -1159,7 +1160,7 @@ $endif$
 
 \usepackage{csquotes}
 $if(fancyquote)$
-\AtBeginEnvironment{quote}{\sffamily\small}
+\AtBeginEnvironment{quote}{\sffamily\small\itshape}
 \renewenvironment{quote}{%
    \list{}{%
      \leftmargin2em   % this is the adjusting screw
@@ -1168,7 +1169,7 @@ $if(fancyquote)$
 }
 {\endlist}
 $else$
-\AtBeginEnvironment{quote}{\small}
+\AtBeginEnvironment{quote}{\small\itshape}
 \renewenvironment{quote}{%
    \list{}{%
      \leftmargin2em   % this is the adjusting screw
