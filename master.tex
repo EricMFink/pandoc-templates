@@ -1102,13 +1102,10 @@ $endif$
 
 \usepackage{enumitem}
 \setlistdepth{6}
-\setlist[1]{labelindent=.5em}
-\setlist[itemize]{leftmargin=*}
 \setlist[itemize]{label=\textbullet}
-\setlist[enumerate]{labelsep=*, leftmargin=2em}
 \setlist{nosep}
 \providecommand{\tightlist}{%
-  \setlength{\topsep}{0em}\setlength{\partopsep}{0em}\setlength{\itemsep}{0em}\setlength{\parskip}{0em}}
+  \setlength{\itemsep}{0em}\setlength{\parskip}{0em}}
 
 % ============
 % = Headings =
@@ -1117,10 +1114,10 @@ $endif$
 \usepackage[compact]{titlesec}
 % \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
 \titlespacing*{\section}{0em}{2em}{.5em}
-\titlespacing*{\subsection}{0em}{1.5em}{.5em}
-\titlespacing*{\subsubsection}{0em}{1em}{.5em}
-\titlespacing*{\paragraph}{0em}{.5em}{.2em}
-\titlespacing*{\subparagraph}{0em}{.5em}{.2em}
+\titlespacing*{\subsection}{0em}{1.5em}{0em}
+\titlespacing*{\subsubsection}{0em}{.25em}{0em}
+\titlespacing*{\paragraph}{0em}{.25em}{0em}
+\titlespacing*{\subparagraph}{0em}{.25em}{0em}
 
 $if(secnumdepth)$
 \setcounter{secnumdepth}{$secnumdepth$}
@@ -1159,6 +1156,8 @@ $endif$
 % ==========
 
 \usepackage{csquotes}
+\usepackage{relsize}
+
 $if(fancyquote)$
 \AtBeginEnvironment{quote}{\sffamily\small\itshape}
 \renewenvironment{quote}{%
@@ -1260,6 +1259,8 @@ $endif$
 \let\oldincludegraphics\includegraphics
 \renewcommand{\includegraphics}[2][]{%
   \oldincludegraphics[#1,max width=.75\linewidth]{#2}}
+  
+\newcommand{\pandocbounded}[1]{#1}
 
 % =============
 % = Footnotes = 
@@ -1345,37 +1346,28 @@ $else$
 $if(subject)$
 \small{$subject$} \\
 $endif$
-
 $if(author)$
 \small{$author$} \\
 $endif$
-
 $if(affiliation)$
 \small{$affiliation$}  \\
 $endif$
-
 $if(term)$
 \small{$term$} \\
 $endif$
-
 $if(date)$
 \small{$date$} \\
 $endif$
-
 $if(title)$
 \vspace{5mm}
-\sffamily\centering\LARGE\textbf{\color{Maroon}{$title$}}
+\sffamily\centering\LARGE\textbf{\color{Maroon}{$title$}} \\
 $endif$
-
 $if(subtitle)$
 \vspace{2mm}
-\sffamily\centering\Large{\color{Maroon}{$subtitle$}}
+\sffamily\centering\Large{\color{Maroon}{$subtitle$}} \\
 $endif$
-
 \vspace{5mm}
-
 \end{flushleft}
-
 $endif$
 
 $if(columns)$
