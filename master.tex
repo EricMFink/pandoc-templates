@@ -76,7 +76,7 @@ $endif$
 \fancyhead[C]{\small\textsc{$header$}}
 \fancyhead[RO]{\small{\thepage}}
 \fancyhead[RE]{\small{[Draft}}
-\fancyhead[LO]{\small{\mydate\today]}}
+\fancyhead[LO]{\small{Draft]}}
 \fancyhead[LE]{\small{\thepage}}
 
 % =====================
@@ -169,7 +169,7 @@ $endif$
 % \setlength{\droptitle}{-3cm}
 \title{\Large\textbf{{$title$}$if(subtitle)$:\\ $subtitle$}$endif$}
 
-\author{$for(author)$\normalsize{$author$}\thanks{$affiliation$. $thanks$} $sep$ \and $endfor$}
+\author{$for(author)$\normalsize{$author.name$}\thanks{$author.affiliation$, $author.address$$if(author.email)$, $author.email$. $endif$$if(author.thanks)$$author.thanks$$endif$} $sep$ \and $endfor$}
 
 \date{}
 
