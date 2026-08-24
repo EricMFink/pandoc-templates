@@ -2,7 +2,7 @@
 %%% Academic article template for pandoc with options for legal-style (1, 1.1, 1.1.1, etc.) or law review style (I. A. 1. a. i.) section headings
 %%% Use with article.yaml for variables
 %%% Created by Eric M. Fink (https://github.com/EricMFink/Pandoc/templates)
-%%% Updated: 
+%%% Updated: 2026-08-24T10:45:45-0400-04:00
 %%% 
 
 % ====================
@@ -158,8 +158,12 @@ $endif$
 
 \usepackage{titling}
 % \setlength{\droptitle}{-3cm}
+\usepackage{titling}
+% \setlength{\droptitle}{-3cm}
 \title{\Large\textbf{{$title$}$if(subtitle)$:\\ $subtitle$}$endif$}
-\author{$for(author)$\normalsize{$author$}\thanks{$position$, $affiliation$, $address$. $email$. $thanks$} $sep$ \and $endfor$}
+
+\author{$for(author)$\normalsize{$author$}\thanks{$affiliation$. $thanks$} $sep$ \and $endfor$}
+
 \date{}
 
 % ============

@@ -168,7 +168,9 @@ $endif$
 \usepackage{titling}
 % \setlength{\droptitle}{-3cm}
 \title{\Large\textbf{{$title$}$if(subtitle)$:\\ $subtitle$}$endif$}
-\author{$for(author)$\normalsize{$author$}\thanks{$position$, $affiliation$, $address$. $email$. $thanks$} $sep$ \and $endfor$}
+
+\author{$for(author)$\normalsize{$author$}\thanks{$affiliation$. $thanks$} $sep$ \and $endfor$}
+
 \date{}
 
 % ============
@@ -273,6 +275,7 @@ $endif$
 \newcounter{none}
 
 \maketitle
+
 % \vspace{-0.5in}
 
 $if(abstract)$
