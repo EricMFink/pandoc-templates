@@ -1064,7 +1064,8 @@ $endif$
 
 \usepackage{fontspec}
 \setmainfont{Athelas}[Mapping=tex-text]
-\setsansfont{Adelle Sans}[Mapping=tex-text]
+%\setsansfont{Adelle Sans}[Mapping=tex-text]
+\setsansfont{Lato}[Mapping=tex-text]
 \setmonofont[Scale=0.90]{LFT Etica Mono}
 
 \usepackage{textcomp}
@@ -1140,7 +1141,7 @@ $endif$
   {1em}
   {}
 \titleformat{\subsubsection}[hang]
-  {\Large\bfseries\rmfamily}
+  {\Large\bfseries\rmfamily\color{Maroon}}
   {\thesubsubsection}
   {1em}
   {}
@@ -1151,7 +1152,7 @@ $endif$
   {}
   [\vspace{-1.3em}\textcolor{Maroon}{\rule{\textwidth}{.5pt}}]
 \titleformat{\subparagraph}[hang]
-  {\large\bfseries\rmfamily}
+  {\large\itshape\rmfamily}
   {\thesubparagraph}
   {1em}
   {}
@@ -1175,8 +1176,8 @@ $endif$
 
 $if(fancyquote)$
 \usepackage{tcolorbox}
-\newtcolorbox{BoxQuote}{colback=Maroon!10!white, colframe=Maroon}
-\AtBeginEnvironment{quote}{\sffamily}
+\newtcolorbox{BoxQuote}{colback=Maroon!5!white,colframe=Maroon,toprule=0mm,bottomrule=0mm,leftrule=3mm,rightrule=0mm,boxsep=0mm}
+\AtBeginEnvironment{quote}{\sffamily\small}
 \renewenvironment{quote}{\begin{BoxQuote}}{\end{BoxQuote}}
 
 $else$
