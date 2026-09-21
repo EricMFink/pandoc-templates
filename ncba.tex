@@ -1,0 +1,235 @@
+%%% ncba.tex
+%%% Pandoc template for NCBA CLE Manuscripts
+%%% Created by Eric M. Fink (https://github.com/EricMFink/Pandoc/templates)
+
+% ====================
+% = Layout & Spacing =
+% ====================
+
+\documentclass[12pt,letterpaper,twoside]{article}
+
+\usepackage[hmarginratio=1:1,top=1in,bottom=.75in,left=1.5in,right=1.5in]{geometry}
+
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{ragged2e}
+\RaggedRight
+\usepackage[none]{hyphenat}
+$if(parindent)$
+\setlength{\parindent}{$parindent$}
+\setlength{\parskip}{0.5em}
+$else$
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+$endif$
+\raggedbottom
+\setlength{\emergencystretch}{3em}
+\usepackage{currfile}
+
+% ==========================
+% = Language & Date Format =
+% ==========================
+
+\usepackage[english]{babel}  
+\usepackage{datetime}
+\newdateformat{mydate}{\THEDAY-\monthname-\THEYEAR}
+
+% ==================
+% = Colors & Fonts =
+% ==================
+
+\usepackage[table]{xcolor}
+\definecolor{OffBlack}{HTML}{191919}
+\definecolor{Maroon}{HTML}{800000}
+\definecolor{TarHeelBlue}{HTML}{4b9cd3}
+\definecolor{HopkinsBlue}{HTML}{002D72}
+\definecolor{RacingGreen}{HTML}{004225}
+
+\usepackage{fontspec}
+\setmainfont{Athelas}[Mapping=tex-text]
+%\setsansfont{Adelle Sans}[Mapping=tex-text]
+\setsansfont{Lato}[Mapping=tex-text]
+\setmonofont[Scale=0.90]{LFT Etica Mono}
+
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage[]{ccicons}
+\usepackage{fontawesome5}
+
+% =======================
+% = Headers and Footers = 
+% =======================
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{}
+\fancyfoot[R]{\tiny\texttt{Revised: \mydate\today}}
+$if(path)$
+\fancyfoot[L]{\tiny\texttt{$path$}}
+$else$
+\fancyfoot[L]{}
+$endif$
+$if(subtitle)$
+\fancyhead[CE]{\small{$title$}}
+\fancyhead[CO]{\small{$subtitle$}}
+\fancyhead[LE]{\small{\thepage}}
+\fancyhead[LO]{\small{}}
+\fancyhead[RE]{\small{}}
+\fancyhead[RO]{\small{\thepage}}
+$else$
+\fancyhead[C]{\small{$title$}}
+\fancyhead[LE]{\small{\thepage}}
+\fancyhead[LO]{\small{}}
+\fancyhead[RE]{\small{}}
+\fancyhead[RO]{\small{\thepage}}
+$endif$
+
+% =========
+% = Lists =
+% =========
+
+\usepackage{enumitem}
+\setlistdepth{6}
+\setlist[itemize]{label=\textbullet}
+\setlist{nosep}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0em}\setlength{\parskip}{0em}}
+
+% ============
+% = Headings =
+% ============
+
+\usepackage[]{titlesec}  
+% \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
+\titlespacing*{\section}{0em}{2em}{0.5em}
+\titlespacing*{\subsection}{0em}{1.5em}{0em}
+\titlespacing*{\subsubsection}{0em}{1em}{0em}
+\titlespacing*{\paragraph}{0em}{0.5em}{0pt}
+\titlespacing*{\subparagraph}{0em}{0.5em}{0em}
+
+\setcounter{secnumdepth}{3}
+
+\makeatletter
+\renewcommand{\thesection}{\Alph{section}}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\alph{subsubsection}}
+\renewcommand{\theparagraph}{\arabic{paragraph}}
+\renewcommand{\thesubparagraph}{\roman{subparagraph}}
+
+\titleformat{\section}[hang]
+  {\Large\bfseries}
+  {\thesection.}
+  {1em}
+  {}
+\titleformat{\subsection}[hang]
+  {\large\bfseries}
+  {\thesubsection.}
+  {1em}
+  {}
+\titleformat{\subsubsection}[hang]
+  {\normalsize\bfseries}
+  {\thesubsubsection.}
+  {1em}
+  {}
+\titleformat{\paragraph}[hang]
+  {\normalsize\itshape}
+  {\thesubparagraph}
+  {1em}
+  {}
+\titleformat{\subparagraph}[hang]
+  {\normalsize}
+  {\theparagraph}
+  {1em}
+  {}
+  
+  
+
+% ================
+% = Title Layout =
+% ================
+
+\usepackage{titling}
+
+\title{\Large\textbf{$title$}}
+
+\author{$for(author)$\normalsize{$author.name$ -- $author.address$}\thanks{$author.affiliation$. $if(author.thanks)$$author.thanks$$endif$} $sep$ \and $endfor$}
+
+\date{}
+
+% ==========
+% = Quotes =
+% ==========
+
+\usepackage{csquotes}
+\AtBeginEnvironment{quote}{\small}
+
+\renewenvironment{quote}{%
+   \list{}{%
+     \leftmargin2em   % this is the adjusting screw
+     \rightmargin\leftmargin\parsep 0mm }
+   \item\relax
+}
+{\endlist}
+
+% ===================
+% = Pandoc citeproc =
+% ===================
+
+$if(csl-refs)$
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+\begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+\let\@cite@ofmt\@firstofone
+\def\@biblabel#1{}
+\def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+{\begin{list}{}{%
+	\setlength{\itemindent}{0pt}
+	\setlength{\leftmargin}{0pt}
+	\setlength{\parsep}{0pt}
+	\ifodd #1
+	\setlength{\leftmargin}{\cslhangindent}
+	\setlength{\itemindent}{-1\cslhangindent}
+	\fi
+	\setlength{\itemsep}{#2\baselineskip}}}
+{\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+$endif$
+
+% ==============
+% = Hyperlinks =
+% ==============
+
+\usepackage{hyperref}
+\hypersetup{%
+  colorlinks=true,
+  allcolors=black,
+  breaklinks=true,
+}
+\usepackage{url}
+\urlstyle{same}
+
+% ==============================================================================
+% =============================== BEGIN DOCUMENT =============================== 
+% ==============================================================================
+
+\begin{document}
+\color{OffBlack}
+\singlespacing
+\newcounter{none}
+
+\maketitle
+
+$body$
+
+\end{document}
