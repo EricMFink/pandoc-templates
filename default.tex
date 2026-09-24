@@ -1,6 +1,9 @@
-%%% emf_generic.tex
-%%% Pandoc template 
-%%% Created by Eric M. Fink (https://github.com/EricMFink)
+%%% default.tex
+%%% Default template for Pandoc 
+%%% Created by Eric M. Fink (https://github.com/EricMFink/Pandoc/templates)
+%%% Updated: 2026-09-24T17:57:45-0400-04:00
+%%%
+
 
 % ====================
 % = Layout & Spacing =
@@ -8,7 +11,7 @@
 $if(fontsize)$
 \documentclass[$fontsize$,letterpaper,twoside]{article}
 $else$
-\documentclass[11pt,letterpaper,twoside]{article}
+\documentclass[12pt,letterpaper,twoside]{article}
 $endif$
 
 $if(geometry)$
@@ -54,7 +57,8 @@ $endif$
 
 \usepackage{fontspec}
 \setmainfont{Athelas}[Mapping=tex-text]
-\setsansfont{Adelle Sans}[Mapping=tex-text]
+%\setsansfont{Adelle Sans}[Mapping=tex-text]
+\setsansfont{Lato}[Mapping=tex-text]
 \setmonofont[Scale=0.90]{LFT Etica Mono}
 
 \usepackage{textcomp}
@@ -96,12 +100,10 @@ $endif$
 
 \usepackage{enumitem}
 \setlistdepth{6}
-\setlist[1]{labelindent=.5em}
-\setlist[itemize]{leftmargin=*}
-\setlist[enumerate]{labelsep=*, leftmargin=2em}
+\setlist[itemize]{label=\textbullet}
 \setlist{nosep}
 \providecommand{\tightlist}{%
-  \setlength{\topsep}{0em}\setlength{\partopsep}{0em}\setlength{\itemsep}{0em}\setlength{\parskip}{0em}}
+  \setlength{\itemsep}{0em}\setlength{\parskip}{0em}}
 
 % ============
 % = Headings =
@@ -110,10 +112,10 @@ $endif$
 \usepackage[compact]{titlesec}
 % \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
 \titlespacing*{\section}{0em}{2em}{.5em}
-\titlespacing*{\subsection}{0em}{1.5em}{.5em}
-\titlespacing*{\subsubsection}{0em}{1em}{.5em}
-\titlespacing*{\paragraph}{0em}{.5em}{.2em}
-\titlespacing*{\subparagraph}{0em}{.5em}{.2em}
+\titlespacing*{\subsection}{0em}{1.5em}{0em}
+\titlespacing*{\subsubsection}{0em}{.25em}{0em}
+\titlespacing*{\paragraph}{0mm}{6mm}{0mm}
+\titlespacing*{\subparagraph}{0em}{.25em}{0em}
 
 $if(secnumdepth)$
 \setcounter{secnumdepth}{$secnumdepth$}
@@ -127,42 +129,52 @@ $endif$
   {1em}
   {}
 \titleformat{\subsection}[hang]
-  {\Large\sffamily\color{Maroon}}
+  {\LARGE\sffamily\color{Maroon}}
   {\thesubsection}
   {1em}
   {}
 \titleformat{\subsubsection}[hang]
-  {\large\bfseries\rmfamily}
+  {\Large\bfseries\rmfamily\color{Maroon}}
   {\thesubsubsection}
   {1em}
   {}
 \titleformat{\paragraph}[hang]
-  {\normalsize\bfseries\rmfamily}
-  {\theparagraph}
-  {1em}
+  {\large\sffamily\color{Maroon}}
+  {\thesubsubsection ~~}
+  {0em}
   {}
+  [\vspace{-1.3em}\textcolor{Maroon}{\rule{\textwidth}{.5pt}}]
 \titleformat{\subparagraph}[hang]
-  {\normalsize\itshape\rmfamily}
+  {\large\itshape\rmfamily}
   {\thesubparagraph}
   {1em}
   {}
+  
+% \titleformat{\paragraph}[hang]
+%   {\normalsize\bfseries\rmfamily}
+%   {\theparagraph}
+%   {1em}
+%   {}
+% \titleformat{\subparagraph}[hang]
+%   {\normalsize\itshape\rmfamily}
+%   {\thesubparagraph}
+%   {1em}
+%   {}
 
 % ==========
 % = Quotes =
 % ==========
-
 \usepackage{csquotes}
+\usepackage{relsize}
+
 $if(fancyquote)$
+\usepackage{tcolorbox}
+\newtcolorbox{BoxQuote}{colback=Maroon!5!white,colframe=Maroon,toprule=0mm,bottomrule=0mm,leftrule=3mm,rightrule=0mm,boxsep=0mm}
 \AtBeginEnvironment{quote}{\sffamily\small}
-\renewenvironment{quote}{%
-   \list{}{%
-     \leftmargin2em   % this is the adjusting screw
-     \rightmargin\leftmargin\parsep 0mm }
-   \item\relax
-}
-{\endlist}
+\renewenvironment{quote}{\begin{BoxQuote}}{\end{BoxQuote}}
+
 $else$
-\AtBeginEnvironment{quote}{\small}
+\AtBeginEnvironment{quote}{\small\itshape}
 \renewenvironment{quote}{%
    \list{}{%
      \leftmargin2em   % this is the adjusting screw
@@ -253,6 +265,8 @@ $endif$
 \let\oldincludegraphics\includegraphics
 \renewcommand{\includegraphics}[2][]{%
   \oldincludegraphics[#1,max width=.75\linewidth]{#2}}
+  
+\newcommand{\pandocbounded}[1]{#1}
 
 % =============
 % = Footnotes = 
@@ -325,6 +339,7 @@ $endif$
 \begin{document}
 \color{OffBlack}
 \singlespacing
+\newcounter{none}
 
 $if(full-title)$
 \maketitle
@@ -337,37 +352,28 @@ $else$
 $if(subject)$
 \small{$subject$} \\
 $endif$
-
 $if(author)$
 \small{$author$} \\
 $endif$
-
 $if(affiliation)$
 \small{$affiliation$}  \\
 $endif$
-
 $if(term)$
 \small{$term$} \\
 $endif$
-
 $if(date)$
 \small{$date$} \\
 $endif$
-
 $if(title)$
 \vspace{5mm}
-\sffamily\centering\LARGE\textbf{\color{Maroon}{$title$}}
+\sffamily\centering\LARGE\textbf{\color{Maroon}{$title$}} \\
 $endif$
-
 $if(subtitle)$
 \vspace{2mm}
-\sffamily\centering\Large{\color{Maroon}{$subtitle$}}
+\sffamily\centering\Large{\color{Maroon}{$subtitle$}} \\
 $endif$
-
 \vspace{5mm}
-
 \end{flushleft}
-
 $endif$
 
 $if(columns)$
@@ -381,3 +387,5 @@ $body$
 $endif$
 
 \end{document}
+
+$endif$

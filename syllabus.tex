@@ -1,7 +1,8 @@
-%%% syllabus_template.tex
-%%% Pandoc template using LaTeX article class
-%%% For creating PDF from .md file with YAML frontmatter 
-%%% Created by Eric M. Fink (https://github.com/EricMFink/pandoc-templates)
+%%% syllabus.tex
+%%% Course syllabus template for Pandoc 
+%%% Created by Eric M. Fink (https://github.com/EricMFink/Pandoc/templates)
+%%% Updated: 2026-09-24T17:57:45-0400-04:00
+%%% 
 
 % ====================
 % = Layout & Spacing =
@@ -9,11 +10,9 @@
 
 \documentclass[11pt,letterpaper,twoside]{article}
 \usepackage[hmarginratio=1:1,top=1in,bottom=.75in,left=1.5in,right=1.5in]{geometry}
-
 \usepackage{etoolbox}
 \usepackage{marginnote}
 \usepackage{sidenotes}
-
 \usepackage{needspace}
 \usepackage[defaultlines=3,all]{nowidow}
 \raggedbottom
@@ -53,7 +52,7 @@
 \setmonofont[Scale=0.90]{LFT Etica Mono}
 
 \usepackage{textcomp}
-\usepackage{amssymb}}
+\usepackage{amssymb}
 \usepackage[]{ccicons}
 \usepackage{fontawesome5}
 
@@ -119,7 +118,7 @@
   {}
 % H4
 \titleformat{\paragraph}[block]
-  {\footnotesize\sffamily\large\rmfamily\bfseries}
+  {\normalsize\rmfamily\itshape}
   {\thesubsubsection}
   {0em}
   {}
@@ -196,6 +195,8 @@ $if(notesymbols)$\renewcommand{\thefootnote}{\fnsymbol{footnote}}$endif$
 % ===============================
 
 \begin{document}\thispagestyle{empty}
+
+\newcounter{none}
 
 \color{OffBlack}
 

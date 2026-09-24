@@ -1,0 +1,159 @@
+%%% rules.tex
+%%% Rules & Statutes Handout template for Pandoc 
+%%% Created by Eric M. Fink (https://github.com/EricMFink/Pandoc/templates)
+%%% Updated: 2026-09-24T17:57:45-0400-04:00
+%%% 
+
+% ====================
+% = Layout & Spacing =
+% ====================
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage[hmarginratio=1:1,top=1in,bottom=.5in,left=.25in,right=.25in]{geometry}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage{ragged2e}
+\RaggedRight
+\usepackage[none]{hyphenat}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+\raggedbottom
+\setlength{\emergencystretch}{3em}
+
+% ===================
+% = Language & Date =
+% ===================
+
+\usepackage[english]{babel}
+\usepackage{datetime}
+\newdateformat{mydate}{\THEDAY-\monthname-\THEYEAR}
+
+% ==================
+% = Colors & Fonts =
+% ==================
+
+\usepackage[table]{xcolor}
+\definecolor{OffBlack}{HTML}{191919}
+\definecolor{Maroon}{HTML}{800000}
+\definecolor{TarHeelBlue}{HTML}{4b9cd3}
+\definecolor{HopkinsBlue}{HTML}{002D72}
+\definecolor{RacingGreen}{HTML}{004225}
+
+\usepackage{fontspec}
+\setmainfont{Athelas}[Mapping={tex-text}]
+\setsansfont{Adelle Sans}[Mapping=tex-text]
+\newfontface\titlefont{Adelle Sans}[Colour=Maroon]
+\setmonofont{LFT Etica Mono}[Mapping=tex-text,Scale=0.8]
+
+% =======================
+% = Headers and Footers = 
+% =======================
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{}
+\fancyfoot[R]{\tiny\texttt{Revised: \mydate\today}}
+\fancyfoot[L]{}
+$if(subtitle)$
+\fancyhead[CE]{\small{$title$}}
+\fancyhead[CO]{\small{$subtitle$}}
+\fancyhead[LE]{\small{\thepage}}
+\fancyhead[LO]{\small{}}
+\fancyhead[RE]{\small{}}
+\fancyhead[RO]{\small{\thepage}}
+$else$
+\fancyhead[C]{\small{$title$}}
+\fancyhead[LE]{\small{\thepage}}
+\fancyhead[LO]{\small{}}
+\fancyhead[RE]{\small{}}
+\fancyhead[RO]{\small{\thepage}}
+$endif$
+
+% ============
+% = Headings =
+% ============
+
+\usepackage[compact]{titlesec}
+% \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
+\titlespacing*{\section}{0em}{1.5em}{.5em}
+\titlespacing*{\subsection}{0em}{1em}{.2em}
+\titlespacing*{\subsubsection}{0em}{0em}{0em}
+\titlespacing*{\paragraph}{0em}{0em}{0em}
+\titlespacing*{\subparagraph}{0em}{0em}{0em}
+
+\setcounter{secnumdepth}{0}
+
+\titleformat{\section}[hang]
+  {\Large\rmfamily}
+  {\thesection}
+  {1em}
+  {}
+\titleformat{\subsection}[hang]
+  {\large\rmfamily}
+  {\thesubsection}
+  {1em}
+  {}
+\titleformat{\subsubsection}[hang]
+  {\normalsize\bfseries\rmfamily}
+  {\thesubsubsection}
+  {1em}
+  {}
+\titleformat{\paragraph}[hang]
+  {\normalsize\bfseries\rmfamily}
+  {\theparagraph}
+  {1em}
+  {}
+\titleformat{\subparagraph}[hang]
+  {\normalsize\itshape\rmfamily}
+  {\thesubparagraph}
+  {1em}
+  {}
+
+% =========
+% = Lists =
+% =========
+
+\usepackage{enumitem}
+\setlistdepth{6}
+\setlist[itemize]{label=\textbullet}
+\setlist{nosep}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0em}\setlength{\parskip}{0em}}
+
+% =============
+% = Footnotes = 
+% =============
+
+\usepackage[hang,flushmargin]{footmisc} 
+$if(notesymbols)$\renewcommand{\thefootnote}{\fnsymbol{footnote}}$endif$
+
+% ===============================
+% ===== BEGIN DOCUMENT ==========
+% ===============================
+
+\begin{document}
+\color{OffBlack}
+
+\newcounter{none}
+
+\singlespacing
+\thispagestyle{empty}
+\begin{flushleft}
+
+\footnotesize{$subject$} \\
+\footnotesize{$author$} \\
+
+\vspace{3mm}
+\section{$title$} 
+
+\setlength{\columnsep}{3em}
+\begin{multicols*}{2}
+$body$
+\end{multicols*}
+
+\end{flushleft}
+
+\end{document}
+
+% END OF RULES HANDOUT TEMPLATE
+
