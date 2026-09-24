@@ -4,7 +4,6 @@
 %%% Updated: 2026-09-24T17:57:45-0400-04:00
 %%%
 
-
 % ====================
 % = Layout & Spacing =
 % ====================
@@ -57,8 +56,8 @@ $endif$
 
 \usepackage{fontspec}
 \setmainfont{Athelas}[Mapping=tex-text]
-%\setsansfont{Adelle Sans}[Mapping=tex-text]
-\setsansfont{Lato}[Mapping=tex-text]
+\setsansfont{Adelle Sans}[Mapping=tex-text]
+%\setsansfont{Lato}[Mapping=tex-text]
 \setmonofont[Scale=0.90]{LFT Etica Mono}
 
 \usepackage{textcomp}
@@ -235,13 +234,16 @@ $endif$
 % ================
 
 \usepackage{titling}
-
 % \setlength{\droptitle}{-3cm}
-\title{$for(title)$\Large\textbf{$title$}$if(subtitle)$:\\ \textbf{$subtitle$} $endif$ $endfor$}
-\author{$for(author)${$author$}$if(thanks)$ \thanks{$thanks$} $endif$ \\ $if(position)$ {$position$}\\$endif$ {$affiliation$}\\ $if(address)$ {$address$}$endif$ $endfor$}
-\date{$date$}
+\usepackage{titling}
+% \setlength{\droptitle}{-3cm}
+\title{\Large\textbf{{$title$}$if(subtitle)$:\\ $subtitle$}$endif$}
 
-% Aligns * for "thanks" footnote with left margin
+\author{$for(author)$\normalsize{$author.name$}\thanks{$author.affiliation$, $author.address$. $author.email$. $author.thanks$} $sep$ \and $endfor$}
+
+\date{}
+
+% Aligns "thanks" footnote symbol with left margin
 \setlength\thanksmarkwidth{.5em}
 \setlength\thanksmargin{-\thanksmarkwidth}
 
