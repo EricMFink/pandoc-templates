@@ -16,7 +16,7 @@ $endif$
 $if(geometry)$
 \usepackage[$geometry$]{geometry}
 $else$
-\usepackage[hmarginratio=1:1,top=1in,bottom=.75in,left=1.5in,right=1.5in]{geometry}
+\usepackage[hmarginratio=1:1,top=1in,bottom=.75in,left=1.25in,right=1.25in]{geometry}
 $endif$
 
 \usepackage{multicol}
@@ -128,21 +128,21 @@ $endif$
   {1em}
   {}
 \titleformat{\subsection}[hang]
-  {\LARGE\sffamily\color{Maroon}}
+  {\Large\bfseries\sffamily\color{Maroon}}
   {\thesubsection}
   {1em}
   {}
 \titleformat{\subsubsection}[hang]
-  {\Large\bfseries\rmfamily\color{Maroon}}
+  {\large\bfseries\sffamily\color{Maroon}}
   {\thesubsubsection}
   {1em}
   {}
 \titleformat{\paragraph}[hang]
-  {\large\sffamily\color{Maroon}}
+  {\large\rmfamily\color{Maroon}}
   {\thesubsubsection ~~}
   {0em}
   {}
-  [\vspace{-1.3em}\textcolor{Maroon}{\rule{\textwidth}{.5pt}}]
+  [\vspace{-1.5em}\textcolor{Maroon}{\rule{\textwidth}{.5pt}}]
 \titleformat{\subparagraph}[hang]
   {\large\itshape\rmfamily}
   {\thesubparagraph}
@@ -168,12 +168,12 @@ $endif$
 
 $if(fancyquote)$
 \usepackage{tcolorbox}
-\newtcolorbox{BoxQuote}{colback=Maroon!5!white,colframe=Maroon,toprule=0mm,bottomrule=0mm,leftrule=3mm,rightrule=0mm,boxsep=0mm}
-\AtBeginEnvironment{quote}{\sffamily\small}
+\newtcolorbox{BoxQuote}{flush right,colback=Maroon!5!white,colframe=Maroon,toprule=0mm,bottomrule=0mm,leftrule=3mm,rightrule=0mm,boxsep=0mm,width=.95\linewidth}
+\AtBeginEnvironment{quote}{\normalsize}
 \renewenvironment{quote}{\begin{BoxQuote}}{\end{BoxQuote}}
 
 $else$
-\AtBeginEnvironment{quote}{\small\itshape}
+\AtBeginEnvironment{quote}{\small}
 \renewenvironment{quote}{%
    \list{}{%
      \leftmargin2em   % this is the adjusting screw
@@ -368,11 +368,11 @@ $if(date)$
 $endif$
 $if(title)$
 \vspace{5mm}
-\sffamily\centering\LARGE\textbf{\color{Maroon}{$title$}} \\
+\sffamily\centering\Large\textbf{\color{Maroon}{$title$}} \\
 $endif$
 $if(subtitle)$
 \vspace{2mm}
-\sffamily\centering\Large{\color{Maroon}{$subtitle$}} \\
+\sffamily\centering\Large\itshape{\color{Maroon}{$subtitle$}} \\
 $endif$
 \vspace{5mm}
 \end{flushleft}
@@ -389,5 +389,3 @@ $body$
 $endif$
 
 \end{document}
-
-$endif$
